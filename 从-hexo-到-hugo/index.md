@@ -261,6 +261,21 @@ git commit -m "updating site on $(date)"
 git push origin main
 ```
 
+##### 添加 SEO
+
+###### Google
+
+第一步
+
+先去 https://search.google.com/search-console 点击添加资源，选择 URL 方式导入，输入 URL，然后下载弹出 html 到 static 目录下，重新部署网站，部署完之后点击验证，验证成功代表没问题
+
+第二步
+
+在 search-console 中点击站点地图，然后把自己的添加进去，hugo 的默认在 sitemap.xml 下
+
+###### 百度
+
+
 
 ---
 
