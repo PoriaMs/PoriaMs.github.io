@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>愿天堂没有Java之面向对象进阶 - 晨星_茯苓</title><meta name="author" content="晨星_茯苓">
+<meta name="author-link" content="/about/">
+<meta name="description" content="JavaSE 笔记（二）" /><meta name="keywords" content='web security' /><meta itemprop="name" content="愿天堂没有Java之面向对象进阶">
+<meta itemprop="description" content="JavaSE 笔记（二）"><meta itemprop="datePublished" content="2021-12-08T15:18:14+00:00" />
+<meta itemprop="dateModified" content="2023-01-15T21:17:52+08:00" />
+<meta itemprop="wordCount" content="1970">
+<meta itemprop="keywords" content="" /><meta property="og:title" content="愿天堂没有Java之面向对象进阶" />
+<meta property="og:description" content="JavaSE 笔记（二）" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-08T15:18:14+00:00" />
+<meta property="article:modified_time" content="2023-01-15T21:17:52+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="愿天堂没有Java之面向对象进阶"/>
+<meta name="twitter:description" content="JavaSE 笔记（二）"/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.jpg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6/" /><link rel="prev" href="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" /><link rel="next" href="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E5%B8%B8%E8%A7%81api/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "愿天堂没有Java之面向对象进阶",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/poriams.github.io\/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6\/"
+    },"genre": "posts","wordcount":  1970 ,
+    "url": "https:\/\/poriams.github.io\/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6\/","datePublished": "2021-12-08T15:18:14+00:00","dateModified": "2023-01-15T21:17:52+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "晨星_茯苓"
+      },"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="晨星_茯苓"><span class="header-title-pre"><i class='fa-solid fa-home fa-fw fa-sm'></i></span><span class="header-title-text">Poria Morningstar</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-users fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 友链</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="晨星_茯苓"><span class="header-title-pre"><i class='fa-solid fa-home fa-fw fa-sm'></i></span><span class="header-title-text">Poria Morningstar</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-users fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 友链</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container" data-page-style="normal"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX">
+        <span>愿天堂没有Java之面向对象进阶</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="/about/" title="作者" rel=" author" class="author"><img
+    class="lazyload avatar"
+    src="/svg/loading.min.svg"
+    data-src="/avatar.jpg"
+    data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+    data-sizes="auto"
+    alt="晨星_茯苓"
+    title="晨星_茯苓"/>&nbsp;晨星_茯苓</a></span>
+          <span class="post-category">收录于 <a href="/categories/java/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Java</a></span></div>
+      <div class="post-meta-line"><span title=2021-12-08&#32;15:18:14><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-12-08">2021-12-08</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i> 约 1970 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden="true"></i> 预计阅读 4 分钟</span>&nbsp;<span class="comment-visitors" data-flag-title="愿天堂没有Java之面向对象进阶">
+              <i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span data-path="/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6/" class="waline-pageview-count">-</span>&nbsp;次阅读
+            </span>&nbsp;<span class="comment-count" data-flag-title="愿天堂没有Java之面向对象进阶">
+              <i class="fa-regular fa-comments fa-fw" aria-hidden="true"></i>&nbsp;<span data-path="/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6/" class="waline-comment-count">-</span>&nbsp;条评论
+            </span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#final">final</a>
+              <ul>
+                <li><a href="#认识一下嘛">认识一下嘛</a></li>
+                <li><a href="#注意事项">注意事项</a></li>
+              </ul>
+            </li>
+            <li><a href="#常量">常量</a>
+              <ul>
+                <li><a href="#认识一下嘛-1">认识一下嘛</a></li>
+                <li><a href="#执行原理">执行原理</a></li>
+              </ul>
+            </li>
+            <li><a href="#枚举">枚举</a>
+              <ul>
+                <li><a href="#认识一下嘛-2">认识一下嘛</a></li>
+                <li><a href="#格式">格式</a></li>
+                <li><a href="#特征">特征</a></li>
+              </ul>
+            </li>
+            <li><a href="#抽象类">抽象类</a>
+              <ul>
+                <li><a href="#认识一下嘛-3">认识一下嘛</a></li>
+                <li><a href="#格式-1">格式</a></li>
+                <li><a href="#注意事项-1">注意事项</a></li>
+              </ul>
+            </li>
+            <li><a href="#接口">接口</a>
+              <ul>
+                <li><a href="#认识一下嘛-4">认识一下嘛</a></li>
+                <li><a href="#格式-2">格式</a></li>
+                <li><a href="#使用方法">使用方法</a></li>
+                <li><a href="#接口与接口的关系">接口与接口的关系</a></li>
+              </ul>
+            </li>
+            <li><a href="#内部类概述">内部类概述</a>
+              <ul>
+                <li><a href="#认识一下嘛-5">认识一下嘛</a></li>
+                <li><a href="#使用场景">使用场景</a></li>
+                <li><a href="#作用">作用</a></li>
+              </ul>
+            </li>
+            <li><a href="#内部类之一静态内部类了解">内部类之一：静态内部类（了解）</a>
+              <ul>
+                <li><a href="#认识一下嘛-6">认识一下嘛</a></li>
+                <li><a href="#格式-3">格式</a></li>
+                <li><a href="#总结">总结</a></li>
+              </ul>
+            </li>
+            <li><a href="#内部类之二成员内部类了解">内部类之二：成员内部类（了解）</a>
+              <ul>
+                <li><a href="#认识一下嘛-7">认识一下嘛</a></li>
+                <li><a href="#格式-4">格式</a></li>
+                <li><a href="#总结-1">总结</a></li>
+              </ul>
+            </li>
+            <li><a href="#内部类之三局部内部类了解">内部类之三：局部内部类（了解）</a>
+              <ul>
+                <li><a href="#认识一下嘛-8">认识一下嘛</a></li>
+              </ul>
+            </li>
+            <li><a href="#内部类之四匿名内部类">内部类之四：匿名内部类</a>
+              <ul>
+                <li><a href="#认识一下嘛-9">认识一下嘛</a></li>
+                <li><a href="#格式-5">格式</a></li>
+                <li><a href="#总结-2">总结</a></li>
+                <li><a href="#实例">实例</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><p><strong>JavaSE 笔记（二）</strong></p>
+<blockquote>
+<p>Java 是一门非常严谨的语言</p>
+</blockquote>
+<h4 id="final">final</h4>
+<h5 id="认识一下嘛">认识一下嘛</h5>
+<ul>
+<li>可以修饰
+<ul>
+<li>方法：表明该方法是最终方法，不能被重写</li>
+<li>变量：表示该变量第一次赋值后，不能再次被赋值(有且仅能被赋值一次)</li>
+<li>类：表明该类是最终类，不能被继承</li>
+</ul>
+</li>
+</ul>
+<h5 id="注意事项">注意事项</h5>
+<ul>
+<li>修饰基本类型：变量存储的数据值不能发生改变</li>
+<li>修饰引用类型：存储的地址值不能改变，但是<strong>地址指向的对象内容可以改变</strong></li>
+</ul>
+<h4 id="常量">常量</h4>
+<h5 id="认识一下嘛-1">认识一下嘛</h5>
+<ul>
+<li>常量是使用了<code>public static final</code>修饰的成员变量，必须有初始化值，而且执行的过程中其值不能被改变</li>
+<li>可以用于做系统的配置信息，方便程序的维护，同时也能提高可读性</li>
+</ul>
+<h5 id="执行原理">执行原理</h5>
+<ul>
+<li>在编译阶段会进行宏替换，把使用常量的地方全部替换成真实的字面量</li>
+<li>这样做的好处是让使用常量的程序的执行性能与直接使用字面量是一样的</li>
+</ul>
+<h4 id="枚举">枚举</h4>
+<h5 id="认识一下嘛-2">认识一下嘛</h5>
+<ul>
+<li>是 Java 中的一种特殊类型</li>
+<li>是为了做信息的标志和信息的分类</li>
+</ul>
+<h5 id="格式">格式</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">修饰符</span> <span class="kd">enum</span> <span class="err">枚举名称</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">第一行都是罗列枚举类实例的名称</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">enum</span> <span class="n">Season</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">SPRING</span> <span class="o">,</span> <span class="n">SUMMER</span> <span class="o">,</span> <span class="n">AUTUMN</span> <span class="o">,</span> <span class="n">WINTER</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="特征">特征</h5>
+<ul>
+<li>枚举类都是继承了枚举类型：<code>java.lang.Enum</code></li>
+<li>枚举都是最终类，不可以被继承</li>
+<li>构造器都是私有的，枚举对外不能创建对象</li>
+</ul>
+<h4 id="抽象类">抽象类</h4>
+<h5 id="认识一下嘛-3">认识一下嘛</h5>
+<ul>
+<li>如果一个类中的某个方法的具体实现不能确定，就可以申明成 abstract 修饰的<strong>抽象方法（不能写方法体了）</strong>，这个类必须用 abstract 修饰，被称为抽象类</li>
+</ul>
+<h5 id="格式-1">格式</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">修饰符</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="err">类名{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">修饰符</span> <span class="kd">abstract</span> <span class="err">返回值类型</span> <span class="err">方法名称</span><span class="o">(</span><span class="err">形参列表</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Animal</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="注意事项-1">注意事项</h5>
+<ul>
+<li>得到了抽象方法，失去了创建对象的能力（这波是有得有失）</li>
+<li>抽象类可以理解成类的不完整设计图，是用来被子类继承的</li>
+<li>一个类如果继承了抽象类，那么这个类必须重写完抽象类的全部抽象方法，否则这个类也必须定义成抽象类</li>
+<li>不能用 abstract 修饰变量、代码块、构造器</li>
+</ul>
+<h4 id="接口">接口</h4>
+<h5 id="认识一下嘛-4">认识一下嘛</h5>
+<ul>
+<li>接口是一种规范</li>
+<li>接口不能实例化</li>
+<li>接口中的成员都是 public 修饰，不论你写不写，因为规范的目的是为了公开化</li>
+</ul>
+<h5 id="格式-2">格式</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">interface</span> <span class="err">接口名{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 常量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// 抽象方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="使用方法">使用方法</h5>
+<ul>
+<li>
+<p>接口是用来被类实现的，实现接口的类叫做实现类，实现类可以理解为“子类”</p>
+</li>
+<li>
+<p>接口可以被类单独实现，也可以被多实现</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">修饰符</span> <span class="kd">class</span> <span class="err">实现类 </span><span class="nc">implements</span> <span class="err">接口</span><span class="mi">1</span><span class="o">,</span> <span class="err">接口</span><span class="mi">2</span><span class="o">,</span> <span class="err">接口</span><span class="mi">3</span> <span class="o">,</span> <span class="o">...</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h5 id="接口与接口的关系">接口与接口的关系</h5>
+<ul>
+<li>多继承，一个接口可以同时继承多个接口</li>
+<li>规范合并，整合多个接口为同一个接口，便于子类实现</li>
+</ul>
+<h4 id="内部类概述">内部类概述</h4>
+<h5 id="认识一下嘛-5">认识一下嘛</h5>
+<ul>
+<li>
+<p>内部类就是定义在一个类里面的类，里面的类可以理解为寄生，外面的类可以理解为宿主</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">People</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 内部类
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Heart</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h5 id="使用场景">使用场景</h5>
+<ul>
+<li>当一个事物的内部还有一个部分需要一个完整的结构进行概述，而这个内部的完整的结构又只为外部事物提供服务，那么这个内部事物就可以选择用内部类来设计</li>
+<li>内部类通常可以方便的访问外部成员，包括<strong>私有的成员</strong></li>
+</ul>
+<h5 id="作用">作用</h5>
+<ul>
+<li>提供了更好的封装性，可以在封装性这个层面做到更多控制</li>
+</ul>
+<h4 id="内部类之一静态内部类了解">内部类之一：静态内部类（了解）</h4>
+<h5 id="认识一下嘛-6">认识一下嘛</h5>
+<ul>
+<li>有 static 修饰，属于外部类本身</li>
+<li>和普通类使用完全一致</li>
+</ul>
+<h5 id="格式-3">格式</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Outer</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 静态成员内部类
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Inner</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">外部类名</span><span class="o">.</span><span class="err">内部类名</span> <span class="err">对象名称</span> <span class="o">=</span> <span class="k">new</span> <span class="err">外部类名</span><span class="o">.</span><span class="err">内部类构造器</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Outer</span><span class="o">.</span><span class="na">Inner</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Outer</span><span class="o">.</span><span class="na">Inner</span><span class="o">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="总结">总结</h5>
+<ul>
+<li>譬如汽车类中的发动机类</li>
+<li>可以直接访问外部类的静态成员，不能直接访问外部类的实例成员</li>
+</ul>
+<h4 id="内部类之二成员内部类了解">内部类之二：成员内部类（了解）</h4>
+<h5 id="认识一下嘛-7">认识一下嘛</h5>
+<ul>
+<li>无static修饰，属于外部类的对象</li>
+<li>JDK16之前，成员内部类中不能定义静态成员，JDK 16开始也可以定义静态成员了</li>
+</ul>
+<h5 id="格式-4">格式</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Outer</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 成员内部类
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Inner</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">外部类名</span><span class="o">.</span><span class="err">内部类名</span> <span class="err">对象名称</span> <span class="o">=</span> <span class="k">new</span> <span class="err">外部类构造器</span><span class="o">.</span><span class="na">new</span> <span class="err">内部类构造器</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Outer</span><span class="o">.</span><span class="na">Inner</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Outer</span><span class="o">().</span><span class="na">new</span> <span class="n">Inner</span><span class="o">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="总结-1">总结</h5>
+<ul>
+<li>譬如人类中的心脏类</li>
+<li>可以直接访问外部类的静态成员，可以通过实例方法直接访问外部类的实例成员</li>
+</ul>
+<h4 id="内部类之三局部内部类了解">内部类之三：局部内部类（了解）</h4>
+<h5 id="认识一下嘛-8">认识一下嘛</h5>
+<ul>
+<li>局部内部类放在方法、代码块、构造器等执行体中</li>
+<li>局部内部类的类文件名为：<code>外部类$内部类.class</code></li>
+</ul>
+<h4 id="内部类之四匿名内部类">内部类之四：匿名内部类</h4>
+<h5 id="认识一下嘛-9">认识一下嘛</h5>
+<ul>
+<li>本质上是一个没有名字的局部内部类，定义在方法、代码块等</li>
+<li>方便创建子类对象，其实质就是为了简化代码</li>
+</ul>
+<h5 id="格式-5">格式</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">new</span> <span class="err">类</span><span class="o">||</span><span class="err">抽象类名</span><span class="o">||</span><span class="err">接口名</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="err">重写方法</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Animal</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Animal</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">};</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span><span class="o">.</span> <span class="nf">run</span><span class="o">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="总结-2">总结</h5>
+<ul>
+<li>匿名内部类是没有名称的</li>
+<li>会创建一个匿名内部类的对象</li>
+<li>匿名内部类的对象就是当前<code>new</code>的那个类型的子类</li>
+</ul>
+<h5 id="实例">实例</h5>
+<ul>
+<li>
+<p>案例一</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/*游泳接口*/</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Swimming</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">swim</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* 测试类*/</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JumppingDemo</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//需求：goSwimming方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">JumppingDemo</span><span class="o">.</span><span class="na">goSwimming</span><span class="o">(</span><span class="k">new</span> <span class="n">Swimming</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl">      <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">swim</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Poria不会游泳~~~&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">      <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">});</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 以上代码还可简化为
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">JumppingDemo</span><span class="o">.</span><span class="na">goSwimming</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Poria不会游泳~~~&#34;</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 定义一个方法让所有角色进来一起比赛
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">goSwimming</span><span class="o">(</span><span class="n">Swimming</span> <span class="n">swimming</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">swimming</span><span class="o">.</span><span class="na">swim</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>案例二</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">//  为按钮绑定点击事件监听器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">btn</span><span class="o">.</span><span class="na">addActionListener</span><span class="o">(</span><span class="k">new</span> <span class="n">ActionListener</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">actionPerformed</span><span class="o">(</span><span class="n">ActionEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;登录一下~~&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 以上代码还可简化为
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">btn</span><span class="o">.</span><span class="na">addActionListener</span><span class="o">(</span><span class="n">e</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;登录一下~~&#34;</span><span class="o">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title=2023-01-15&#32;21:17:52>更新于 2023-01-15&nbsp;</span>
+      </div><div class="post-info-license">
+          <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
+        </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6/" data-title="愿天堂没有Java之面向对象进阶"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6/"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6/" data-title="愿天堂没有Java之面向对象进阶" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6/" data-title="愿天堂没有Java之面向对象进阶"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6/" data-title="愿天堂没有Java之面向对象进阶"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6/" data-title="愿天堂没有Java之面向对象进阶" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6/" data-title="愿天堂没有Java之面向对象进阶" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6/" data-title="愿天堂没有Java之面向对象进阶"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" class="post-nav-item" rel="prev" title="愿天堂没有Java之面向对象"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>愿天堂没有Java之面向对象</a>
+      <a href="/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E5%B8%B8%E8%A7%81api/" class="post-nav-item" rel="next" title="愿天堂没有Java之常见API">愿天堂没有Java之常见API<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="waline" class="comment"></div><noscript>
+        Please enable JavaScript to view the comments powered by <a href="https://waline.js.org/" rel="external nofollow noopener noreferrer">Waline</a>.
+      </noscript></div></article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line copyright order-last" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2023</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line statistics"><span class="site-time" title='网站运行中 ...'><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden="true"></i><span class="ms-1 d-none">博客已运行</span><span class="run-times ms-1">网站运行中 ...</span></span></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric">0%</span>
+        </div><div class="fixed-button view-comments d-none" role="button" aria-label="查看评论"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><div class="reading-progress-bar" style="left: 0;top: 0;"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/waline/waline.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><link rel="stylesheet" href="/lib/pace/themes/blue/pace-theme-minimal.css"><script src="/lib/waline/waline.js" defer></script><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lazysizes/lazysizes.min.js" async defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="/lib/pace/pace.min.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":5000},"comment":{"enable":true,"expired":false,"waline":{"comment":true,"copyright":true,"dark":"body[data-theme='dark']","el":"#waline","emoji":["//unpkg.com/@waline/emojis@1.1.0/weibo"],"highlighter":true,"imageUploader":true,"lang":"zh-cn","login":"enable","meta":["nick","mail","link"],"pageSize":10,"pageview":true,"requiredMeta":["nick","mail"],"search":true,"serverURL":"https://comments-nf6liufk4-1803700972-qqcom.vercel.app","texRenderer":true}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"siteTime":"2023-1-10"};</script><script src="/js/theme.min.js" defer></script><script>
+      window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+      gtag('config', 'G-CBQC1RW0CV', { 'anonymize_ip': true });
+    </script><script src="https://www.googletagmanager.com/gtag/js?id=G-CBQC1RW0CV" async></script></body>
+</html>

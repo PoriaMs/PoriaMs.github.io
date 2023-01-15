@@ -25,5 +25,5 @@
 ---
 
 > 作者: [晨星_茯苓](/about/)  
-> URL: http://example.org/friends/  
+> URL: https://poriams.github.io/friends/  
 

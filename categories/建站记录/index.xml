@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
     <title>建站记录 - 分类 - 晨星_茯苓</title>
-    <link>http://example.org/categories/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/</link>
+    <link>https://poriams.github.io/categories/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/</link>
     <description>建站记录 - 分类 - 晨星_茯苓</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>PoriaMs@outlook.com (晨星_茯苓)</managingEditor>
-      <webMaster>PoriaMs@outlook.com (晨星_茯苓)</webMaster><lastBuildDate>Tue, 10 Jan 2023 15:08:56 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/" rel="self" type="application/rss+xml" /><item>
-  <title>从 Hexo 到 Hugo （一）</title>
-  <link>http://example.org/%E4%BB%8E-hexo-%E5%88%B0-hugo/</link>
+      <webMaster>PoriaMs@outlook.com (晨星_茯苓)</webMaster><lastBuildDate>Tue, 10 Jan 2023 15:08:56 &#43;0800</lastBuildDate><atom:link href="https://poriams.github.io/categories/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/" rel="self" type="application/rss+xml" /><item>
+  <title>从 Hexo 到 Hugo</title>
+  <link>https://poriams.github.io/%E4%BB%8E-hexo-%E5%88%B0-hugo/</link>
   <pubDate>Tue, 10 Jan 2023 15:08:56 &#43;0800</pubDate>
   <author>晨星_茯苓</author>
-  <guid>http://example.org/%E4%BB%8E-hexo-%E5%88%B0-hugo/</guid>
+  <guid>https://poriams.github.io/%E4%BB%8E-hexo-%E5%88%B0-hugo/</guid>
   <description><![CDATA[]]></description>
 </item>
 </channel>

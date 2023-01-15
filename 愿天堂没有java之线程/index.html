@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>愿天堂没有Java之线程 - 晨星_茯苓</title><meta name="author" content="晨星_茯苓">
+<meta name="author-link" content="/about/">
+<meta name="description" content="JavaSE 笔记（八）" /><meta name="keywords" content='web security' /><meta itemprop="name" content="愿天堂没有Java之线程">
+<meta itemprop="description" content="JavaSE 笔记（八）"><meta itemprop="datePublished" content="2022-01-18T18:07:02+00:00" />
+<meta itemprop="dateModified" content="2023-01-15T21:18:15+08:00" />
+<meta itemprop="wordCount" content="2525">
+<meta itemprop="keywords" content="" /><meta property="og:title" content="愿天堂没有Java之线程" />
+<meta property="og:description" content="JavaSE 笔记（八）" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E7%BA%BF%E7%A8%8B/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-18T18:07:02+00:00" />
+<meta property="article:modified_time" content="2023-01-15T21:18:15+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="愿天堂没有Java之线程"/>
+<meta name="twitter:description" content="JavaSE 笔记（八）"/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.jpg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E7%BA%BF%E7%A8%8B/" /><link rel="prev" href="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" /><link rel="next" href="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "愿天堂没有Java之线程",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/poriams.github.io\/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E7%BA%BF%E7%A8%8B\/"
+    },"genre": "posts","wordcount":  2525 ,
+    "url": "https:\/\/poriams.github.io\/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E7%BA%BF%E7%A8%8B\/","datePublished": "2022-01-18T18:07:02+00:00","dateModified": "2023-01-15T21:18:15+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "晨星_茯苓"
+      },"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="晨星_茯苓"><span class="header-title-pre"><i class='fa-solid fa-home fa-fw fa-sm'></i></span><span class="header-title-text">Poria Morningstar</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-users fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 友链</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="晨星_茯苓"><span class="header-title-pre"><i class='fa-solid fa-home fa-fw fa-sm'></i></span><span class="header-title-text">Poria Morningstar</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-users fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 友链</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container" data-page-style="normal"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX">
+        <span>愿天堂没有Java之线程</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="/about/" title="作者" rel=" author" class="author"><img
+    class="lazyload avatar"
+    src="/svg/loading.min.svg"
+    data-src="/avatar.jpg"
+    data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+    data-sizes="auto"
+    alt="晨星_茯苓"
+    title="晨星_茯苓"/>&nbsp;晨星_茯苓</a></span>
+          <span class="post-category">收录于 <a href="/categories/java/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Java</a></span></div>
+      <div class="post-meta-line"><span title=2022-01-18&#32;18:07:02><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-18">2022-01-18</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i> 约 2525 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden="true"></i> 预计阅读 6 分钟</span>&nbsp;<span class="comment-visitors" data-flag-title="愿天堂没有Java之线程">
+              <i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span data-path="/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E7%BA%BF%E7%A8%8B/" class="waline-pageview-count">-</span>&nbsp;次阅读
+            </span>&nbsp;<span class="comment-count" data-flag-title="愿天堂没有Java之线程">
+              <i class="fa-regular fa-comments fa-fw" aria-hidden="true"></i>&nbsp;<span data-path="/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E7%BA%BF%E7%A8%8B/" class="waline-comment-count">-</span>&nbsp;条评论
+            </span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#线程概述">线程概述</a>
+              <ul>
+                <li><a href="#认识一下嘛">认识一下嘛</a></li>
+                <li><a href="#多线程">多线程</a></li>
+              </ul>
+            </li>
+            <li><a href="#多线程的创建">多线程的创建</a>
+              <ul>
+                <li><a href="#继承-thread-类">继承 Thread 类</a></li>
+                <li><a href="#实现-runnable-接口">实现 Runnable 接口</a></li>
+                <li><a href="#实现-callable-接口">实现 Callable 接口</a></li>
+              </ul>
+            </li>
+            <li><a href="#thread-常用方法">Thread 常用方法</a>
+              <ul>
+                <li><a href="#api">API</a></li>
+                <li><a href="#构造器">构造器</a></li>
+              </ul>
+            </li>
+            <li><a href="#线程安全">线程安全</a>
+              <ul>
+                <li><a href="#问题">问题</a></li>
+                <li><a href="#原因">原因</a></li>
+              </ul>
+            </li>
+            <li><a href="#线程同步">线程同步</a>
+              <ul>
+                <li><a href="#解决线程安全问题">解决线程安全问题</a></li>
+                <li><a href="#核心思想">核心思想</a></li>
+                <li><a href="#方法一同步代码块">方法一：同步代码块</a></li>
+                <li><a href="#方法二同步方法">方法二：同步方法</a></li>
+                <li><a href="#方法三lock-锁">方法三：Lock 锁</a></li>
+              </ul>
+            </li>
+            <li><a href="#线程通信">线程通信</a>
+              <ul>
+                <li><a href="#实现">实现</a></li>
+                <li><a href="#常见形式">常见形式</a></li>
+                <li><a href="#等待与唤醒">等待与唤醒</a></li>
+              </ul>
+            </li>
+            <li><a href="#线程池">线程池</a>
+              <ul>
+                <li><a href="#认识一下嘛-1">认识一下嘛</a></li>
+                <li><a href="#获得线程池对象">获得线程池对象</a></li>
+                <li><a href="#线程池处理-runnable-任务">线程池处理 Runnable 任务</a></li>
+                <li><a href="#线程池处理-callable-任务">线程池处理 Callable 任务</a></li>
+                <li><a href="#工具类实现线程池">工具类实现线程池</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><p><strong>JavaSE 笔记（八）</strong></p>
+<blockquote>
+<p>Java 是一门非常严谨的语言</p>
+</blockquote>
+<h4 id="线程概述">线程概述</h4>
+<h5 id="认识一下嘛">认识一下嘛</h5>
+<ul>
+<li>Java 是通过 java.lang.Thread 类来代表线程的</li>
+<li>线程是程序内部的一条执行路径</li>
+<li>mian 方法的执行其实就是一条单独的执行路径，这种程序也叫做单线程程序</li>
+</ul>
+<h5 id="多线程">多线程</h5>
+<ul>
+<li>是指从软硬件上实现多条执行流程的技术</li>
+<li>消息通信、淘宝、京东系统都离不开多线程技术</li>
+</ul>
+<h4 id="多线程的创建">多线程的创建</h4>
+<h5 id="继承-thread-类">继承 Thread 类</h5>
+<ol>
+<li>定义一个子类 MyThread 继承 Thread 类，重写 run() 方法</li>
+<li>创建 MyThread 类的对象</li>
+<li>调用线程对象的 start() 方法启动线程（启动之后还是执行 run() 方法）</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">MyThread</span> <span class="kd">extends</span> <span class="n">Thread</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 定义线程要做的事情
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ThreadDemo</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Thread</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyThread</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>只有调用 start 方法才是启动一个新的线程执行，如果直接调用 run 就会被当成普通方法执行</li>
+<li>该方式编码简单，但是线程类已经继承 Thread，无法继承其他类，不利于扩展</li>
+</ul>
+<h5 id="实现-runnable-接口">实现 Runnable 接口</h5>
+<ol>
+<li>定义一个子类 MyThread 实现 Runnable 接口，重写 run() 方法</li>
+<li>创建 MyRunnable 任务对象</li>
+<li>把 MyRunnable 任务对象交给 Thread 处理</li>
+<li>调用线程对象的 start() 方法启动线程</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public Thread(Runnable target)</code></td>
+<td>封装Runnable对象成为线程对象</td>
+</tr>
+<tr>
+<td><code>public Thread(Runnable target, String name )</code></td>
+<td>封装Runnable对象成为线程对象，并指定线程名称</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">MyRunnable</span> <span class="kd">implements</span> <span class="n">Runnable</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 定义线程要做的事情
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ThreadDemo</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Runnable</span> <span class="n">target</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyRunnable</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Thread</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">target</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 以上代码可以简化为
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;子线程2执行输出：&#34;</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}).</span><span class="na">start</span><span class="o">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>该方式可以继续继承类和实现接口，扩展性很强；但是线程执行有结果没办法返回</li>
+</ul>
+<h5 id="实现-callable-接口">实现 Callable 接口</h5>
+<ol>
+<li>定义类实现 Callable 接口，重写 call 方法，封装任务</li>
+<li>用 FutureTask 把 Callable 对象封装成线程任务对象</li>
+<li>把线程任务对象交给 Thread 处理</li>
+<li>调用 start 方法启动线程，执行任务</li>
+<li>执行完毕之后，通过 FutureTask 的 get 方法去获取任务执行的结果</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public FutureTask&lt;&gt;(Callable call)</code></td>
+<td>把Callable对象封装成FutureTask对象。</td>
+</tr>
+<tr>
+<td><code>public V get() throws Exception</code></td>
+<td>获取线程执行call方法返回的结果。</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">MyCallable</span> <span class="kd">implements</span> <span class="n">Callable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;{</span>
+</span></span><span class="line"><span class="cl">  <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">public</span> <span class="n">String</span> <span class="nf">call</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="err">结果</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ThreadDemo</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Callable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">call</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyCallable</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">FutureTask</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FutureTask</span><span class="o">&lt;&gt;(</span><span class="n">call</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Thread</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">f</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;结果：&#34;</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="thread-常用方法">Thread 常用方法</h4>
+<h5 id="api">API</h5>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>String getName()</code></td>
+<td>获取当前线程的名称，默认线程名称是Thread-索引</td>
+</tr>
+<tr>
+<td><code>void setName(String name)</code></td>
+<td>将此线程的名称更改为指定的名称，通过构造器也可以设置线程名称</td>
+</tr>
+<tr>
+<td><code>public static Thread currentThread()</code></td>
+<td>返回对当前正在执行的线程对象的引用</td>
+</tr>
+<tr>
+<td><code>public static void sleep(long time)</code></td>
+<td>让当前线程休眠指定的时间后再继续执行，单位为毫秒</td>
+</tr>
+<tr>
+<td><code>public  void run()</code></td>
+<td>线程任务方法</td>
+</tr>
+<tr>
+<td><code>public  void start()</code></td>
+<td>线程启动方法</td>
+</tr>
+</tbody>
+</table>
+<h5 id="构造器">构造器</h5>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public Thread(String name)</code></td>
+<td>可以为当前线程指定名称</td>
+</tr>
+<tr>
+<td><code>public Thread(Runnable target)</code></td>
+<td>封装Runnable对象成为线程对象</td>
+</tr>
+<tr>
+<td><code>public Thread(Runnable target, String name)</code></td>
+<td>封装Runnable对象成为线程对象，并指定线程名称</td>
+</tr>
+</tbody>
+</table>
+<h4 id="线程安全">线程安全</h4>
+<h5 id="问题">问题</h5>
+<ul>
+<li>多个线程同时操作同一个共享资源时，会出现的业务安全问题</li>
+<li>例如：两人拥有共同账户10万元，同时来取钱，并且都取走10万元。每个线程要进行的任务为：1、判断余额是否足够 2、吐出10万元 3、更新账户余额。当两个线程同时运行时，有可能出现两个线程都通过第一步，并执行第二步的情况。</li>
+</ul>
+<h5 id="原因">原因</h5>
+<ul>
+<li>存在多线程并发</li>
+<li>同时访问共享资源</li>
+<li>存在修改共享资源</li>
+</ul>
+<h4 id="线程同步">线程同步</h4>
+<h5 id="解决线程安全问题">解决线程安全问题</h5>
+<ul>
+<li>让多个线程实现先后依次访问共享资源</li>
+</ul>
+<h5 id="核心思想">核心思想</h5>
+<ul>
+<li>加锁：将共享的资源上锁，每次只有一个线程能进入，访问完毕之后解锁，其他线程才能进来</li>
+</ul>
+<h5 id="方法一同步代码块">方法一：同步代码块</h5>
+<ul>
+<li>
+<p>作用：把出现线程安全问题的核心代码块上锁</p>
+</li>
+<li>
+<p>原理：每次只有一个线程可以进入核心代码，访问完毕之后解锁</p>
+</li>
+<li>
+<p>格式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">synchronized</span><span class="o">(</span><span class="err">同步锁对象</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">  <span class="err">操作共享资源的代码</span><span class="o">(</span><span class="err">核心代码</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>理论上锁对象只要对于当前同时执行的线程来说是一个对象即可，但是这样会影响其他无关线程的运行</p>
+</li>
+<li>
+<p>锁对象的规范</p>
+<ul>
+<li>使用共享资源作为锁对象</li>
+<li>实例方法：this 作为锁对象</li>
+<li>静态方法：字节码（类名.class）作为锁对象</li>
+</ul>
+</li>
+</ul>
+<h5 id="方法二同步方法">方法二：同步方法</h5>
+<ul>
+<li>
+<p>作用：把出现线程安全问题的核心方法上锁</p>
+</li>
+<li>
+<p>原理：每次只有一个线程可以进入核心方法，访问完毕之后解锁</p>
+</li>
+<li>
+<p>格式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">修饰符</span> <span class="kd">synchronized</span> <span class="err">返回值类型</span> <span class="err">方法名称</span><span class="o">(</span><span class="err">形参列表</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">  <span class="err">操作共享资源的代码</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>底层原理</p>
+<ul>
+<li>同步方法底层可以看作是隐式锁对象，只是锁的范围是整个方法代码</li>
+<li>实例方法：this 作为锁对象，但是方法要高度面向对象</li>
+<li>静态方法：字节码（类名.class）作为锁对象</li>
+</ul>
+</li>
+</ul>
+<h5 id="方法三lock-锁">方法三：Lock 锁</h5>
+<ul>
+<li>
+<p>Lock 实现更加广泛的锁定操作</p>
+</li>
+<li>
+<p>Lock 是接口，不可以实例化，采用他的实现类 ReentrantLock 来构建 Lock 对象</p>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public ReentrantLock()</code></td>
+<td>获得Lock锁的实现类对象</td>
+</tr>
+<tr>
+<td><code>void lock()</code></td>
+<td>获得锁</td>
+</tr>
+<tr>
+<td><code>void unlock()</code></td>
+<td>释放锁</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h4 id="线程通信">线程通信</h4>
+<h5 id="实现">实现</h5>
+<ul>
+<li>线程间相互发送数据，线程间共享一个资源即可实现线程通信</li>
+</ul>
+<h5 id="常见形式">常见形式</h5>
+<ul>
+<li>通过共享一个数据的方式实现</li>
+<li>根据共享数据的情况决定自己该怎么做，以及通知其他线程怎么做</li>
+<li>生产者消费者模型</li>
+</ul>
+<h5 id="等待与唤醒">等待与唤醒</h5>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>void wait()</code></td>
+<td>让当前线程等待并释放所占锁，直到另一个线程调用notify()方法或 notifyAll()方法</td>
+</tr>
+<tr>
+<td><code>void notify()</code></td>
+<td>唤醒正在等待的单个线程</td>
+</tr>
+<tr>
+<td><code>void notifyAll()</code></td>
+<td>唤醒正在等待的所有线程</td>
+</tr>
+</tbody>
+</table>
+<h4 id="线程池">线程池</h4>
+<h5 id="认识一下嘛-1">认识一下嘛</h5>
+<ul>
+<li>一种可以复用线程池的技术</li>
+<li>线程池的接口：<code>ExecutorService</code></li>
+</ul>
+<h5 id="获得线程池对象">获得线程池对象</h5>
+<ul>
+<li>
+<p>方式一：用 ExecutorService 的实现类 ThreadPoolExcutor 自创一个线程池对象</p>
+</li>
+<li>
+<p>方式二：使用 Executors 线程池的工具类调用方法返回不同特点的线程池对象</p>
+</li>
+<li>
+<p>ThreadPoolExcutor 参数说明</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">ThreadPoolExecutor</span><span class="o">(</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">corePoolSize</span><span class="o">,</span>										<span class="c1">// 指定线程池的核心线程数量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">maximumPoolSize</span><span class="o">,</span>								<span class="c1">// 指定线程池的最大线程数量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">long</span> <span class="n">keepAliveTime</span><span class="o">,</span>									<span class="c1">// 指定临时线程最长存活时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">TimeUnit</span> <span class="n">unit</span><span class="o">,</span>								       <span class="c1">// 指定存活时间的单位
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">BlockingQueue</span><span class="o">&lt;</span><span class="n">Runnable</span><span class="o">&gt;</span> <span class="n">workQueue</span><span class="o">,</span>    <span class="c1">// 指定任务队列
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">ThreadFactory</span> <span class="n">threadFactory</span><span class="o">,</span>			    <span class="c1">// 指定线程工厂 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">RejectedExecutionHandler</span> <span class="n">handler</span><span class="o">)</span> 	  <span class="c1">// 指定线程忙时的处理方式
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>拒绝策略</p>
+<table>
+<thead>
+<tr>
+<th>策略</th>
+<th>详解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ThreadPoolExecutor.AbortPolicy</code></td>
+<td>丢弃任务并抛出RejectedExecutionException异常。<strong>是默认的策略</strong></td>
+</tr>
+<tr>
+<td><code>ThreadPoolExecutor.DiscardPolicy</code></td>
+<td>丢弃任务，但是不抛出异常  这是不推荐的做法</td>
+</tr>
+<tr>
+<td><code>ThreadPoolExecutor.DiscardOldestPolicy</code></td>
+<td>抛弃队列中等待最久的任务  然后把当前任务加入队列中</td>
+</tr>
+<tr>
+<td><code>ThreadPoolExecutor.CallerRunsPolicy</code></td>
+<td>由主线程负责调用任务的run()方法从而绕过线程池直接执行</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h5 id="线程池处理-runnable-任务">线程池处理 Runnable 任务</h5>
+<ul>
+<li>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">ExecutorService</span> <span class="n">pools</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ThreadPoolExecutor</span><span class="o">(</span>
+</span></span><span class="line"><span class="cl">  <span class="mi">3</span><span class="o">,</span> 
+</span></span><span class="line"><span class="cl">  <span class="mi">5</span><span class="o">,</span> 
+</span></span><span class="line"><span class="cl">  <span class="mi">8</span><span class="o">,</span> 
+</span></span><span class="line"><span class="cl">  <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">,</span> 
+</span></span><span class="line"><span class="cl">  <span class="k">new</span> <span class="n">ArrayBlockingQueue</span><span class="o">&lt;&gt;(</span><span class="mi">6</span><span class="o">),</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Executors</span><span class="o">.</span><span class="na">defaultThreadFactory</span><span class="o">(),</span> 
+</span></span><span class="line"><span class="cl">  <span class="k">new</span> <span class="n">ThreadPoolExecutor</span><span class="o">.</span><span class="na">AbortPolicy</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Runnable</span> <span class="n">target</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyRunnable</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">pool</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">target</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">pool</span><span class="o">.</span><span class="na">shutdown</span><span class="o">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h5 id="线程池处理-callable-任务">线程池处理 Callable 任务</h5>
+<ul>
+<li>
+<p>示例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">ExecutorService</span> <span class="n">pools</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ThreadPoolExecutor</span><span class="o">(</span>
+</span></span><span class="line"><span class="cl">  <span class="mi">3</span><span class="o">,</span> 
+</span></span><span class="line"><span class="cl">  <span class="mi">5</span><span class="o">,</span> 
+</span></span><span class="line"><span class="cl">  <span class="mi">8</span><span class="o">,</span> 
+</span></span><span class="line"><span class="cl">  <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">,</span> 
+</span></span><span class="line"><span class="cl">  <span class="k">new</span> <span class="n">ArrayBlockingQueue</span><span class="o">&lt;&gt;(</span><span class="mi">6</span><span class="o">),</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Executors</span><span class="o">.</span><span class="na">defaultThreadFactory</span><span class="o">(),</span> 
+</span></span><span class="line"><span class="cl">  <span class="k">new</span> <span class="n">ThreadPoolExecutor</span><span class="o">.</span><span class="na">AbortPolicy</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Future</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">f1</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="na">submit</span><span class="o">(</span><span class="k">new</span> <span class="n">MyCallable</span><span class="o">(</span><span class="mi">100</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">f1</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h5 id="工具类实现线程池">工具类实现线程池</h5>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public  static ExecutorService newCachedThreadPool()</code></td>
+<td>线程数量随着任务增加而增加，如果线程任务执行完毕且空闲了一段时间则会被回收掉。</td>
+</tr>
+<tr>
+<td><code>public static ExecutorService newFixedThreadPool(int nThreads)</code></td>
+<td>创建固定线程数量的线程池，如果某个线程因为执行异常而结束，那么线程池会补充一个新线程替代它。</td>
+</tr>
+<tr>
+<td><code>public  static ExecutorService newSingleThreadExecutor ()</code></td>
+<td>创建只有一个线程的线程池对象，如果该线程出现异常而结束，那么线程池会补充一个新线程。</td>
+</tr>
+<tr>
+<td><code>public  static ScheduledExecutorService newScheduledThreadPool(int corePoolSize)</code></td>
+<td>创建一个线程池，可以实现在给定的延迟后运行任务，或者定期执行任务。</td>
+</tr>
+</tbody>
+</table></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title=2023-01-15&#32;21:18:15>更新于 2023-01-15&nbsp;</span>
+      </div><div class="post-info-license">
+          <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
+        </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E7%BA%BF%E7%A8%8B/" data-title="愿天堂没有Java之线程"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E7%BA%BF%E7%A8%8B/"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E7%BA%BF%E7%A8%8B/" data-title="愿天堂没有Java之线程" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E7%BA%BF%E7%A8%8B/" data-title="愿天堂没有Java之线程"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E7%BA%BF%E7%A8%8B/" data-title="愿天堂没有Java之线程"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E7%BA%BF%E7%A8%8B/" data-title="愿天堂没有Java之线程" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E7%BA%BF%E7%A8%8B/" data-title="愿天堂没有Java之线程" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E7%BA%BF%E7%A8%8B/" data-title="愿天堂没有Java之线程"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="post-nav-item" rel="prev" title="愿天堂没有Java之文件操作"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>愿天堂没有Java之文件操作</a>
+      <a href="/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/" class="post-nav-item" rel="next" title="愿天堂没有Java之框架技术">愿天堂没有Java之框架技术<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="waline" class="comment"></div><noscript>
+        Please enable JavaScript to view the comments powered by <a href="https://waline.js.org/" rel="external nofollow noopener noreferrer">Waline</a>.
+      </noscript></div></article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line copyright order-last" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2023</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line statistics"><span class="site-time" title='网站运行中 ...'><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden="true"></i><span class="ms-1 d-none">博客已运行</span><span class="run-times ms-1">网站运行中 ...</span></span></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric">0%</span>
+        </div><div class="fixed-button view-comments d-none" role="button" aria-label="查看评论"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><div class="reading-progress-bar" style="left: 0;top: 0;"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/waline/waline.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><link rel="stylesheet" href="/lib/pace/themes/blue/pace-theme-minimal.css"><script src="/lib/waline/waline.js" defer></script><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lazysizes/lazysizes.min.js" async defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="/lib/pace/pace.min.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":5000},"comment":{"enable":true,"expired":false,"waline":{"comment":true,"copyright":true,"dark":"body[data-theme='dark']","el":"#waline","emoji":["//unpkg.com/@waline/emojis@1.1.0/weibo"],"highlighter":true,"imageUploader":true,"lang":"zh-cn","login":"enable","meta":["nick","mail","link"],"pageSize":10,"pageview":true,"requiredMeta":["nick","mail"],"search":true,"serverURL":"https://comments-nf6liufk4-1803700972-qqcom.vercel.app","texRenderer":true}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"siteTime":"2023-1-10"};</script><script src="/js/theme.min.js" defer></script><script>
+      window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+      gtag('config', 'G-CBQC1RW0CV', { 'anonymize_ip': true });
+    </script><script src="https://www.googletagmanager.com/gtag/js?id=G-CBQC1RW0CV" async></script></body>
+</html>

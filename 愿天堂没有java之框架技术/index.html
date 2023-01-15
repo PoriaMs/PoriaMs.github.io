@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>愿天堂没有Java之框架技术 - 晨星_茯苓</title><meta name="author" content="晨星_茯苓">
+<meta name="author-link" content="/about/">
+<meta name="description" content="JavaSE 笔记（九）" /><meta name="keywords" content='web security' /><meta itemprop="name" content="愿天堂没有Java之框架技术">
+<meta itemprop="description" content="JavaSE 笔记（九）"><meta itemprop="datePublished" content="2022-01-25T17:28:04+00:00" />
+<meta itemprop="dateModified" content="2023-01-15T21:17:29+08:00" />
+<meta itemprop="wordCount" content="2288">
+<meta itemprop="keywords" content="" /><meta property="og:title" content="愿天堂没有Java之框架技术" />
+<meta property="og:description" content="JavaSE 笔记（九）" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-25T17:28:04+00:00" />
+<meta property="article:modified_time" content="2023-01-15T21:17:29+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="愿天堂没有Java之框架技术"/>
+<meta name="twitter:description" content="JavaSE 笔记（九）"/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.jpg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/" /><link rel="prev" href="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E7%BA%BF%E7%A8%8B/" /><link rel="next" href="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8Bxml/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "愿天堂没有Java之框架技术",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/poriams.github.io\/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF\/"
+    },"genre": "posts","wordcount":  2288 ,
+    "url": "https:\/\/poriams.github.io\/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF\/","datePublished": "2022-01-25T17:28:04+00:00","dateModified": "2023-01-15T21:17:29+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "晨星_茯苓"
+      },"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="晨星_茯苓"><span class="header-title-pre"><i class='fa-solid fa-home fa-fw fa-sm'></i></span><span class="header-title-text">Poria Morningstar</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-users fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 友链</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="晨星_茯苓"><span class="header-title-pre"><i class='fa-solid fa-home fa-fw fa-sm'></i></span><span class="header-title-text">Poria Morningstar</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-users fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 友链</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container" data-page-style="normal"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX">
+        <span>愿天堂没有Java之框架技术</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="/about/" title="作者" rel=" author" class="author"><img
+    class="lazyload avatar"
+    src="/svg/loading.min.svg"
+    data-src="/avatar.jpg"
+    data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+    data-sizes="auto"
+    alt="晨星_茯苓"
+    title="晨星_茯苓"/>&nbsp;晨星_茯苓</a></span>
+          <span class="post-category">收录于 <a href="/categories/java/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Java</a></span></div>
+      <div class="post-meta-line"><span title=2022-01-25&#32;17:28:04><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-25">2022-01-25</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i> 约 2288 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden="true"></i> 预计阅读 5 分钟</span>&nbsp;<span class="comment-visitors" data-flag-title="愿天堂没有Java之框架技术">
+              <i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span data-path="/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/" class="waline-pageview-count">-</span>&nbsp;次阅读
+            </span>&nbsp;<span class="comment-count" data-flag-title="愿天堂没有Java之框架技术">
+              <i class="fa-regular fa-comments fa-fw" aria-hidden="true"></i>&nbsp;<span data-path="/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/" class="waline-comment-count">-</span>&nbsp;条评论
+            </span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#反射">反射</a>
+              <ul>
+                <li><a href="#认识一下嘛">认识一下嘛</a></li>
+                <li><a href="#关键">关键</a></li>
+                <li><a href="#获取类对象">获取类对象</a></li>
+                <li><a href="#获取构造器对象">获取构造器对象</a></li>
+                <li><a href="#获取成员变量对象">获取成员变量对象</a></li>
+                <li><a href="#获取方法对象">获取方法对象</a></li>
+                <li><a href="#作用">作用</a></li>
+              </ul>
+            </li>
+            <li><a href="#注解">注解</a>
+              <ul>
+                <li><a href="#认识一下嘛-1">认识一下嘛</a></li>
+                <li><a href="#自定义注解">自定义注解</a></li>
+                <li><a href="#元注解">元注解</a></li>
+                <li><a href="#注解解析">注解解析</a></li>
+                <li><a href="#单元测试">单元测试</a></li>
+              </ul>
+            </li>
+            <li><a href="#动态代理">动态代理</a>
+              <ul>
+                <li><a href="#认识一下嘛-2">认识一下嘛</a></li>
+                <li><a href="#关键步骤">关键步骤</a></li>
+                <li><a href="#用例">用例</a></li>
+                <li><a href="#优点">优点</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><p><strong>JavaSE 笔记（九）</strong></p>
+<blockquote>
+<p>Java 是一门非常严谨的语言</p>
+</blockquote>
+<h4 id="反射">反射</h4>
+<h5 id="认识一下嘛">认识一下嘛</h5>
+<ul>
+<li>反射是指对于任何一个Class类，在<strong>运行的时候</strong>都可以直接得到这个类全部成分</li>
+<li>全部成分指构造器对象<code>Constructor</code>，成员变量对象<code>Field</code>，成员方法对象<code>Method</code></li>
+<li>这种运行时动态获取类信息以及动态调用类中成分的能力称为Java语言的反射机制</li>
+</ul>
+<h5 id="关键">关键</h5>
+<ul>
+<li>
+<p>反射的第一步都是得到编译后的 Class 类对象，然后就可以得到 Class 的全部成分</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">HelloWorld</span><span class="o">.</span><span class="na">java</span> <span class="o">-&gt;</span> <span class="n">javac</span> <span class="o">-&gt;</span> <span class="n">HelloWorld</span><span class="o">.</span><span class="na">class</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Class</span> <span class="n">c</span> <span class="o">=</span> <span class="n">HelloWorld</span><span class="o">.</span><span class="na">class</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h5 id="获取类对象">获取类对象</h5>
+<ul>
+<li>
+<p>方法一：Class类中的一个静态方法：forName(全限名：包名 + 类名)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Class</span> <span class="n">c</span> <span class="o">=</span> <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">&#34;poria.Test&#34;</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>方法二：类名.class</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Class</span> <span class="n">c</span> <span class="o">=</span> <span class="n">Test</span><span class="o">.</span><span class="na">class</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>方式三：对象.getClass() 获取对象对应类的Class对象</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Test</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Test</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">Class</span> <span class="n">c</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="na">getClass</span><span class="o">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h5 id="获取构造器对象">获取构造器对象</h5>
+<ul>
+<li>
+<p>Class 类用于获取构造器的方法</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Constructor&lt;?&gt;[] getConstructors()</code></td>
+<td>返回所有构造器对象的数组（只能拿public的）</td>
+</tr>
+<tr>
+<td><code>Constructor&lt;?&gt;[] getDeclaredConstructors()</code></td>
+<td>返回所有构造器对象的数组，存在就能拿到</td>
+</tr>
+<tr>
+<td><code>Constructor&lt;T&gt; getConstructor(Class&lt;?&gt;...  parameterTypes)</code></td>
+<td>返回单个构造器对象（只能拿public的）</td>
+</tr>
+<tr>
+<td><code>Constructor&lt;T&gt; getDeclaredConstructor(Class&lt;?&gt;...  parameterTypes)</code></td>
+<td>返回单个构造器对象，存在就能拿到</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Constructor 类用于创建对象的方法</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>T newInstance(Object...  initargs)</code></td>
+<td>根据指定的构造器创建对象</td>
+</tr>
+<tr>
+<td><code>public void setAccessible(boolean  flag)</code></td>
+<td>设置为true,表示取消访问检查，进行暴力反射</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h5 id="获取成员变量对象">获取成员变量对象</h5>
+<ul>
+<li>
+<p>Class 类用于获取成员变量的方法</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Field[] getFields()</code></td>
+<td>返回所有成员变量对象的数组（只能拿public的）</td>
+</tr>
+<tr>
+<td><code>Field[] getDeclaredFields()</code></td>
+<td>返回所有成员变量对象的数组，存在就能拿到</td>
+</tr>
+<tr>
+<td><code>Field getField(String  name)</code></td>
+<td>返回单个成员变量对象（只能拿public的）</td>
+</tr>
+<tr>
+<td><code>Field getDeclaredField(String  name)</code></td>
+<td>返回单个成员变量对象，存在就能拿到</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Field 类中用于取值、赋值的方法</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>void set(Object obj, Object value)</code></td>
+<td>赋值</td>
+</tr>
+<tr>
+<td><code>Object get(Object obj)</code></td>
+<td>获取值</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h5 id="获取方法对象">获取方法对象</h5>
+<ul>
+<li>
+<p>Class 类中用于获取成员方法的方法</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Method[] getMethods()</code></td>
+<td>返回所有成员方法对象的数组（只能拿public的）</td>
+</tr>
+<tr>
+<td><code>Method[] getDeclaredMethods()</code></td>
+<td>返回所有成员方法对象的数组，存在就能拿到</td>
+</tr>
+<tr>
+<td><code>Method getMethod(String  name, Class&lt;?&gt;... parameterTypes)</code></td>
+<td>返回单个成员方法对象（只能拿public的）</td>
+</tr>
+<tr>
+<td><code>Method getDeclaredMethod(String  name, Class&lt;?&gt;... parameterTypes)</code></td>
+<td>返回单个成员方法对象，存在就能拿到</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Method 类中用于触发执行的方法</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Object invoke(Object obj, Object... args)</code></td>
+<td>运行方法  参数一：用obj对象调用该方法  参数二：调用方法的传递的参数（如果没有就不写）  返回值：方法的返回值（如果没有就不写）</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h5 id="作用">作用</h5>
+<ul>
+<li>在运行时获得一个类的全部成分</li>
+<li>破坏封装性</li>
+<li>破坏泛型的约束性</li>
+<li>做高级框架底层技术</li>
+</ul>
+<h4 id="注解">注解</h4>
+<h5 id="认识一下嘛-1">认识一下嘛</h5>
+<ul>
+<li>Java 语言中的类、构造器、方法、成员变量、参数等都可以被注解进行标注</li>
+<li>对 Java 中类、方法、成员变量做标记，然后进行特殊处理</li>
+</ul>
+<h5 id="自定义注解">自定义注解</h5>
+<ul>
+<li>
+<p>格式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="nd">@interface</span> <span class="err">注解名称</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">public</span> <span class="err">属性类型</span> <span class="err">属性名</span><span class="o">()</span> <span class="k">default</span> <span class="err">默认值</span> <span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>value 属性，如果只有一个 value 属性的情况下，使用 value 属性的时候可以省略 value 名称不写</p>
+</li>
+</ul>
+<h5 id="元注解">元注解</h5>
+<ul>
+<li>
+<p>就是用来注解注解的注解（绕口令</p>
+</li>
+<li>
+<p>元注解有两个</p>
+<ul>
+<li>@Target：约束自定义注解只能在哪些地方使用</li>
+<li>常用值
+<ul>
+<li>TYPE，类，接口</li>
+<li>FIELD，成员变量</li>
+<li>METHOD，成员方法</li>
+<li>PARAMETER, 方法参数</li>
+<li>CONSTRUCTOR, 构造器</li>
+<li>LOCAL_VARIABLE, 局部变量</li>
+</ul>
+</li>
+<li>@Retention：申明注解的生命周期</li>
+<li>常用值
+<ul>
+<li>SOURCE： 注解只作用在源码阶段，生成的字节码文件中不存在</li>
+<li>CLASS： 注解作用在源码阶段，字节码文件阶段，运行阶段不存在，默认值.</li>
+<li>RUNTIME：注解作用在源码阶段，字节码文件阶段，运行阶段（开发常用）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>用例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Target</span><span class="o">({</span><span class="n">ElementType</span><span class="o">.</span><span class="na">METHOD</span><span class="o">,</span><span class="n">ElementType</span><span class="o">.</span><span class="na">FIELD</span><span class="o">})</span> <span class="c1">// 元注解
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nd">@Retention</span><span class="o">(</span><span class="n">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span> <span class="c1">// 一直活着，在运行阶段这个注解也不消失
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="nd">@interface</span> <span class="n">MyTest</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h5 id="注解解析">注解解析</h5>
+<ul>
+<li>
+<p>注解的操作中经常需要进行解析，注解的解析就是判断是否存在注解，存在注解就解析出内容</p>
+</li>
+<li>
+<p>注解相关接口</p>
+<ul>
+<li>Annotation：注解的顶级接口，注解都是 Annotation 类型的对象</li>
+<li>AnnotatedElement：该接口定义了与注解解析相关的解析方法</li>
+</ul>
+</li>
+<li>
+<p>常用方法</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Annotation[] getDeclaredAnnotations()</code></td>
+<td>获得当前对象上使用的所有注解，返回注解数组。</td>
+</tr>
+<tr>
+<td><code>T getDeclaredAnnotation(Class&lt;T&gt;  annotationClass)</code></td>
+<td>根据注解类型获得对应注解对象</td>
+</tr>
+<tr>
+<td><code>boolean isAnnotationPresent(Class&lt;Annotation&gt;  annotationClass)</code></td>
+<td>判断当前对象是否使用了指定的注解，如果使用了则返回true，否则false</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>所有的类成分Class，Method，Field，Constructor，都实现了 AnnotatedElement 接口他们都拥有解析注解的能力</p>
+</li>
+<li>
+<p>技巧</p>
+<ul>
+<li>注解在哪个成分上，我们就先拿哪个成分对象。</li>
+<li>比如注解作用成员方法，则要获得该成员方法对应的 Method 对象，再来拿上面的注解</li>
+<li>比如注解作用在类上，则要该类的 Class 对象，再来拿上面的注解</li>
+<li>比如注解作用在成员变量上，则要获得该成员变量对应的 Field 对象，再来拿上面的注解</li>
+</ul>
+</li>
+</ul>
+<h5 id="单元测试">单元测试</h5>
+<ul>
+<li>
+<p>单元测试就是针对最小的功能单元编写测试代码，Java 程序最小的功能单元是方法，因此，单元测试就是针对 Java 方法的测试，进而检查方法的正确性</p>
+</li>
+<li>
+<p>测试方法使用 @Test 注解标记</p>
+</li>
+<li>
+<p>定义的测试方法必须是无参数无返回值，且公开的方法</p>
+<table>
+<thead>
+<tr>
+<th>注解</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@Test</code></td>
+<td>测试方法</td>
+</tr>
+<tr>
+<td><code>@BeforeEach</code></td>
+<td>用来修饰实例方法，该方法会在每一个测试方法执行之前执行一次。</td>
+</tr>
+<tr>
+<td><code>@AfterEach</code></td>
+<td>用来修饰实例方法，该方法会在每一个测试方法执行之后执行一次。</td>
+</tr>
+<tr>
+<td><code>@BeforeAll</code></td>
+<td>用来静态修饰方法，该方法会在所有测试方法之前只执行一次。</td>
+</tr>
+<tr>
+<td><code>@AfterAll</code></td>
+<td>用来静态修饰方法，该方法会在所有测试方法之后只执行一次。</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h4 id="动态代理">动态代理</h4>
+<h5 id="认识一下嘛-2">认识一下嘛</h5>
+<ul>
+<li>代理就是被代理者没有能力或者不愿意去完成某件事情，需要找个人代替自己去完成这件事，动态代理就是用来对业务功能（方法）进行代理的</li>
+</ul>
+<h5 id="关键步骤">关键步骤</h5>
+<ul>
+<li>必须有接口，实现类要实现接口</li>
+<li>创建一个实现类的对象，该对象为业务对象，然后为业务对象创建一个代理对象</li>
+</ul>
+<h5 id="用例">用例</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span>  <span class="nf">getProxy</span><span class="o">(</span><span class="n">T</span> <span class="n">obj</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 返回了一个代理对象了
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="o">(</span><span class="n">T</span><span class="o">)</span><span class="n">Proxy</span><span class="o">.</span><span class="na">newProxyInstance</span><span class="o">(</span><span class="n">obj</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getClassLoader</span><span class="o">(),</span> <span class="n">obj</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getInterfaces</span><span class="o">(),</span>
+</span></span><span class="line"><span class="cl">                <span class="k">new</span> <span class="n">InvocationHandler</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">                    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">invoke</span><span class="o">(</span><span class="n">Object</span> <span class="n">proxy</span><span class="o">,</span> <span class="n">Method</span> <span class="n">method</span><span class="o">,</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Throwable</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="c1">// 参数一：代理对象本身
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="c1">// 参数二：正在被代理的方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="c1">// 参数三：被代理方法，应该传入的参数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                       <span class="kt">long</span> <span class="n">startTimer</span> <span class="o">=</span> <span class="n">System</span> <span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                        <span class="c1">// 马上触发方法的真正执行。(触发真正的业务功能)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="n">Object</span> <span class="n">result</span> <span class="o">=</span> <span class="n">method</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">obj</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                        <span class="kt">long</span> <span class="n">endTimer</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">method</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;方法耗时：&#34;</span> <span class="o">+</span> <span class="o">(</span><span class="n">endTimer</span> <span class="o">-</span> <span class="n">startTimer</span><span class="o">)</span> <span class="o">/</span> <span class="mf">1000.0</span> <span class="o">+</span> <span class="s">&#34;s&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                        <span class="c1">// 把业务功能方法执行的结果返回给调用者
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">                <span class="o">});</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="优点">优点</h5>
+<ul>
+<li>非常的灵活，支持任意接口类型的实现类对象做代理，也可以直接为接本身做代理</li>
+<li>可以为被代理对象的所有方法做代理</li>
+<li>可以在不改变方法源码的情况下，实现对方法功能的增强</li>
+<li>不仅简化了编程工作、提高了软件系统的可扩展性，同时也提高了开发效率</li>
+</ul></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title=2023-01-15&#32;21:17:29>更新于 2023-01-15&nbsp;</span>
+      </div><div class="post-info-license">
+          <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
+        </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/" data-title="愿天堂没有Java之框架技术"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/" data-title="愿天堂没有Java之框架技术" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/" data-title="愿天堂没有Java之框架技术"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/" data-title="愿天堂没有Java之框架技术"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/" data-title="愿天堂没有Java之框架技术" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/" data-title="愿天堂没有Java之框架技术" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/" data-title="愿天堂没有Java之框架技术"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E7%BA%BF%E7%A8%8B/" class="post-nav-item" rel="prev" title="愿天堂没有Java之线程"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>愿天堂没有Java之线程</a>
+      <a href="/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8Bxml/" class="post-nav-item" rel="next" title="愿天堂没有Java之XML">愿天堂没有Java之XML<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="waline" class="comment"></div><noscript>
+        Please enable JavaScript to view the comments powered by <a href="https://waline.js.org/" rel="external nofollow noopener noreferrer">Waline</a>.
+      </noscript></div></article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line copyright order-last" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2023</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line statistics"><span class="site-time" title='网站运行中 ...'><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden="true"></i><span class="ms-1 d-none">博客已运行</span><span class="run-times ms-1">网站运行中 ...</span></span></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric">0%</span>
+        </div><div class="fixed-button view-comments d-none" role="button" aria-label="查看评论"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><div class="reading-progress-bar" style="left: 0;top: 0;"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/waline/waline.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><link rel="stylesheet" href="/lib/pace/themes/blue/pace-theme-minimal.css"><script src="/lib/waline/waline.js" defer></script><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lazysizes/lazysizes.min.js" async defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="/lib/pace/pace.min.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":5000},"comment":{"enable":true,"expired":false,"waline":{"comment":true,"copyright":true,"dark":"body[data-theme='dark']","el":"#waline","emoji":["//unpkg.com/@waline/emojis@1.1.0/weibo"],"highlighter":true,"imageUploader":true,"lang":"zh-cn","login":"enable","meta":["nick","mail","link"],"pageSize":10,"pageview":true,"requiredMeta":["nick","mail"],"search":true,"serverURL":"https://comments-nf6liufk4-1803700972-qqcom.vercel.app","texRenderer":true}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"siteTime":"2023-1-10"};</script><script src="/js/theme.min.js" defer></script><script>
+      window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+      gtag('config', 'G-CBQC1RW0CV', { 'anonymize_ip': true });
+    </script><script src="https://www.googletagmanager.com/gtag/js?id=G-CBQC1RW0CV" async></script></body>
+</html>

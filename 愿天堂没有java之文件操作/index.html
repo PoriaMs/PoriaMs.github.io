@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>愿天堂没有Java之文件操作 - 晨星_茯苓</title><meta name="author" content="晨星_茯苓">
+<meta name="author-link" content="/about/">
+<meta name="description" content="JavaSE 笔记（七）" /><meta name="keywords" content='web security' /><meta itemprop="name" content="愿天堂没有Java之文件操作">
+<meta itemprop="description" content="JavaSE 笔记（七）"><meta itemprop="datePublished" content="2021-12-22T19:01:25+00:00" />
+<meta itemprop="dateModified" content="2023-01-15T21:18:03+08:00" />
+<meta itemprop="wordCount" content="3646">
+<meta itemprop="keywords" content="" /><meta property="og:title" content="愿天堂没有Java之文件操作" />
+<meta property="og:description" content="JavaSE 笔记（七）" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-22T19:01:25+00:00" />
+<meta property="article:modified_time" content="2023-01-15T21:18:03+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="愿天堂没有Java之文件操作"/>
+<meta name="twitter:description" content="JavaSE 笔记（七）"/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.jpg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" /><link rel="prev" href="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E5%BC%82%E5%B8%B8%E4%B8%8E%E6%97%A5%E5%BF%97/" /><link rel="next" href="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E7%BA%BF%E7%A8%8B/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "愿天堂没有Java之文件操作",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/poriams.github.io\/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C\/"
+    },"genre": "posts","wordcount":  3646 ,
+    "url": "https:\/\/poriams.github.io\/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C\/","datePublished": "2021-12-22T19:01:25+00:00","dateModified": "2023-01-15T21:18:03+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "晨星_茯苓"
+      },"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="晨星_茯苓"><span class="header-title-pre"><i class='fa-solid fa-home fa-fw fa-sm'></i></span><span class="header-title-text">Poria Morningstar</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-users fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 友链</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="晨星_茯苓"><span class="header-title-pre"><i class='fa-solid fa-home fa-fw fa-sm'></i></span><span class="header-title-text">Poria Morningstar</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-users fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 友链</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container" data-page-style="normal"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX">
+        <span>愿天堂没有Java之文件操作</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="/about/" title="作者" rel=" author" class="author"><img
+    class="lazyload avatar"
+    src="/svg/loading.min.svg"
+    data-src="/avatar.jpg"
+    data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+    data-sizes="auto"
+    alt="晨星_茯苓"
+    title="晨星_茯苓"/>&nbsp;晨星_茯苓</a></span>
+          <span class="post-category">收录于 <a href="/categories/java/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Java</a></span></div>
+      <div class="post-meta-line"><span title=2021-12-22&#32;19:01:25><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-12-22">2021-12-22</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i> 约 3646 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden="true"></i> 预计阅读 8 分钟</span>&nbsp;<span class="comment-visitors" data-flag-title="愿天堂没有Java之文件操作">
+              <i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span data-path="/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="waline-pageview-count">-</span>&nbsp;次阅读
+            </span>&nbsp;<span class="comment-count" data-flag-title="愿天堂没有Java之文件操作">
+              <i class="fa-regular fa-comments fa-fw" aria-hidden="true"></i>&nbsp;<span data-path="/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="waline-comment-count">-</span>&nbsp;条评论
+            </span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#file-类概述">File 类概述</a>
+              <ul>
+                <li><a href="#认识一下嘛">认识一下嘛</a></li>
+                <li><a href="#格式">格式</a></li>
+                <li><a href="#绝对路径与相对路径">绝对路径与相对路径</a></li>
+              </ul>
+            </li>
+            <li><a href="#常用方法">常用方法</a>
+              <ul>
+                <li><a href="#判断文件类型获取文件信息">判断文件类型、获取文件信息</a></li>
+                <li><a href="#创建文件">创建文件</a></li>
+                <li><a href="#删除文件">删除文件</a></li>
+                <li><a href="#遍历文件夹">遍历文件夹</a></li>
+              </ul>
+            </li>
+            <li><a href="#字符集">字符集</a>
+              <ul>
+                <li><a href="#认识一下嘛-1">认识一下嘛</a></li>
+                <li><a href="#常见字符集">常见字符集</a></li>
+                <li><a href="#编码解码方法">编码解码方法</a></li>
+              </ul>
+            </li>
+            <li><a href="#io-流概述">IO 流概述</a>
+              <ul>
+                <li><a href="#认识一下嘛-2">认识一下嘛</a></li>
+                <li><a href="#分类">分类</a></li>
+              </ul>
+            </li>
+            <li><a href="#字节流的使用">字节流的使用</a>
+              <ul>
+                <li><a href="#fileinputstream">FileInputStream</a></li>
+                <li><a href="#fileoutputstream">FileOutputStream</a></li>
+                <li><a href="#流的刷新与关闭">流的刷新与关闭</a></li>
+              </ul>
+            </li>
+            <li><a href="#资源释放的方式">资源释放的方式</a>
+              <ul>
+                <li><a href="#try-catch-finally">try-catch-finally</a></li>
+                <li><a href="#try-with-resource">try-with-resource</a></li>
+              </ul>
+            </li>
+            <li><a href="#字符流的使用">字符流的使用</a>
+              <ul>
+                <li><a href="#reader">Reader</a></li>
+                <li><a href="#filewriter">FileWriter</a></li>
+                <li><a href="#流的刷新与关闭-1">流的刷新与关闭</a></li>
+              </ul>
+            </li>
+            <li><a href="#缓冲流">缓冲流</a>
+              <ul>
+                <li><a href="#认识一下嘛-3">认识一下嘛</a></li>
+                <li><a href="#字节缓冲流">字节缓冲流</a></li>
+                <li><a href="#字符缓冲流">字符缓冲流</a></li>
+              </ul>
+            </li>
+            <li><a href="#转换流">转换流</a>
+              <ul>
+                <li><a href="#引出">引出</a></li>
+                <li><a href="#字符输入转换流">字符输入转换流</a></li>
+                <li><a href="#字符输出转换流">字符输出转换流</a></li>
+              </ul>
+            </li>
+            <li><a href="#序列化对象">序列化对象</a>
+              <ul>
+                <li><a href="#对象序列化">对象序列化</a></li>
+                <li><a href="#对象反序列化">对象反序列化</a></li>
+              </ul>
+            </li>
+            <li><a href="#打印流">打印流</a>
+              <ul>
+                <li><a href="#认识一下嘛-4">认识一下嘛</a></li>
+                <li><a href="#printstream">PrintStream</a></li>
+                <li><a href="#printwriter">PrintWriter</a></li>
+                <li><a href="#输出语句重定向">输出语句重定向</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><p><strong>JavaSE 笔记（七）</strong></p>
+<blockquote>
+<p>Java 是一门非常严谨的语言</p>
+</blockquote>
+<h4 id="file-类概述">File 类概述</h4>
+<h5 id="认识一下嘛">认识一下嘛</h5>
+<ul>
+<li>该类在 java.io.File 下，代表操作系统的文件对象（文件、文件夹）</li>
+<li>该类可以定位文件，获取文件信息，删除、创建文件（夹）；但是不能读写文件</li>
+</ul>
+<h5 id="格式">格式</h5>
+<ul>
+<li>仅仅是一个路径名称，该路径可以存在，也可以不存在</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="o">(</span><span class="s">&#34;pathname&#34;</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="绝对路径与相对路径">绝对路径与相对路径</h5>
+<ul>
+<li>
+<p>绝对路径：从盘符开始</p>
+<p><code>File file = new File(&quot;D:/poria/poria.txt&quot;);</code></p>
+</li>
+<li>
+<p>相对路径：不带盘符，默认直接到当前工程下寻找文件</p>
+<p><code>File file = new File(&quot;模块名称/poria.txt&quot;);</code></p>
+</li>
+</ul>
+<h4 id="常用方法">常用方法</h4>
+<h5 id="判断文件类型获取文件信息">判断文件类型、获取文件信息</h5>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public  boolean isDirectory()</code></td>
+<td>测试此抽象路径名表示的File是否为文件夹</td>
+</tr>
+<tr>
+<td><code>public  boolean isFile()</code></td>
+<td>测试此抽象路径名表示的File是否为文件</td>
+</tr>
+<tr>
+<td><code>public  boolean  exists()</code></td>
+<td>测试此抽象路径名表示的File是否存在</td>
+</tr>
+<tr>
+<td><code>public  String getAbsolutePath()</code></td>
+<td>返回此抽象路径名的绝对路径名字符串</td>
+</tr>
+<tr>
+<td><code>public  String getPath()</code></td>
+<td>将此抽象路径名转换为路径名字符串</td>
+</tr>
+<tr>
+<td><code>public  String getName()</code></td>
+<td>返回由此抽象路径名表示的文件或文件夹的名称</td>
+</tr>
+<tr>
+<td><code>public  long lastModified()</code></td>
+<td>返回文件最后修改的时间毫秒值</td>
+</tr>
+</tbody>
+</table>
+<h5 id="创建文件">创建文件</h5>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public boolean createNewFile()</code></td>
+<td>创建一个新的空的文件</td>
+</tr>
+<tr>
+<td><code>public boolean mkdir()</code></td>
+<td>只能创建一级文件夹</td>
+</tr>
+<tr>
+<td><code>public boolean mkdirs()</code></td>
+<td>可以创建多级文件夹</td>
+</tr>
+</tbody>
+</table>
+<h5 id="删除文件">删除文件</h5>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public  boolean delete()</code></td>
+<td>删除由此抽象路径名表示的文件或空文件夹</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>delete 方法默认只能删除文件和空文件夹</li>
+<li>该删除方法不走回收站</li>
+</ul>
+<h5 id="遍历文件夹">遍历文件夹</h5>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public String[] list()</code></td>
+<td>获取当前目录下所有的<strong>一级文件名称</strong>到一个字符串数组中去返回。</td>
+</tr>
+<tr>
+<td><code>public File[] listFiles()(常用)</code></td>
+<td>获取当前目录下所有的<strong>一级文件对象</strong>到一个文件对象数组中去返回（重点）</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>listFIles 注意事项
+<ul>
+<li>当调用者不存在时，返回 null</li>
+<li>当调用者是文件夹时，返回 null</li>
+<li>当调用者是一个空文件夹时，返回长度为0的数组</li>
+<li>当调用者是一个有内容的文件夹时，将里面所有的文件和文件夹的路径放在 File 数组中返回</li>
+<li>当调用者是一个有隐藏文件的文件夹时，会将所有内容返回，包括隐藏文件</li>
+<li>当调用者是一个有权限的文件夹时，返回 null</li>
+</ul>
+</li>
+</ul>
+<h4 id="字符集">字符集</h4>
+<h5 id="认识一下嘛-1">认识一下嘛</h5>
+<ul>
+<li>计算机底层不可以直接存储字符，只能存储二进制</li>
+<li>二进制可以转化为十进制，十进制编号</li>
+<li>计算机可以给人类字符进行编号存储，这套编号规则就是字符集</li>
+</ul>
+<h5 id="常见字符集">常见字符集</h5>
+<ul>
+<li>ASCII
+<ul>
+<li>美国信息交换标准码</li>
+<li>一个字节存储一个字符，一个字节是8位，即2的八次方，对于英文，数字够用</li>
+</ul>
+</li>
+<li>GBK
+<ul>
+<li>windows系统默认的码表，兼容 ASCII 码表，也包含几万汉字，并支持繁体汉字以及部分日韩文字</li>
+<li>GBK 是中国的码表，一个中文以两个字节的形式存储</li>
+</ul>
+</li>
+<li>Unicode
+<ul>
+<li>又称统一码，万国码，单一码</li>
+<li>容纳有世界上大多数国家的所有常见文字和符号</li>
+<li>Unicode 会先通过 UTF-8，UTF-6 以及 UTF-32 的编码成二进制后再存储到计算机中</li>
+<li>UTF-8 编码后一个中文一般以三个字节形式存储</li>
+</ul>
+</li>
+</ul>
+<h5 id="编码解码方法">编码解码方法</h5>
+<ul>
+<li>
+<p>String 编码</p>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>byte[] getBytes()</code></td>
+<td>使用平台的默认字符集将该  String编码为一系列字节，将结果存储到新的字节数组中</td>
+</tr>
+<tr>
+<td><code>byte[] getBytes(String charsetName)</code></td>
+<td>使用指定的字符集将该 String编码为一系列字节，将结果存储到新的字节数组中</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>String 解码</p>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>String(byte[] bytes)</code></td>
+<td>通过使用平台的默认字符集解码指定的字节数组来构造新的  String</td>
+</tr>
+<tr>
+<td><code>String(byte[] bytes, String charsetName)</code></td>
+<td>通过指定的字符集解码指定的字节数组来构造新的 String</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h4 id="io-流概述">IO 流概述</h4>
+<h5 id="认识一下嘛-2">认识一下嘛</h5>
+<ul>
+<li>IO 流也成为输入、输出流，就是用来读写数据的</li>
+<li>I 表示 Input，是数据从磁盘文件读到内存的过程，称之为输入，负责读</li>
+<li>O 表示 Output，是内存数据从内存写到磁盘文件的过程，称之为输出，负责写</li>
+</ul>
+<h5 id="分类">分类</h5>
+<ul>
+<li>字节流：操作所有类型的文件</li>
+<li>字符流：只能操作纯文本文件</li>
+</ul>
+<h4 id="字节流的使用">字节流的使用</h4>
+<h5 id="fileinputstream">FileInputStream</h5>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public  FileInputStream(File file)</code></td>
+<td>创建字节输入流管道与源文件对象接通</td>
+</tr>
+<tr>
+<td><code>public  FileInputStream(String pathname)</code></td>
+<td>创建字节输入流管道与源文件路径接通</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public int  read()</code></td>
+<td>每次读取一个字节返回，如果字节已经没有可读的返回-1</td>
+</tr>
+<tr>
+<td><code>public int  read(byte[] buffer)</code></td>
+<td>每次读取一个字节数组返回，如果字节已经没有可读的返回-1</td>
+</tr>
+<tr>
+<td><code>public byte[] readAllBytes() throws IOException</code></td>
+<td>直接将当前字节输入流对应的文件对象的字节数据装到一个字节数组返回</td>
+</tr>
+</tbody>
+</table>
+<h5 id="fileoutputstream">FileOutputStream</h5>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public FileOutputStream(File file)</code></td>
+<td>创建字节输出流管道与源文件对象接通</td>
+</tr>
+<tr>
+<td><code>public FileOutputStream(File file，boolean append)</code></td>
+<td>创建字节输出流管道与源文件对象接通，可追加数据</td>
+</tr>
+<tr>
+<td><code>public FileOutputStream(String filepath)</code></td>
+<td>创建字节输出流管道与源文件路径接通</td>
+</tr>
+<tr>
+<td><code>public FileOutputStream(String filepath，boolean append)</code></td>
+<td>创建字节输出流管道与源文件路径接通，可追加数据</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public void write(int a)</code></td>
+<td>写一个字节出去</td>
+</tr>
+<tr>
+<td><code>public void write(byte[] buffer)</code></td>
+<td>写一个字节数组出去</td>
+</tr>
+<tr>
+<td><code>public void write(byte[] buffer , int pos , int len)</code></td>
+<td>写一个字节数组的一部分出去。</td>
+</tr>
+</tbody>
+</table>
+<h5 id="流的刷新与关闭">流的刷新与关闭</h5>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>flush()</code></td>
+<td>刷新流，还可以继续写数据</td>
+</tr>
+<tr>
+<td><code>close()</code></td>
+<td>关闭流，释放资源，但是在关闭之前会先刷新流。一旦关闭，就不能再写数据</td>
+</tr>
+</tbody>
+</table>
+<h4 id="资源释放的方式">资源释放的方式</h4>
+<h5 id="try-catch-finally">try-catch-finally</h5>
+<ul>
+<li>
+<p>finally：在异常处理时，提供 finally 块来执行所有清除操作，比如 IO 流中的资源释放</p>
+</li>
+<li>
+<p>被 finally 控制的语句最终一定会执行，除非 JVM 退出</p>
+</li>
+<li>
+<p>格式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">try</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 正常语句
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="n">Expection</span> <span class="n">e</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">  <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span><span class="k">finally</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 最终执行的语句
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>可以在 finally 块中最后释放资源</p>
+</li>
+</ul>
+<h5 id="try-with-resource">try-with-resource</h5>
+<ul>
+<li>
+<p>虽然上面的办法可以用于释放资源，但是释放的代码过于繁琐</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">InputStream</span> <span class="n">is</span> <span class="o">=</span> <span class="kc">null</span> <span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">OutputStream</span> <span class="n">os</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">  <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 关闭资源！
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="o">(</span><span class="n">os</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="n">os</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="o">(</span><span class="n">is</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="n">is</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>改进后的方案</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">定义输入流对象</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="err">定义输出流对象</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="o">(</span><span class="err">输入流对象；输出流对象</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">  <span class="err">可能出现异常的代码</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="err">异常类名</span> <span class="err">变量名</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">  <span class="err">异常的处理代码</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>注意：</p>
+<ul>
+<li>try 后面的小括号只能放资源对象，否则就会报错</li>
+<li>所谓资源对象就是实现了 Closeable/AutoCloseable 接口的对象</li>
+</ul>
+</li>
+</ul>
+<h4 id="字符流的使用">字符流的使用</h4>
+<h5 id="reader">Reader</h5>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public FileReader(File file)</code></td>
+<td>创建字符输入流管道与源文件对象接通</td>
+</tr>
+<tr>
+<td><code>public FileReader(String  pathname)</code></td>
+<td>创建字符输入流管道与源文件路径接通</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public int read()</code></td>
+<td>每次读取一个字符返回，如果字符已经没有可读的返回-1</td>
+</tr>
+<tr>
+<td><code>public int  read(char[] buffer)</code></td>
+<td>每次读取一个字符数组，返回读取的字符个数，如果字符已经没有可读的返回-1</td>
+</tr>
+</tbody>
+</table>
+<h5 id="filewriter">FileWriter</h5>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public FileWriter(File file)</code></td>
+<td>创建字符输出流管道与源文件对象接通</td>
+</tr>
+<tr>
+<td><code>public FileWriter(File file，boolean append)</code></td>
+<td>创建字符输出流管道与源文件对象接通，可追加数据</td>
+</tr>
+<tr>
+<td><code>public FileWriter(String filepath)</code></td>
+<td>创建字符输出流管道与源文件路径接通</td>
+</tr>
+<tr>
+<td><code>public FileWriter(String filepath，boolean append)</code></td>
+<td>创建字符输出流管道与源文件路径接通，可追加数据</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>void  write(int c)</code></td>
+<td>写一个字符</td>
+</tr>
+<tr>
+<td><code>void  write(char[] cbuf)</code></td>
+<td>写入一个字符数组</td>
+</tr>
+<tr>
+<td><code>void  write(char[] cbuf, int off, int len)</code></td>
+<td>写入字符数组的一部分</td>
+</tr>
+<tr>
+<td><code>void  write(String str)</code></td>
+<td>写一个字符串</td>
+</tr>
+<tr>
+<td><code>void  write(String str, int off, int len)</code></td>
+<td>写一个字符串的一部分</td>
+</tr>
+<tr>
+<td><code>void  write(int c)</code></td>
+<td>写一个字符</td>
+</tr>
+</tbody>
+</table>
+<h5 id="流的刷新与关闭-1">流的刷新与关闭</h5>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>flush()</code></td>
+<td>刷新流，还可以继续写数据</td>
+</tr>
+<tr>
+<td><code>close()</code></td>
+<td>关闭流，释放资源，但是在关闭之前会先刷新流。一旦关闭，就不能再写数据</td>
+</tr>
+</tbody>
+</table>
+<h4 id="缓冲流">缓冲流</h4>
+<h5 id="认识一下嘛-3">认识一下嘛</h5>
+<ul>
+<li>缓冲流也称为高级流、高效流</li>
+<li>缓冲流自带缓冲区、可以提高原始流独写数据的性能</li>
+</ul>
+<h5 id="字节缓冲流">字节缓冲流</h5>
+<ul>
+<li>BufferedInputStream &amp; BufferedOutputStream 只是提高了性能，功能方法上并无变化
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public BufferedInputStream(InputStream is)</code></td>
+<td>可以把低级的字节输入流包装成一个高级的缓冲字节输入流管道，从而提高字节输入流读数据的性能</td>
+</tr>
+<tr>
+<td><code>public BufferedOutputStream(OutputStream os)</code></td>
+<td>可以把低级的字节输出流包装成一个高级的缓冲字节输出流，从而提高写数据的性能</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h5 id="字符缓冲流">字符缓冲流</h5>
+<ul>
+<li>
+<p>BufferedReader 除了提高性能外，还<strong>多了一个按行读取数据</strong>的功能</p>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public  BufferedReader(Reader r)</code></td>
+<td>可以把低级的字符输入流包装成一个高级的缓冲字符输入流管道，从而提高字符输入流读数据的性能</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public  String readLine()</code></td>
+<td>读取一行数据返回，如果读取没有完毕，无行可读返回null</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>BufferWriter 除了提高性能外，还<strong>多了一个换行的</strong>功能</p>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public BufferedWriter(Writer  w)</code></td>
+<td>可以把低级的字符输出流包装成一个高级的缓冲字符输出流管道，从而提高字符输出流写数据的性能</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public  void newLine()</code></td>
+<td>换行操作</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h4 id="转换流">转换流</h4>
+<h5 id="引出">引出</h5>
+<ul>
+<li>如果代码编码和文件编码不一致，使用字符流直接读取会出现乱码</li>
+<li>使用转换流封装之后，可以避免这一问题</li>
+</ul>
+<h5 id="字符输入转换流">字符输入转换流</h5>
+<ul>
+<li>InputStreamReader，可以把原始的字节流按照指定编码转换成字符输入流
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public InputStreamReader(InputStream is)</code></td>
+<td>可以把原始的字节流按照代码默认编码转换成字符输入流。几乎不用，与默认的FileReader一样。</td>
+</tr>
+<tr>
+<td><code>public InputStreamReader(InputStream is ，String charset)</code></td>
+<td>可以把原始的字节流按照指定编码转换成字符输入流，这样字符流中的字符就不乱码了(重点)</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h5 id="字符输出转换流">字符输出转换流</h5>
+<ul>
+<li>OutputStreamWriter，可以把字节输出流按照指定编码转换成字符输出流
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public OutputStreamWriter(OutputStream os)</code></td>
+<td>可以把原始的字节输出流按照代码默认编码转换成字符输出流。几乎不用。</td>
+</tr>
+<tr>
+<td><code>public OutputStreamWriter(OutputStream os，String  charset)</code></td>
+<td>可以把原始的字节输出流按照指定编码转换成字符输出流(重点)</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h4 id="序列化对象">序列化对象</h4>
+<h5 id="对象序列化">对象序列化</h5>
+<ul>
+<li>
+<p>把内存中的对象存储到磁盘文件中去</p>
+</li>
+<li>
+<p>序列化的对象必须实现了<strong>序列化接口</strong></p>
+</li>
+<li>
+<p>对象字节输出流：ObjectOutputStream</p>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public ObjectOutputStream(OutputStream  out)</code></td>
+<td>把低级字节输出流包装成高级的对象字节输出流</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>序列化方法</p>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public final void writeObject(Object obj)</code></td>
+<td>把对象写出去到对象序列化流的文件中去</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h5 id="对象反序列化">对象反序列化</h5>
+<ul>
+<li>
+<p>把磁盘文件中的对象恢复到内存中的对象</p>
+</li>
+<li>
+<p>对象字节输入流：ObjectInputStream</p>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public ObjectInputStream(InputStream  out)</code></td>
+<td>把低级字节输如流包装成高级的对象字节输入流</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>反序列化方法</p>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public  Object readObject()</code></td>
+<td>把存储到磁盘文件中去的对象数据恢复成内存中的对象返回</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h4 id="打印流">打印流</h4>
+<h5 id="认识一下嘛-4">认识一下嘛</h5>
+<ul>
+<li>该流可以实现方便、高效的打印数据到文件中去</li>
+<li>一般指 PrintStream，PrintWriter 两个类</li>
+<li>可以实现打印什么数据就是什么数据</li>
+</ul>
+<h5 id="printstream">PrintStream</h5>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public PrintStream(OutputStream os)</code></td>
+<td>打印流直接通向字节输出流管道</td>
+</tr>
+<tr>
+<td><code>public PrintStream(File f)</code></td>
+<td>打印流直接通向文件对象</td>
+</tr>
+<tr>
+<td><code>public PrintStream(String filepath)</code></td>
+<td>打印流直接通向文件路径</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public void print(Xxx  xx)</code></td>
+<td>打印任意类型的数据出去</td>
+</tr>
+</tbody>
+</table>
+<h5 id="printwriter">PrintWriter</h5>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public PrintWriter(OutputStream os)</code></td>
+<td>打印流直接通向字节输出流管道</td>
+</tr>
+<tr>
+<td><code>public PrintWriter (Writer w)</code></td>
+<td>打印流直接通向字符输出流管道</td>
+</tr>
+<tr>
+<td><code>public PrintWriter (File f)</code></td>
+<td>打印流直接通向文件对象</td>
+</tr>
+<tr>
+<td><code>public PrintWriter (String filepath)</code></td>
+<td>打印流直接通向文件路径</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public void print(Xxx  xx)</code></td>
+<td>打印任意类型的数据出去</td>
+</tr>
+</tbody>
+</table>
+<h5 id="输出语句重定向">输出语句重定向</h5>
+<ul>
+<li>
+<p>属于打印流的一种应用，可以打印的位置改到指定位置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">PrintStream</span> <span class="n">ps</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PrintStream</span><span class="o">(</span><span class="s">&#34;文件地址&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">setOut</span><span class="o">(</span><span class="n">ps</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title=2023-01-15&#32;21:18:03>更新于 2023-01-15&nbsp;</span>
+      </div><div class="post-info-license">
+          <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
+        </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" data-title="愿天堂没有Java之文件操作"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" data-title="愿天堂没有Java之文件操作" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" data-title="愿天堂没有Java之文件操作"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" data-title="愿天堂没有Java之文件操作"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" data-title="愿天堂没有Java之文件操作" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" data-title="愿天堂没有Java之文件操作" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" data-title="愿天堂没有Java之文件操作"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E5%BC%82%E5%B8%B8%E4%B8%8E%E6%97%A5%E5%BF%97/" class="post-nav-item" rel="prev" title="愿天堂没有Java之异常与日志"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>愿天堂没有Java之异常与日志</a>
+      <a href="/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E7%BA%BF%E7%A8%8B/" class="post-nav-item" rel="next" title="愿天堂没有Java之线程">愿天堂没有Java之线程<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="waline" class="comment"></div><noscript>
+        Please enable JavaScript to view the comments powered by <a href="https://waline.js.org/" rel="external nofollow noopener noreferrer">Waline</a>.
+      </noscript></div></article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line copyright order-last" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2023</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line statistics"><span class="site-time" title='网站运行中 ...'><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden="true"></i><span class="ms-1 d-none">博客已运行</span><span class="run-times ms-1">网站运行中 ...</span></span></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric">0%</span>
+        </div><div class="fixed-button view-comments d-none" role="button" aria-label="查看评论"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><div class="reading-progress-bar" style="left: 0;top: 0;"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/waline/waline.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><link rel="stylesheet" href="/lib/pace/themes/blue/pace-theme-minimal.css"><script src="/lib/waline/waline.js" defer></script><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lazysizes/lazysizes.min.js" async defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="/lib/pace/pace.min.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":5000},"comment":{"enable":true,"expired":false,"waline":{"comment":true,"copyright":true,"dark":"body[data-theme='dark']","el":"#waline","emoji":["//unpkg.com/@waline/emojis@1.1.0/weibo"],"highlighter":true,"imageUploader":true,"lang":"zh-cn","login":"enable","meta":["nick","mail","link"],"pageSize":10,"pageview":true,"requiredMeta":["nick","mail"],"search":true,"serverURL":"https://comments-nf6liufk4-1803700972-qqcom.vercel.app","texRenderer":true}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"siteTime":"2023-1-10"};</script><script src="/js/theme.min.js" defer></script><script>
+      window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+      gtag('config', 'G-CBQC1RW0CV', { 'anonymize_ip': true });
+    </script><script src="https://www.googletagmanager.com/gtag/js?id=G-CBQC1RW0CV" async></script></body>
+</html>

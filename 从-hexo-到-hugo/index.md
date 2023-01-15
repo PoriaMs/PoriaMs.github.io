@@ -1,4 +1,4 @@
-# 从 Hexo 到 Hugo （一）
+# 从 Hexo 到 Hugo
 
 
 <!--more-->
@@ -229,9 +229,41 @@ resources:
   src: featured-image.png
 ```
 
+##### 文章迁移
+
+茯苓以前也都不怎么写博客，有很多文章的年限都比较久了，就挑了一篇二次反序列化，以及 JavaSE 的笔记迁过来，要改动的地方就是头部的那些，没啥难度就是有点麻烦耗时间
+
+##### 部署到 github 仓库
+
+需要部署在 GitHub Pages 上，首先在GitHub上创建一个 Repository，仓库名必须跟自己的用户名一样`用户名.github.io`
+
+然后运行`hugo`命令创建 public 页面，然后建立本地和 github 仓库的连接
+
+```bash
+hugo
+cd public
+git init
+git add .
+git commit -m "updating site on $(date)"
+git remote add origin https://github.com/xdr630/xdr630.github.io.git
+git push -u origin main
+```
+
+与远程仓库建立连接时，现在不能使用用户名密码登录，需要申请令牌，会有提示文档，照着操作就好
+
+以后每次更新只需要
+
+```bash
+hugo
+cd public
+git add .
+git commit -m "updating site on $(date)"
+git push origin main
+```
+
 
 ---
 
 > 作者: [晨星_茯苓](/about/)  
-> URL: http://example.org/%E4%BB%8E-hexo-%E5%88%B0-hugo/  
+> URL: https://poriams.github.io/%E4%BB%8E-hexo-%E5%88%B0-hugo/  
 

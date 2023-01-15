@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>愿天堂没有Java之常见API - 晨星_茯苓</title><meta name="author" content="晨星_茯苓">
+<meta name="author-link" content="/about/">
+<meta name="description" content="JavaSE 笔记（三）" /><meta name="keywords" content='web security' /><meta itemprop="name" content="愿天堂没有Java之常见API">
+<meta itemprop="description" content="JavaSE 笔记（三）"><meta itemprop="datePublished" content="2021-12-08T15:24:20+00:00" />
+<meta itemprop="dateModified" content="2023-01-15T21:10:08+08:00" />
+<meta itemprop="wordCount" content="2536">
+<meta itemprop="keywords" content="" /><meta property="og:title" content="愿天堂没有Java之常见API" />
+<meta property="og:description" content="JavaSE 笔记（三）" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E5%B8%B8%E8%A7%81api/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-08T15:24:20+00:00" />
+<meta property="article:modified_time" content="2023-01-15T21:10:08+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="愿天堂没有Java之常见API"/>
+<meta name="twitter:description" content="JavaSE 笔记（三）"/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.jpg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E5%B8%B8%E8%A7%81api/" /><link rel="prev" href="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6/" /><link rel="next" href="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E9%9B%86%E5%90%88/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "愿天堂没有Java之常见API",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/poriams.github.io\/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E5%B8%B8%E8%A7%81api\/"
+    },"genre": "posts","wordcount":  2536 ,
+    "url": "https:\/\/poriams.github.io\/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E5%B8%B8%E8%A7%81api\/","datePublished": "2021-12-08T15:24:20+00:00","dateModified": "2023-01-15T21:10:08+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "晨星_茯苓"
+      },"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="晨星_茯苓"><span class="header-title-pre"><i class='fa-solid fa-home fa-fw fa-sm'></i></span><span class="header-title-text">Poria Morningstar</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-users fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 友链</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="晨星_茯苓"><span class="header-title-pre"><i class='fa-solid fa-home fa-fw fa-sm'></i></span><span class="header-title-text">Poria Morningstar</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-users fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 友链</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container" data-page-style="normal"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX">
+        <span>愿天堂没有Java之常见API</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="/about/" title="作者" rel=" author" class="author"><img
+    class="lazyload avatar"
+    src="/svg/loading.min.svg"
+    data-src="/avatar.jpg"
+    data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+    data-sizes="auto"
+    alt="晨星_茯苓"
+    title="晨星_茯苓"/>&nbsp;晨星_茯苓</a></span>
+          <span class="post-category">收录于 <a href="/categories/java/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Java</a></span></div>
+      <div class="post-meta-line"><span title=2021-12-08&#32;15:24:20><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-12-08">2021-12-08</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i> 约 2536 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden="true"></i> 预计阅读 6 分钟</span>&nbsp;<span class="comment-visitors" data-flag-title="愿天堂没有Java之常见API">
+              <i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span data-path="/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E5%B8%B8%E8%A7%81api/" class="waline-pageview-count">-</span>&nbsp;次阅读
+            </span>&nbsp;<span class="comment-count" data-flag-title="愿天堂没有Java之常见API">
+              <i class="fa-regular fa-comments fa-fw" aria-hidden="true"></i>&nbsp;<span data-path="/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E5%B8%B8%E8%A7%81api/" class="waline-comment-count">-</span>&nbsp;条评论
+            </span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#api-概述">API 概述</a>
+              <ul>
+                <li><a href="#认识一下嘛">认识一下嘛</a></li>
+              </ul>
+            </li>
+            <li><a href="#object">Object</a>
+              <ul>
+                <li><a href="#认识一下嘛-1">认识一下嘛</a></li>
+                <li><a href="#常用方法">常用方法</a></li>
+                <li><a href="#tostring">toString</a></li>
+                <li><a href="#equals">equals</a></li>
+              </ul>
+            </li>
+            <li><a href="#objects">Objects</a>
+              <ul>
+                <li><a href="#认识一下嘛-2">认识一下嘛</a></li>
+                <li><a href="#常见方法">常见方法</a></li>
+              </ul>
+            </li>
+            <li><a href="#stringbuilder">StringBuilder</a>
+              <ul>
+                <li><a href="#认识一下">认识一下</a></li>
+                <li><a href="#构造器">构造器</a></li>
+                <li><a href="#常见方法-1">常见方法</a></li>
+              </ul>
+            </li>
+            <li><a href="#math">Math</a>
+              <ul>
+                <li><a href="#认识一下嘛-3">认识一下嘛</a></li>
+                <li><a href="#常用方法-1">常用方法</a></li>
+              </ul>
+            </li>
+            <li><a href="#system">System</a>
+              <ul>
+                <li><a href="#认识一下嘛-4">认识一下嘛</a></li>
+                <li><a href="#常用方法-2">常用方法</a></li>
+              </ul>
+            </li>
+            <li><a href="#bigdecimal">BigDecimal</a>
+              <ul>
+                <li><a href="#认识一下嘛-5">认识一下嘛</a></li>
+                <li><a href="#常用方法-3">常用方法</a></li>
+              </ul>
+            </li>
+            <li><a href="#localdatelocaltimelocaldatetime">LocalDate、LocalTime、LocalDateTime</a>
+              <ul>
+                <li><a href="#认识一下嘛-6">认识一下嘛</a></li>
+                <li><a href="#构造器-1">构造器</a></li>
+                <li><a href="#常见方法-2">常见方法</a></li>
+              </ul>
+            </li>
+            <li><a href="#包装类">包装类</a>
+              <ul>
+                <li><a href="#认识一下嘛-7">认识一下嘛</a></li>
+                <li><a href="#对应关系">对应关系</a></li>
+                <li><a href="#特性">特性</a></li>
+                <li><a href="#特有功能">特有功能</a></li>
+              </ul>
+            </li>
+            <li><a href="#正则表达式">正则表达式</a>
+              <ul>
+                <li><a href="#认识一下嘛-8">认识一下嘛</a></li>
+                <li><a href="#使用详解">使用详解</a></li>
+                <li><a href="#用例">用例</a></li>
+                <li><a href="#在字符串方法中的应用">在字符串方法中的应用</a></li>
+              </ul>
+            </li>
+            <li><a href="#arrays">Arrays</a>
+              <ul>
+                <li><a href="#认识一下嘛-9">认识一下嘛</a></li>
+                <li><a href="#常见方法-3">常见方法</a></li>
+                <li><a href="#排序方法">排序方法</a></li>
+              </ul>
+            </li>
+            <li><a href="#lambda">Lambda</a>
+              <ul>
+                <li><a href="#认识一下嘛-10">认识一下嘛</a></li>
+                <li><a href="#省略规则">省略规则</a></li>
+              </ul>
+            </li>
+            <li><a href="#heading"></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><p><strong>JavaSE 笔记（三）</strong></p>
+<blockquote>
+<p>Java 是一门非常严谨的语言</p>
+</blockquote>
+<h4 id="api-概述">API 概述</h4>
+<h5 id="认识一下嘛">认识一下嘛</h5>
+<ul>
+<li><code>API (Application Programming interface)</code>应用程序编程接口</li>
+<li>简单来说就是 Java 已经写好的一些方法，我们只需要拿过来调用即可</li>
+</ul>
+<h4 id="object">Object</h4>
+<h5 id="认识一下嘛-1">认识一下嘛</h5>
+<ul>
+<li>Object 类的方法是一切子类对象都可以直接索引使用的</li>
+</ul>
+<h5 id="常用方法">常用方法</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法名</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>public String toString()</code></td>
+<td style="text-align:left">默认是返回当前对象在堆内存中的地址信息：类的全限名@内存地址</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>public boolean equals(Object o)</code></td>
+<td style="text-align:left">默认是比较当前对象与另一个对象的地址是否相同，相同返回true，不同返回false</td>
+</tr>
+</tbody>
+</table>
+<h5 id="tostring">toString</h5>
+<ul>
+<li>父类<code>toString()</code>方法存在的意义就是为了被子类重写，以便返回对象的内容信息，而不是地址信息</li>
+<li>子类重写之后，直接输出对象就可以看到对象的数据内容，更有意义</li>
+</ul>
+<h5 id="equals">equals</h5>
+<ul>
+<li><code>==</code>可以比较两个对象的地址是否相同，但是不能去比较对象的属性</li>
+<li>父类equals方法存在的意义就是为了被子类重写，以便子类自己来定制比较规则</li>
+</ul>
+<h4 id="objects">Objects</h4>
+<h5 id="认识一下嘛-2">认识一下嘛</h5>
+<ul>
+<li>Objects 类是一个工具类，提供了一些方法去完成一些功能</li>
+</ul>
+<h5 id="常见方法">常见方法</h5>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public static boolean equals(Object a, Object b)</code></td>
+<td>比较两个对象的，底层会先进行非空判断，从而可以避免空指针异常。再进行equals比较</td>
+</tr>
+<tr>
+<td><code>public static boolean isNull(Object obj) </code></td>
+<td>判断变量是否为null ,为null返回true ,反之</td>
+</tr>
+</tbody>
+</table>
+<h4 id="stringbuilder">StringBuilder</h4>
+<h5 id="认识一下">认识一下</h5>
+<ul>
+<li>
+<p>StringBuilder是一个可变的<strong>字符串类</strong>，可以把它看成是一个对象容器</p>
+</li>
+<li>
+<p>提高字符串操作效率，比如拼接、修改</p>
+</li>
+</ul>
+<h5 id="构造器">构造器</h5>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public StringBuilder()</code></td>
+<td>创建一个空白的可变的字符串对象，不包含任何内容</td>
+</tr>
+<tr>
+<td><code>public StringBuilder(String str)</code></td>
+<td>创建一个指定字符串内容的可变字符串对象</td>
+</tr>
+</tbody>
+</table>
+<h5 id="常见方法-1">常见方法</h5>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public StringBuilder append(任意类型)</code></td>
+<td>添加数据并返回StringBuilder对象本身</td>
+</tr>
+<tr>
+<td><code>public StringBuilder reverse()</code></td>
+<td>将对象的内容反转</td>
+</tr>
+<tr>
+<td><code>public int length()</code></td>
+<td>返回对象内容长度</td>
+</tr>
+<tr>
+<td><code>public String toString()</code></td>
+<td>通过toString()就可以实现把StringBuilder转换为String</td>
+</tr>
+</tbody>
+</table>
+<h4 id="math">Math</h4>
+<h5 id="认识一下嘛-3">认识一下嘛</h5>
+<ul>
+<li>包含执行基本数字运算的方法，没有公开的构造器</li>
+<li>成员都是静态的，直接通过类名来索引</li>
+</ul>
+<h5 id="常用方法-1">常用方法</h5>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public static int abs(int a)</code></td>
+<td>获取参数绝对值</td>
+</tr>
+<tr>
+<td><code>public static double  ceil(double a)</code></td>
+<td>向上取整</td>
+</tr>
+<tr>
+<td><code>public static double  floor(double a)</code></td>
+<td>向下取整</td>
+</tr>
+<tr>
+<td><code>public static int round(float a)</code></td>
+<td>四舍五入</td>
+</tr>
+<tr>
+<td><code>public static int max(int a,int b)</code></td>
+<td>获取两个int值中的较大值</td>
+</tr>
+<tr>
+<td><code>public static double pow(double a,double b)</code></td>
+<td>返回a的b次幂的值</td>
+</tr>
+<tr>
+<td><code>public static double random()</code></td>
+<td>返回值为double的随机值，范围[0.0,1.0)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="system">System</h4>
+<h5 id="认识一下嘛-4">认识一下嘛</h5>
+<ul>
+<li>System 也是一个工具类，代表了当前系统，提供一些与系统相关的方法</li>
+</ul>
+<h5 id="常用方法-2">常用方法</h5>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public  static void exit(int status)</code></td>
+<td>终止当前运行的 Java 虚拟机，非零表示异常终止</td>
+</tr>
+<tr>
+<td><code>public  static long currentTimeMillis()</code></td>
+<td>返回当前系统的时间毫秒值形式</td>
+</tr>
+<tr>
+<td><code>public  static void arraycopy(数据源数组, 起始索引, 目的地数组, 起始索引, 拷贝个数)</code></td>
+<td>数组拷贝</td>
+</tr>
+</tbody>
+</table>
+<h4 id="bigdecimal">BigDecimal</h4>
+<h5 id="认识一下嘛-5">认识一下嘛</h5>
+<ul>
+<li>
+<p>浮点型运算的时候直接<code>+-*/</code>可能会出现数据失真，用于解决浮点型运算精度失真的问题</p>
+</li>
+<li>
+<p>调用方法封装浮点型数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">BigDecimal</span> <span class="n">b1</span> <span class="o">=</span> <span class="n">BigDecimal</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mf">0.1</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h5 id="常用方法-3">常用方法</h5>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public BigDecimal add(BigDecimal b)</code></td>
+<td>加法</td>
+</tr>
+<tr>
+<td><code>public BigDecimal subtract(BigDecimal b)</code></td>
+<td>减法</td>
+</tr>
+<tr>
+<td><code>public BigDecimal multiply(BigDecimal b)</code></td>
+<td>乘法</td>
+</tr>
+<tr>
+<td><code>public BigDecimal divide(BigDecimal b)</code></td>
+<td>除法</td>
+</tr>
+<tr>
+<td><code>public BigDecimal divide (另一个BigDecimal对象，精确几位，舍入模式)</code></td>
+<td>除法</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>对舍入模式的说明</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">BigDecimal</span><span class="o">.</span><span class="na">ROUND_UP</span>  <span class="err">进一法</span>
+</span></span><span class="line"><span class="cl"><span class="n">BigDecimal</span><span class="o">.</span><span class="na">ROUND_FLOOR</span> <span class="err">去尾法</span>
+</span></span><span class="line"><span class="cl"><span class="n">BigDecimal</span><span class="o">.</span><span class="na">ROUND_HALF_UP</span> <span class="err">四舍五入</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="localdatelocaltimelocaldatetime">LocalDate、LocalTime、LocalDateTime</h4>
+<h5 id="认识一下嘛-6">认识一下嘛</h5>
+<ul>
+<li>他们 分别表示日期，时间，日期时间对象，他们的类的实例是不可变的对象</li>
+<li>三者构建对象和 API 都是通用的</li>
+</ul>
+<h5 id="构造器-1">构造器</h5>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public static Xxxx now();</code></td>
+<td>静态方法，根据当前时间创建对象</td>
+</tr>
+<tr>
+<td><code>public static Xxxx of(...);</code></td>
+<td>静态方法，指定日期/时间创建对象</td>
+</tr>
+</tbody>
+</table>
+<h5 id="常见方法-2">常见方法</h5>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public int geYear()</code></td>
+<td>获取年</td>
+</tr>
+<tr>
+<td><code>public int getMonthValue()</code></td>
+<td>获取月份（1-12）</td>
+</tr>
+<tr>
+<td><code>Public int getDayOfMonth()</code></td>
+<td>获取月中第几天乘法</td>
+</tr>
+<tr>
+<td><code>Public int getDayOfYear()</code></td>
+<td>获取年中第几天</td>
+</tr>
+<tr>
+<td><code>Public DayOfWeek getDayOfWeek()</code></td>
+<td>获取星期</td>
+</tr>
+</tbody>
+</table>
+<h4 id="包装类">包装类</h4>
+<h5 id="认识一下嘛-7">认识一下嘛</h5>
+<ul>
+<li>Java 为了实现一切皆对象，为8种基本类型提供了对应的引用类型</li>
+<li>集合和泛型也只能支持包装类型，不支持基本数据类型</li>
+</ul>
+<h5 id="对应关系">对应关系</h5>
+<table>
+<thead>
+<tr>
+<th>基本数据类型</th>
+<th>引用数据类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>byte</td>
+<td>Byte</td>
+</tr>
+<tr>
+<td>short</td>
+<td>Short</td>
+</tr>
+<tr>
+<td>int</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>long</td>
+<td>Long</td>
+</tr>
+<tr>
+<td>char</td>
+<td>Character</td>
+</tr>
+<tr>
+<td>float</td>
+<td>Float</td>
+</tr>
+<tr>
+<td>double</td>
+<td>Double</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>Boolean</td>
+</tr>
+</tbody>
+</table>
+<h5 id="特性">特性</h5>
+<ul>
+<li>自动装箱：基本数据类型可以直接赋值给包装类型</li>
+<li>自动拆箱：包装类型可以直接赋值给基本数据类型</li>
+</ul>
+<h5 id="特有功能">特有功能</h5>
+<ul>
+<li>
+<p>包装类变量默认值为<code>null</code></p>
+</li>
+<li>
+<p>可以把基本类型数据转化为字符串类型</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Integer</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">int</span><span class="err">类型的值</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>可以把字符串类型转化为真实的数据类型</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="s">&#34;字符串类型的整数&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">Double</span><span class="o">.</span><span class="na">parseDouble</span><span class="o">(</span><span class="s">&#34;字符串类型的小数&#34;</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="正则表达式">正则表达式</h4>
+<h5 id="认识一下嘛-8">认识一下嘛</h5>
+<ul>
+<li>正则表达式可以用一些规定的字符来制定规则，并用来校验数据格式的合法性</li>
+</ul>
+<h5 id="使用详解">使用详解</h5>
+<ul>
+<li>
+<p>字符串对象提供了匹配正则表达的方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">matches</span><span class="o">(</span><span class="n">String</span> <span class="n">regex</span><span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>字符类（默认只匹配一个字符）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="o">[</span><span class="n">abc</span><span class="o">]</span>	       		<span class="err">只能是</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">,</span> <span class="err">或</span><span class="n">c</span>
+</span></span><span class="line"><span class="cl"><span class="o">[^</span><span class="n">abc</span><span class="o">]</span>	       	<span class="err">除了</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">,</span> <span class="n">c</span><span class="err">之外的任何字符</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span><span class="n">a</span><span class="o">-</span><span class="n">zA</span><span class="o">-</span><span class="n">Z</span><span class="o">]</span>       	<span class="n">a</span><span class="err">到</span><span class="n">z</span> <span class="n">A</span><span class="err">到</span><span class="n">Z</span><span class="err">，包括（范围）</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span><span class="n">a</span><span class="o">-</span><span class="n">d</span><span class="o">[</span><span class="n">m</span><span class="o">-</span><span class="n">p</span><span class="o">]]</span>	 	  <span class="n">a</span><span class="err">到</span><span class="n">d</span><span class="err">，或</span><span class="n">m</span><span class="err">通过</span><span class="n">p</span><span class="err">：（</span><span class="o">[</span><span class="n">a</span><span class="o">-</span><span class="n">dm</span><span class="o">-</span><span class="n">p</span><span class="o">]</span><span class="err">联合）</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span><span class="n">a</span><span class="o">-</span><span class="n">z</span><span class="o">&amp;&amp;[</span><span class="n">def</span><span class="o">]]</span>	 	<span class="n">d</span><span class="o">,</span> <span class="n">e</span><span class="o">,</span> <span class="err">或</span><span class="n">f</span><span class="o">(</span><span class="err">交集</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span><span class="n">a</span><span class="o">-</span><span class="n">z</span><span class="o">&amp;&amp;[^</span><span class="n">bc</span><span class="o">]]</span>		<span class="n">a</span><span class="err">到</span><span class="n">z</span><span class="err">，除了</span><span class="n">b</span><span class="err">和</span><span class="n">c</span><span class="err">：（</span><span class="o">[</span><span class="n">ad</span><span class="o">-</span><span class="n">z</span><span class="o">]</span><span class="err">减法）</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>预定义字符类（默认只匹配一个字符）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="o">.</span>			<span class="err">任何字符</span>
+</span></span><span class="line"><span class="cl"><span class="err">\</span><span class="n">d</span>		<span class="err">一个数字：</span> <span class="o">[</span><span class="mi">0</span><span class="o">-</span><span class="mi">9</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="err">\</span><span class="n">D</span>		<span class="err">非数字：</span> <span class="o">[^</span><span class="mi">0</span><span class="o">-</span><span class="mi">9</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="err">\</span><span class="n">s</span>		<span class="err">一个空白字符：</span> <span class="o">[</span> <span class="err">\</span><span class="n">t</span><span class="err">\</span><span class="n">n</span><span class="err">\</span><span class="n">x0B</span><span class="err">\</span><span class="n">f</span><span class="err">\</span><span class="n">r</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="err">\</span><span class="n">S</span>		<span class="err">非空白字符：</span> <span class="o">[^</span><span class="err">\</span><span class="n">s</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="err">\</span><span class="n">w</span>		<span class="o">[</span><span class="n">a</span><span class="o">-</span><span class="n">zA</span><span class="o">-</span><span class="n">Z_0</span><span class="o">-</span><span class="mi">9</span><span class="o">]</span> <span class="err">英文、数字、下划线</span>
+</span></span><span class="line"><span class="cl"><span class="err">\</span><span class="n">W</span>	 	<span class="o">[^</span><span class="err">\</span><span class="n">w</span><span class="o">]</span> <span class="err">一个非单词字符</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>贪婪量词</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">X</span><span class="o">?</span>					<span class="n">X</span><span class="err">，一次或根本不</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span><span class="o">*</span>					<span class="n">X</span><span class="err">，零次或多次</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span><span class="o">+</span>					<span class="n">X</span><span class="err">，一次或多次</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span>				<span class="n">X</span><span class="err">，正好</span><span class="n">n</span><span class="err">次</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span> <span class="o">{</span><span class="n">n</span><span class="o">,</span> <span class="o">}</span>			<span class="n">X</span><span class="err">，至少</span><span class="n">n</span><span class="err">次</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span> <span class="o">{</span><span class="n">n</span><span class="o">,</span><span class="n">m</span><span class="o">}</span>			<span class="n">X</span><span class="err">，至少</span><span class="n">n</span><span class="err">但不超过</span><span class="n">m</span><span class="err">次</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h5 id="用例">用例</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;a&#34;</span><span class="o">.</span><span class="na">matches</span><span class="o">(</span><span class="s">&#34;[abc]&#34;</span><span class="o">));</span> <span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;z&#34;</span><span class="o">.</span><span class="na">matches</span><span class="o">(</span><span class="s">&#34;[abc]&#34;</span><span class="o">));</span> <span class="c1">// false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;ab&#34;</span><span class="o">.</span><span class="na">matches</span><span class="o">(</span><span class="s">&#34;[abc]&#34;</span><span class="o">));</span> <span class="c1">// false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;ab&#34;</span><span class="o">.</span><span class="na">matches</span><span class="o">(</span><span class="s">&#34;[abc]+&#34;</span><span class="o">));</span> <span class="c1">//true
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="在字符串方法中的应用">在字符串方法中的应用</h5>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public String replaceAll(String regex,String newStr)</code></td>
+<td>按照正则表达式匹配的内容进行替换</td>
+</tr>
+<tr>
+<td><code>public String[] split(String regex)</code></td>
+<td>按照正则表达式匹配的内容进行分割字符串，反回一个字符串数组。    方法名</td>
+</tr>
+</tbody>
+</table>
+<h4 id="arrays">Arrays</h4>
+<h5 id="认识一下嘛-9">认识一下嘛</h5>
+<ul>
+<li>用于操作数组的工具类</li>
+</ul>
+<h5 id="常见方法-3">常见方法</h5>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public static String toString(类型[] a)</code></td>
+<td>返回数组的内容（字符串形式）</td>
+</tr>
+<tr>
+<td><code>public  static void sort(类型[] a)</code></td>
+<td>对数组进行默认升序排序</td>
+</tr>
+<tr>
+<td><code>public  static &lt;T&gt; void sort(类型[] a, Comparator&lt;?  super T&gt; c)</code></td>
+<td>使用比较器对象自定义排序</td>
+</tr>
+<tr>
+<td><code>public  static int binarySearch(int[] a,  int key)</code></td>
+<td>二分搜索数组中的数据，存在返回索引，不存在返回-1</td>
+</tr>
+</tbody>
+</table>
+<h5 id="排序方法">排序方法</h5>
+<ul>
+<li>
+<p>设置 Comparator 接口对应的比较器对象，定制比较规则</p>
+<ul>
+<li>如果认为左边数据 大于 右边数据 返回正整数</li>
+<li>如果认为左边数据 小于 右边数据 返回负整数</li>
+<li>如果认为左边数据 等于 右边数据 返回0</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">ages1</span><span class="o">,</span> <span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Integer</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Integer</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// return o1 - o2; // 默认升序
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// return o2 - o1; // 降序
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 以上代码还可简化为
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">ages1</span><span class="o">,</span> <span class="o">(</span> <span class="n">o1</span><span class="o">,</span>  <span class="n">o2</span><span class="o">)</span> <span class="o">-&gt;</span>  <span class="n">o1</span> <span class="o">-</span> <span class="n">o2</span> <span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="lambda">Lambda</h4>
+<h5 id="认识一下嘛-10">认识一下嘛</h5>
+<ul>
+<li>简化匿名内部类的代码写法</li>
+<li>函数式接口：首先必须是接口，其次接口中有且只有一个抽象方法，通常会伴有<code>@FunctionalInterface</code>注解</li>
+<li>Lambda 表达式只能简化函数式接口的匿名内部类的写法形式</li>
+</ul>
+<h5 id="省略规则">省略规则</h5>
+<ul>
+<li>
+<p>参数类型可以省略</p>
+</li>
+<li>
+<p>如果只有一个参数，参数类型可以省略，同时 () 也可以省略</p>
+</li>
+<li>
+<p>如果 Lambda 表达式的方法体代码只有一行代码，可以省略大括号不写，同时要省略分号！</p>
+</li>
+<li>
+<p>如果 Lambda 表达式的方法体代码只有一行代码，可以省略大括号不写；此时，如果这行代码是 return 语句，必须省略 return 不写，同时也必须省略 ; 不写</p>
+</li>
+</ul>
+<h4 id="heading"></h4></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title=2023-01-15&#32;21:10:08>更新于 2023-01-15&nbsp;</span>
+      </div><div class="post-info-license">
+          <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
+        </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E5%B8%B8%E8%A7%81api/" data-title="愿天堂没有Java之常见API"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E5%B8%B8%E8%A7%81api/"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E5%B8%B8%E8%A7%81api/" data-title="愿天堂没有Java之常见API" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E5%B8%B8%E8%A7%81api/" data-title="愿天堂没有Java之常见API"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E5%B8%B8%E8%A7%81api/" data-title="愿天堂没有Java之常见API"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E5%B8%B8%E8%A7%81api/" data-title="愿天堂没有Java之常见API" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E5%B8%B8%E8%A7%81api/" data-title="愿天堂没有Java之常见API" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E5%B8%B8%E8%A7%81api/" data-title="愿天堂没有Java之常见API"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6/" class="post-nav-item" rel="prev" title="愿天堂没有Java之面向对象进阶"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>愿天堂没有Java之面向对象进阶</a>
+      <a href="/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8B%E9%9B%86%E5%90%88/" class="post-nav-item" rel="next" title="愿天堂没有Java之集合">愿天堂没有Java之集合<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="waline" class="comment"></div><noscript>
+        Please enable JavaScript to view the comments powered by <a href="https://waline.js.org/" rel="external nofollow noopener noreferrer">Waline</a>.
+      </noscript></div></article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line copyright order-last" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2023</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line statistics"><span class="site-time" title='网站运行中 ...'><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden="true"></i><span class="ms-1 d-none">博客已运行</span><span class="run-times ms-1">网站运行中 ...</span></span></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric">0%</span>
+        </div><div class="fixed-button view-comments d-none" role="button" aria-label="查看评论"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><div class="reading-progress-bar" style="left: 0;top: 0;"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/waline/waline.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><link rel="stylesheet" href="/lib/pace/themes/blue/pace-theme-minimal.css"><script src="/lib/waline/waline.js" defer></script><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lazysizes/lazysizes.min.js" async defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="/lib/pace/pace.min.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":5000},"comment":{"enable":true,"expired":false,"waline":{"comment":true,"copyright":true,"dark":"body[data-theme='dark']","el":"#waline","emoji":["//unpkg.com/@waline/emojis@1.1.0/weibo"],"highlighter":true,"imageUploader":true,"lang":"zh-cn","login":"enable","meta":["nick","mail","link"],"pageSize":10,"pageview":true,"requiredMeta":["nick","mail"],"search":true,"serverURL":"https://comments-nf6liufk4-1803700972-qqcom.vercel.app","texRenderer":true}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"siteTime":"2023-1-10"};</script><script src="/js/theme.min.js" defer></script><script>
+      window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+      gtag('config', 'G-CBQC1RW0CV', { 'anonymize_ip': true });
+    </script><script src="https://www.googletagmanager.com/gtag/js?id=G-CBQC1RW0CV" async></script></body>
+</html>
