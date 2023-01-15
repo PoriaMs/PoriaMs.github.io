@@ -1,0 +1,2 @@
+http://example.org/friends/
+http://example.org/%E4%BB%8E-hexo-%E5%88%B0-hugo/
