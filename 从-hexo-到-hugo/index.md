@@ -1,6 +1,8 @@
 # 从 Hexo 到 Hugo
 
 
+从 Hexo 迁移到 Hugo
+
 <!--more-->
 
 ### 前言
@@ -194,20 +196,6 @@ main.container, footer.footer {
         recaptchaV3Key = "" # FixIt 0.2.16 | 新增
 ```
 
-##### 添加 google 分析
-
-申请好 ID 之后填上去即可
-
-```toml
-  [params.analytics]
-    enable = true
-    # Google Analytics
-    [params.analytics.google]
-      id = ""
-      # 是否匿名化用户 IP
-      anonymizeIP = true
-```
-
 ##### 修改 fontawesome
 
 茯苓根据自己的情况，创建了一个 fontawesome 模版，放在博客根目录的 archetypes 文件夹下，建一个 posts.md
@@ -245,7 +233,7 @@ cd public
 git init
 git add .
 git commit -m "updating site on $(date)"
-git remote add origin https://github.com/xdr630/xdr630.github.io.git
+git remote add origin https://github.com/PoriaMs/poriams.github.io.git
 git push -u origin main
 ```
 
@@ -261,6 +249,22 @@ git commit -m "updating site on $(date)"
 git push origin main
 ```
 
+##### 添加 google 分析
+
+添加这个可以帮助茯苓统计网站流量
+
+申请好 ID 之后填上去即可
+
+```toml
+  [params.analytics]
+    enable = true
+    # Google Analytics
+    [params.analytics.google]
+      id = ""
+      # 是否匿名化用户 IP
+      anonymizeIP = true
+```
+
 ##### 添加 SEO
 
 ###### Google
@@ -274,6 +278,20 @@ git push origin main
 在 search-console 中点击站点地图，然后把自己的添加进去，hugo 的默认在 sitemap.xml 下
 
 ###### 百度
+
+进入[百度搜索资源平台](https://ziyuan.baidu.com/)，选择 用户中心->站点管理->添加网站，这里的验证方式也可以选择下载html的方式，步骤和google的一样，验证成功后选择 搜索服务->普通收录->sitemap，输入sitemap的网址，和google的站点地图一样。不过百度的收录速度貌似很慢
+
+###### 必应
+
+进入[Bing Webmaster Tools](https://www.bing.com/webmasters)，登录后直接导入google的数据就可以，很方便
+
+##### 辅助脚本
+
+茯苓迎合自己的需求写了一个博客辅助脚本，生成文章时可以按照文章名生成文件夹，以 index.md 为文章内容，图片就可以保存在文件夹内以相对路径引用了，还有一些其他功能方便自己使用
+
+![image-20230117150901595](./Zets/index/image-20230117150901595.png)
+
+地址：https://github.com/PoriaMs/wheelchair
 
 
 

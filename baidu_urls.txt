@@ -1,4 +1,5 @@
 https://poriams.github.io/friends/
+https://poriams.github.io/about/
 https://poriams.github.io/%E4%BB%8E-hexo-%E5%88%B0-hugo/
 https://poriams.github.io/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/
 https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8Bxml/
