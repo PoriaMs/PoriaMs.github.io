@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>对 Linux 全局代理的探索 - 晨星_茯苓</title><meta name="author" content="晨星_茯苓">
+<meta name="author-link" content="/about/">
+<meta name="description" content="web security, 网络安全, 红蓝攻防" /><meta name="keywords" content='web security, 网络攻防' /><meta itemprop="name" content="对 Linux 全局代理的探索">
+<meta itemprop="description" content=""><meta itemprop="datePublished" content="2023-02-03T20:29:50+08:00" />
+<meta itemprop="dateModified" content="2023-02-11T19:48:20+08:00" />
+<meta itemprop="wordCount" content="2340"><meta itemprop="image" content="https://poriams.github.io/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2/Zets/index/header.png">
+<meta itemprop="keywords" content="" /><meta property="og:title" content="对 Linux 全局代理的探索" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://poriams.github.io/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2/" /><meta property="og:image" content="https://poriams.github.io/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2/Zets/index/header.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-02-03T20:29:50+08:00" />
+<meta property="article:modified_time" content="2023-02-11T19:48:20+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://poriams.github.io/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2/Zets/index/header.png"/>
+<meta name="twitter:title" content="对 Linux 全局代理的探索"/>
+<meta name="twitter:description" content=""/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.jpg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://poriams.github.io/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2/" /><link rel="prev" href="https://poriams.github.io/%E4%BB%8E-hexo-%E5%88%B0-hugo/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "对 Linux 全局代理的探索",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/poriams.github.io\/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2\/"
+    },"image": [{
+              "@type": "ImageObject",
+              "url": "https:\/\/poriams.github.io\/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2\/Zets\/index\/header.png",
+              "width":  888 ,
+              "height":  266 
+            }],"genre": "posts","wordcount":  2340 ,
+    "url": "https:\/\/poriams.github.io\/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2\/","datePublished": "2023-02-03T20:29:50+08:00","dateModified": "2023-02-11T19:48:20+08:00","publisher": {
+      "@type": "Organization",
+      "name": "晨星_茯苓"},"author": {
+        "@type": "Person",
+        "name": "晨星_茯苓"
+      },"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="晨星_茯苓"><span class="header-title-pre"><i class='fa-solid fa-home fa-fw fa-sm'></i></span><span class="header-title-text">Poria Morningstar</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-users fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 友链</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="晨星_茯苓"><span class="header-title-pre"><i class='fa-solid fa-home fa-fw fa-sm'></i></span><span class="header-title-text">Poria Morningstar</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-users fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 友链</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container" data-page-style="normal"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX">
+        <span>对 Linux 全局代理的探索</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="/about/" title="作者" rel=" author" class="author"><img
+    class="lazyload avatar"
+    src="/svg/loading.min.svg"
+    data-src="/avatar.jpg"
+    data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
+    data-sizes="auto"
+    alt="晨星_茯苓"
+    title="晨星_茯苓"/>&nbsp;晨星_茯苓</a></span>
+          <span class="post-category">收录于 <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 渗透测试</a></span></div>
+      <div class="post-meta-line"><span title=2023-02-03&#32;20:29:50><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-03">2023-02-03</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i> 约 2340 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden="true"></i> 预计阅读 5 分钟</span>&nbsp;<span class="comment-visitors" data-flag-title="对 Linux 全局代理的探索">
+              <i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span data-path="/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2/" class="waline-pageview-count">-</span>&nbsp;次阅读
+            </span>&nbsp;<span class="comment-count" data-flag-title="对 Linux 全局代理的探索">
+              <i class="fa-regular fa-comments fa-fw" aria-hidden="true"></i>&nbsp;<span data-path="/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2/" class="waline-comment-count">-</span>&nbsp;条评论
+            </span>&nbsp;</div>
+    </div><div class="featured-image"><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2/Zets/index/header.png"
+    data-srcset="/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2/Zets/index/header.png, /%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2/Zets/index/header.png 1.5x, /%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2/Zets/index/header.png 2x"
+    data-sizes="auto"
+    alt="/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2/Zets/index/header.png"
+    title="/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2/Zets/index/header.png"/></div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#前言">前言</a></li>
+        <li><a href="#最常见的-proxychains">最常见的 proxychains</a></li>
+        <li><a href="#倾旋大佬的透明代理方式">倾旋大佬的透明代理方式</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#iptables">iptables</a></li>
+                <li><a href="#redsocks">redsocks</a></li>
+                <li><a href="#透明代理">透明代理</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#茯苓基于-gost-的透明代理">茯苓基于 GOST 的透明代理</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#脚本">脚本</a></li>
+                <li><a href="#准备">准备</a></li>
+                <li><a href="#操作介绍">操作介绍</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#结语">结语</a></li>
+        <li><a href="#参考文章">参考文章</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><p>Linux 全局代理脚本</p>
+<h3 id="前言">前言</h3>
+<p>众所周知，我们在网上“探索”别人网站的时候，通常都需要挂上代理来隐藏自己。茯苓目前的方案是这样的，物理机用作 CTF 等日常的使用；开第一个虚拟机用来进行渗透行为，受限于一些条件，茯苓目前只能用 Kali 来渗透；开第二个虚拟机用来进行调试网上拉下来的代码以及运行一些不确定安全性的软件。茯苓给这组方案起名为<strong>面具系统</strong>，以后有机会详细描述下配置的具体细节。（又挖一个坑）</p>
+<p>对于 Windows 和 MacOS 用户，我们可以使用 <a href="https://www.proxifier.com/"target="_blank" rel="external nofollow noopener noreferrer">Proxifier</a> 来实现进程级的代理，好用程度，谁用谁知道。但是 Linux 用户就没用这么好的运气了，而网上几乎很难找到靠谱的方案，现在开始讲述茯苓的探索血泪史。</p>
+<h3 id="最常见的-proxychains">最常见的 proxychains</h3>
+<p>茯苓打开浏览器一搜索“Linux 全局代理”，大多数都是这种方案。都是清一色的给浏览器设置代理，然后对于工具，都在命令行里面使用 proxychains 作为前缀来套一层代理，网上全是这种，茯苓这里就不再赘述。这种方式确实能解决一些问题，但是用起来极其不方便。</p>
+<h3 id="倾旋大佬的透明代理方式">倾旋大佬的透明代理方式</h3>
+<p>就在某一个月黑风高的夜晚，茯苓突然搜到了一个链接<a href="https://payloads.online/archivers/2020-11-13/1/"target="_blank" rel="external nofollow noopener noreferrer">Linux透明代理在红队渗透中的应用</a>，我终于看到了一些曙光。</p>
+<p>详细的内容可以看链接，这里茯苓简单介绍一下几个关键点。</p>
+<h5 id="iptables">iptables</h5>
+<p>iptables 是 Linux 管理员用来设置 IPv4 数据包过滤条件和 NAT 的命令行工具。可以设置规则轻松地重定向传入流量，实现将流量导入 socks 代理。</p>
+<h5 id="redsocks">redsocks</h5>
+<p>redsocks 是一个能够重定向socks代理的一款开源软件，它允许我们在系统上监听一个端口，与远程socks端口进行转换，并且支持socks5认证。</p>
+<h5 id="透明代理">透明代理</h5>
+<p>透明代理的意思是客户端根本不需要知道有代理服务器的存在，它改变你的 request fields（报文），并会传送真实 IP，多用于路由器的 NAT 转发中。加密的透明代理则是属于匿名代理。</p>
+<p>那么总结一下来说就是，利用 iptables 重定向流量到一个端口，利用 redsocks 将该端口流量转化为 socks 代理即我们的代理，这样就可以形成一种透明代理。我们的 linux 访问网站时，会被防火墙拦截，然后通过代理发送到目标网站。对于 linux 系统来说，它以为自己是直接访问了目标网站，而不知道被代理了。</p>
+<p>在学习了他的脚本以后，茯苓往顺手修改了一下，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1"># redsocks 配置</span>
+</span></span><span class="line"><span class="cl"><span class="nv">redsocks_bin_path</span><span class="o">=</span><span class="s2">&#34;redsocks&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">redsocks_config_file_path</span><span class="o">=</span><span class="s2">&#34;/etc/redsocks.conf&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">shell_log_path</span><span class="o">=</span><span class="s2">&#34;/tmp/socks-switch.log&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 代理配置</span>
+</span></span><span class="line"><span class="cl">sed_tool<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">    sed -i <span class="nv">$1</span><span class="s1">&#39;d&#39;</span> <span class="nv">$redsocks_config_file_path</span>
+</span></span><span class="line"><span class="cl">    sed -i <span class="nv">$1</span><span class="s2">&#34;i\        </span><span class="nv">$2</span><span class="s2">&#34;</span> <span class="nv">$redsocks_config_file_path</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">set_proxy<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 行号 内容</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># type</span>
+</span></span><span class="line"><span class="cl">    sed_tool <span class="s1">&#39;52&#39;</span> <span class="s1">&#39;type = socks5;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># ip</span>
+</span></span><span class="line"><span class="cl">    sed_tool <span class="s1">&#39;47&#39;</span> <span class="s1">&#39;ip = 10.37.129.2&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># port</span>
+</span></span><span class="line"><span class="cl">    sed_tool <span class="s1">&#39;48&#39;</span> <span class="s1">&#39;port = 7890&#39;</span>
+</span></span><span class="line"><span class="cl">    socks_loging <span class="s2">&#34;set proxy ...&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 记录日志</span>
+</span></span><span class="line"><span class="cl">socks_loging<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">current_time</span><span class="o">=</span><span class="k">$(</span>date +<span class="s2">&#34;%Y-%m-%d %H:%M:%S&#34;</span><span class="k">)</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;[*] &#34;</span><span class="nv">$current_time</span> <span class="s2">&#34;: &#34;</span> <span class="nv">$1</span> &gt;&gt; <span class="nv">$shell_log_path</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;[*] &#34;</span><span class="nv">$current_time</span> <span class="s2">&#34;: &#34;</span> <span class="nv">$1</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 开启 redsocks</span>
+</span></span><span class="line"><span class="cl">start_redsocks<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$redsocks_bin_path</span> -c <span class="nv">$redsocks_config_file_path</span>
+</span></span><span class="line"><span class="cl">    socks_loging <span class="s2">&#34;start redsocks ...&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 关闭 redsocks</span>
+</span></span><span class="line"><span class="cl">stop_redsocks<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">    pkill redsocks
+</span></span><span class="line"><span class="cl">    socks_loging <span class="s2">&#34;stop redsocks ...&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 重置 iptalbes 不影响其他规则</span>
+</span></span><span class="line"><span class="cl">reset_iptables<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">ids</span><span class="o">=</span><span class="sb">`</span>iptables -t nat -nL OUTPUT --line-number <span class="p">|</span> grep REDSOCKS <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">[</span> ! -z <span class="s2">&#34;</span><span class="nv">$ids</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">id_array</span><span class="o">=(</span><span class="si">${</span><span class="nv">ids</span><span class="p">//</span><span class="se">\\</span><span class="nv">n</span><span class="p">/ </span><span class="si">}</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    	<span class="c1">#socks_loging &#34;REDSOCKS OUTPUT Chian ID : $id_array&#34;</span>
+</span></span><span class="line"><span class="cl">    	<span class="k">for</span> id in <span class="si">${</span><span class="nv">id_array</span><span class="p">[@]</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">    	<span class="k">do</span>
+</span></span><span class="line"><span class="cl">        	<span class="nv">id</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$id</span><span class="p">|</span>egrep -o <span class="s2">&#34;[0-9]{1,4}&#34;</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl">        	<span class="k">if</span> <span class="o">[</span> <span class="nv">$id</span> !<span class="o">=</span> <span class="s2">&#34;&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">            		iptables -t nat -D OUTPUT <span class="nv">$id</span>
+</span></span><span class="line"><span class="cl">            		<span class="c1">#iptables -t nat -D PREROUTING $id</span>
+</span></span><span class="line"><span class="cl">        	<span class="k">fi</span>
+</span></span><span class="line"><span class="cl">    	<span class="k">done</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fi</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#socks_loging &#34;No Set Iptables ...&#34;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    iptables -t nat -nvL REDSOCKS &gt; /dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$?</span><span class="s2">&#34;</span> !<span class="o">=</span> <span class="s2">&#34;1&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">            iptables -t nat -F REDSOCKS
+</span></span><span class="line"><span class="cl">            iptables -t nat -X REDSOCKS
+</span></span><span class="line"><span class="cl">    <span class="k">fi</span>
+</span></span><span class="line"><span class="cl">    socks_loging <span class="s2">&#34;reset iptables ...&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 清除全部 iptables</span>
+</span></span><span class="line"><span class="cl">clean<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">    iptables -t nat -F
+</span></span><span class="line"><span class="cl">    iptables -t nat -X
+</span></span><span class="line"><span class="cl">    iptables -t nat -P PREROUTING ACCEPT
+</span></span><span class="line"><span class="cl">    iptables -t nat -P POSTROUTING ACCEPT
+</span></span><span class="line"><span class="cl">    iptables -t nat -P OUTPUT ACCEPT
+</span></span><span class="line"><span class="cl">    iptables -t mangle -F
+</span></span><span class="line"><span class="cl">    iptables -t mangle -X
+</span></span><span class="line"><span class="cl">    iptables -t mangle -P PREROUTING ACCEPT
+</span></span><span class="line"><span class="cl">    iptables -t mangle -P INPUT ACCEPT
+</span></span><span class="line"><span class="cl">    iptables -t mangle -P FORWARD ACCEPT
+</span></span><span class="line"><span class="cl">    iptables -t mangle -P OUTPUT ACCEPT
+</span></span><span class="line"><span class="cl">    iptables -t mangle -P POSTROUTING ACCEPT
+</span></span><span class="line"><span class="cl">    iptables -F
+</span></span><span class="line"><span class="cl">    iptables -X
+</span></span><span class="line"><span class="cl">    iptables -P FORWARD ACCEPT
+</span></span><span class="line"><span class="cl">    iptables -P INPUT ACCEPT
+</span></span><span class="line"><span class="cl">    iptables -P OUTPUT ACCEPT
+</span></span><span class="line"><span class="cl">    iptables -t raw -F
+</span></span><span class="line"><span class="cl">    iptables -t raw -X
+</span></span><span class="line"><span class="cl">    iptables -t raw -P PREROUTING ACCEPT
+</span></span><span class="line"><span class="cl">    iptables -t raw -P OUTPUT ACCEPT
+</span></span><span class="line"><span class="cl">    socks_loging <span class="s2">&#34;clean iptables ...&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 浏览模式</span>
+</span></span><span class="line"><span class="cl">browse<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">    iptables -t nat -A REDSOCKS -d 10.0.0.0/8 -j RETURN
+</span></span><span class="line"><span class="cl">    iptables -t nat -A REDSOCKS -d 127.0.0.0/8 -j RETURN
+</span></span><span class="line"><span class="cl">    iptables -t nat -A REDSOCKS -d 169.254.0.0/16 -j RETURN
+</span></span><span class="line"><span class="cl">    iptables -t nat -A REDSOCKS -d 172.16.0.0/12 -j RETURN
+</span></span><span class="line"><span class="cl">    iptables -t nat -A REDSOCKS -d 192.168.0.0/16 -j RETURN
+</span></span><span class="line"><span class="cl">    iptables -t nat -A REDSOCKS -p tcp -j REDIRECT --to-port <span class="m">12345</span>
+</span></span><span class="line"><span class="cl">    socks_loging <span class="s2">&#34;browse mode ...&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 内网模式</span>
+</span></span><span class="line"><span class="cl">intranet<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">    set_proxy
+</span></span><span class="line"><span class="cl">    iptables -t nat -A REDSOCKS -p tcp -d 10.0.0.0/8 -j REDIRECT --to-port <span class="m">12345</span>
+</span></span><span class="line"><span class="cl">    iptables -t nat -A REDSOCKS -p tcp -d 172.0.0.0/8 -j REDIRECT --to-port <span class="m">12345</span>
+</span></span><span class="line"><span class="cl">    iptables -t nat -A REDSOCKS -p tcp -d 192.168.0.0/16 -j REDIRECT --to-port <span class="m">12345</span>
+</span></span><span class="line"><span class="cl">    socks_loging <span class="s2">&#34;intranet mode ...&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 自定义模式</span>
+</span></span><span class="line"><span class="cl">diy<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">    socks_loging <span class="s2">&#34;diy mode ...&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 载入防火墙</span>
+</span></span><span class="line"><span class="cl">install<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">    stop_redsocks
+</span></span><span class="line"><span class="cl">    reset_iptables
+</span></span><span class="line"><span class="cl">    iptables -t nat -N REDSOCKS
+</span></span><span class="line"><span class="cl">    iptables -t nat -A REDSOCKS -d <span class="nv">$proxy_ip</span> -j RETURN
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;browse&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">        browse
+</span></span><span class="line"><span class="cl">    <span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;intranet&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">        intranet
+</span></span><span class="line"><span class="cl">    <span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;diy&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">        diy
+</span></span><span class="line"><span class="cl">    <span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    iptables -t nat -A OUTPUT -p tcp -m owner ! --uid-owner <span class="nv">$redsocks_user</span>  -j REDSOCKS
+</span></span><span class="line"><span class="cl">    start_redsocks
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># banner</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> -z <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;[*] Usage
+</span></span></span><span class="line"><span class="cl"><span class="s2">    proxy    : 配置代理
+</span></span></span><span class="line"><span class="cl"><span class="s2">    browse   : 浏览模式
+</span></span></span><span class="line"><span class="cl"><span class="s2">    intranet : 内网模式
+</span></span></span><span class="line"><span class="cl"><span class="s2">    diy      : 自定义模式
+</span></span></span><span class="line"><span class="cl"><span class="s2">    reset    : 重制 iptables 不影响其他规则
+</span></span></span><span class="line"><span class="cl"><span class="s2">    clean    : 清空 iptables 所有规则
+</span></span></span><span class="line"><span class="cl"><span class="s2">    stop     : 重制 iptables 并关闭代理
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">exit</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;proxy&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    set_proxy
+</span></span><span class="line"><span class="cl">    <span class="nb">exit</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;browse&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    install <span class="nv">$1</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">exit</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;intranet&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    install <span class="nv">$1</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">exit</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;diy&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    install <span class="nv">$1</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">exit</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;clean&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    clean
+</span></span><span class="line"><span class="cl">    <span class="nb">exit</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;reset&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    reset_iptables
+</span></span><span class="line"><span class="cl">    <span class="nb">exit</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;stop&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    stop_redsocks
+</span></span><span class="line"><span class="cl">    reset_iptables
+</span></span><span class="line"><span class="cl">    <span class="nb">exit</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>但是这个脚本它只能代理 TCP 流量，而且要先安装 redsocks，配置起来稍微有点复杂。茯苓自己也用过一段时间，直到有一天，茯苓发现了 GOST v3，它用了很优雅的方式实现了透明代理。</p>
+<h3 id="茯苓基于-gost-的透明代理">茯苓基于 GOST 的透明代理</h3>
+<p><a href="https://latest.gost.run/tutorials/redirect/"target="_blank" rel="external nofollow noopener noreferrer">https://latest.gost.run/tutorials/redirect/</a>是 GOST 关于透明代理的用法，原理上也是 redsocks 的重定向，但是 GOST 将该功能集成在自身，茯苓测试操作之后，利用 GOST v3 重写了 Linux 全局代理脚本。</p>
+<h5 id="脚本">脚本</h5>
+<p><a href="https://github.com/PoriaMs/vanish"target="_blank" rel="external nofollow noopener noreferrer">vanish</a></p>
+<p>启动脚本以后，这台虚拟机上的外网的所有流量都会走代理，而不需要其他操作</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="./Zets/index/image-20230211192057582.png"
+    data-srcset="./Zets/index/image-20230211192057582.png, ./Zets/index/image-20230211192057582.png 1.5x, ./Zets/index/image-20230211192057582.png 2x"
+    data-sizes="auto"
+    alt="image-20230211192057582"
+    title="image-20230211192057582"/></p>
+<h5 id="准备">准备</h5>
+<p>需要先去<a href="https://latest.gost.run/"target="_blank" rel="external nofollow noopener noreferrer">https://latest.gost.run/</a>下载对应平台的 GOST 二进制文件</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="./Zets/index/image-20230211181516738.png"
+    data-srcset="./Zets/index/image-20230211181516738.png, ./Zets/index/image-20230211181516738.png 1.5x, ./Zets/index/image-20230211181516738.png 2x"
+    data-sizes="auto"
+    alt="image-20230211181516738"
+    title="image-20230211181516738"/></p>
+<h5 id="操作介绍">操作介绍</h5>
+<p>将 shell 脚本下载到本地以后，先用 <code>chmod +x vanish.sh</code>添加权限</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="./Zets/index/image-20230211182136599.png"
+    data-srcset="./Zets/index/image-20230211182136599.png, ./Zets/index/image-20230211182136599.png 1.5x, ./Zets/index/image-20230211182136599.png 2x"
+    data-sizes="auto"
+    alt="image-20230211182136599"
+    title="image-20230211182136599"/></p>
+<p>mix 选项</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="./Zets/index/image-20230211182600235.png"
+    data-srcset="./Zets/index/image-20230211182600235.png, ./Zets/index/image-20230211182600235.png 1.5x, ./Zets/index/image-20230211182600235.png 2x"
+    data-sizes="auto"
+    alt="image-20230211182600235"
+    title="image-20230211182600235"/></p>
+<p>tcp 选项</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="./Zets/index/image-20230211182738383.png"
+    data-srcset="./Zets/index/image-20230211182738383.png, ./Zets/index/image-20230211182738383.png 1.5x, ./Zets/index/image-20230211182738383.png 2x"
+    data-sizes="auto"
+    alt="image-20230211182738383"
+    title="image-20230211182738383"/></p>
+<p>udp 选项</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="./Zets/index/image-20230211182815116.png"
+    data-srcset="./Zets/index/image-20230211182815116.png, ./Zets/index/image-20230211182815116.png 1.5x, ./Zets/index/image-20230211182815116.png 2x"
+    data-sizes="auto"
+    alt="image-20230211182815116"
+    title="image-20230211182815116"/></p>
+<p>inner 选项，需要先开启前面其中一个选项，开启这个以后可以将自身流量代理进入内网</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="./Zets/index/image-20230211191210894.png"
+    data-srcset="./Zets/index/image-20230211191210894.png, ./Zets/index/image-20230211191210894.png 1.5x, ./Zets/index/image-20230211191210894.png 2x"
+    data-sizes="auto"
+    alt="image-20230211191210894"
+    title="image-20230211191210894"/></p>
+<p>off 选项，会关闭 gost 并且清除工具添加的 iptables 规则而不影响其他规则</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="./Zets/index/image-20230211191442248.png"
+    data-srcset="./Zets/index/image-20230211191442248.png, ./Zets/index/image-20230211191442248.png 1.5x, ./Zets/index/image-20230211191442248.png 2x"
+    data-sizes="auto"
+    alt="image-20230211191442248"
+    title="image-20230211191442248"/></p>
+<p>clean 选项，会删除日志，日志默认位置在<code>log=&quot;/tmp/vanish.log&quot;</code>，可以自行修改</p>
+<h3 id="结语">结语</h3>
+<p>有了这个脚本，茯苓就可以物理机开启一个代理，然后渗透虚拟机使用局域网代理来隐藏自身了！！！</p>
+<p>总得来说，茯苓是借助了 GOST 这个工具，而 GOST v3 还没正式发布，如果后面有什么变动茯苓会继续更新 vanish。</p>
+<p>茯苓认为，Linux 上全局代理的关键就是 iptables 的运用，但是茯苓对于 iptables 掌握得并不是很精通，全是现学的，规则上可能有很多不完善不优雅的地方，欢迎各位师傅交流指正。</p>
+<h3 id="参考文章">参考文章</h3>
+<p><a href="https://payloads.online/archivers/2020-11-13/1/"target="_blank" rel="external nofollow noopener noreferrer">Linux透明代理在红队渗透中的应用</a></p></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title=2023-02-11&#32;19:48:20>更新于 2023-02-11&nbsp;</span>
+      </div><div class="post-info-license">
+          <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
+        </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://poriams.github.io/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2/" data-title="对 Linux 全局代理的探索"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://poriams.github.io/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2/"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://poriams.github.io/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2/" data-title="对 Linux 全局代理的探索" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://poriams.github.io/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2/" data-title="对 Linux 全局代理的探索"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://poriams.github.io/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2/" data-title="对 Linux 全局代理的探索"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://poriams.github.io/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2/" data-title="对 Linux 全局代理的探索" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://poriams.github.io/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2/" data-title="对 Linux 全局代理的探索" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://poriams.github.io/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2/" data-title="对 Linux 全局代理的探索"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/%E4%BB%8E-hexo-%E5%88%B0-hugo/" class="post-nav-item" rel="prev" title="从 Hexo 到 Hugo"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>从 Hexo 到 Hugo</a></div>
+</div>
+<div id="comments"><div id="waline" class="comment"></div><noscript>
+        Please enable JavaScript to view the comments powered by <a href="https://waline.js.org/" rel="external nofollow noopener noreferrer">Waline</a>.
+      </noscript></div></article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line copyright order-last" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2023</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line statistics"><span class="site-time" title='网站运行中 ...'><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden="true"></i><span class="ms-1 d-none">博客已运行</span><span class="run-times ms-1">网站运行中 ...</span></span></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric">0%</span>
+        </div><div class="fixed-button view-comments d-none" role="button" aria-label="查看评论"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><div class="reading-progress-bar" style="left: 0;top: 0;"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/waline/waline.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><link rel="stylesheet" href="/lib/pace/themes/blue/pace-theme-minimal.css"><script src="/lib/waline/waline.js" defer></script><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lazysizes/lazysizes.min.js" async defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="/lib/pace/pace.min.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":5000},"comment":{"enable":true,"expired":false,"waline":{"comment":true,"copyright":true,"dark":"body[data-theme='dark']","el":"#waline","emoji":["//unpkg.com/@waline/emojis@1.1.0/weibo"],"highlighter":true,"imageUploader":true,"lang":"zh-cn","login":"enable","meta":["nick","mail","link"],"pageSize":10,"pageview":true,"requiredMeta":["nick","mail"],"search":true,"serverURL":"https://comments-9ptvjujqa-1803700972-qqcom.vercel.app/","texRenderer":true}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"siteTime":"2023-1-10"};</script><script src="/js/theme.min.js" defer></script><script>
+      window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+      gtag('config', 'G-CBQC1RW0CV', { 'anonymize_ip': true });
+    </script><script src="https://www.googletagmanager.com/gtag/js?id=G-CBQC1RW0CV" async></script></body>
+</html>
