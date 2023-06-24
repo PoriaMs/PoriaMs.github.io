@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "style.min.css",
-	"sourceRoot": "/Users/poira/Bitter_Tree/Blog",
+	"sourceRoot": "/Users/poira/Bitter_Tree/晨星茯苓",
 	"sources": [
 		"themes/FixIt/assets/css/style.scss",
 		"themes/FixIt/assets/css/_variables.scss",
