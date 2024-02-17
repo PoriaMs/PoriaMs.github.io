@@ -3,7 +3,7 @@
 
 从 Hexo 迁移到 Hugo
 
-<!--more-->
+&lt;!--more--&gt;
 
 ### 前言
 
@@ -43,64 +43,64 @@ git submodule add https://github.com/hugo-fixit/FixIt.git themes/FixIt
 填写网站根目录的配置文件 config.toml
 
 ```toml
-title = "我的全新 Hugo FixIt 网站"
-baseURL = "http://example.org/"
-# 设置默认的语言 ["en", "zh-cn", "fr", "pl", ...]
-defaultContentLanguage = "zh-cn"
-# 网站语言, 仅在这里 CN 大写 ["en", "zh-CN", "fr", "pl", ...]
-languageCode = "zh-CN"
+title = &#34;我的全新 Hugo FixIt 网站&#34;
+baseURL = &#34;http://example.org/&#34;
+# 设置默认的语言 [&#34;en&#34;, &#34;zh-cn&#34;, &#34;fr&#34;, &#34;pl&#34;, ...]
+defaultContentLanguage = &#34;zh-cn&#34;
+# 网站语言, 仅在这里 CN 大写 [&#34;en&#34;, &#34;zh-CN&#34;, &#34;fr&#34;, &#34;pl&#34;, ...]
+languageCode = &#34;zh-CN&#34;
 # 是否包括中日韩文字
 hasCJKLanguage = true
 
 # 更改使用 Hugo 构建网站时使用的默认主题
-theme = "FixIt"
+theme = &#34;FixIt&#34;
 
 [params]
   # FixIt 主题版本
-  version = "0.2.X"
+  version = &#34;0.2.X&#34;
 
 [menu]
   [[menu.main]]
-    identifier = "posts"
+    identifier = &#34;posts&#34;
     # 你可以在名称（允许 HTML 格式）之前添加其他信息，例如图标
-    pre = ""
+    pre = &#34;&#34;
     # 你可以在名称（允许 HTML 格式）之后添加其他信息，例如图标
-    post = ""
-    name = "文章"
-    url = "/posts/"
+    post = &#34;&#34;
+    name = &#34;文章&#34;
+    url = &#34;/posts/&#34;
     # 当你将鼠标悬停在此菜单链接上时，将显示的标题
-    title = ""
+    title = &#34;&#34;
     weight = 1
     # 向菜单项添加用户定义的内容
     [menu.main.params]
       # 添加 CSS 类到菜单项
-      class = ""
+      class = &#34;&#34;
       # 是否为草稿菜单，类似草稿页面
       draft = false
       # 添加 fontawesome 图标到菜单项
-      icon = "fa-solid fa-archive"
-      # 设置菜单项类型，可选值：["mobile", "desktop"]
-      type = ""
+      icon = &#34;fa-solid fa-archive&#34;
+      # 设置菜单项类型，可选值：[&#34;mobile&#34;, &#34;desktop&#34;]
+      type = &#34;&#34;
   [[menu.main]]
-    identifier = "categories"
-    pre = ""
-    post = ""
-    name = "分类"
-    url = "/categories/"
-    title = ""
+    identifier = &#34;categories&#34;
+    pre = &#34;&#34;
+    post = &#34;&#34;
+    name = &#34;分类&#34;
+    url = &#34;/categories/&#34;
+    title = &#34;&#34;
     weight = 2
     [menu.main.params]
-      icon = "fa-solid fa-th"
+      icon = &#34;fa-solid fa-th&#34;
   [[menu.main]]
-    identifier = "tags"
-    pre = ""
-    post = ""
-    name = "标签"
-    url = "/tags/"
-    title = ""
+    identifier = &#34;tags&#34;
+    pre = &#34;&#34;
+    post = &#34;&#34;
+    name = &#34;标签&#34;
+    url = &#34;/tags/&#34;
+    title = &#34;&#34;
     weight = 3
     [menu.main.params]
-      icon = "fa-solid fa-tags"
+      icon = &#34;fa-solid fa-tags&#34;
 
 # Hugo 解析文档的配置
 [markup]
@@ -154,14 +154,14 @@ body {
 header#header-desktop.desktop.animate__faster {
     backdrop-filter: blur(10px);
     background: hsla(0, 0%, 100%, 0.8) linear-gradient(90deg, rgba(247,149,51,0.15) 0, rgba(243,112,85,0.15) 15%, rgba(239,78,123,0.15) 30%, rgba(161,102,171,0.15) 44%, rgba(80,115,184,0.15) 58%, rgba(16,152,173,0.15) 72%, rgba(7,179,155,0.15) 86%, rgba(109,186,130,0.15) 100%);
-    [data-theme='dark'] & {
+    [data-theme=&#39;dark&#39;] &amp; {
         background-color: $header-background-color-dark;   
     }
 }
 
 main.container, footer.footer {
     background-color: rgba($color: $global-background-color, $alpha: 0.45);
-    [data-theme='dark'] & {
+    [data-theme=&#39;dark&#39;] &amp; {
         background-color: rgba($color: $global-background-color-dark, $alpha: 0.9);   
     }
 }
@@ -180,12 +180,12 @@ main.container, footer.footer {
 ```toml
       [params.page.comment.waline]
         enable = true
-        serverURL = ""
+        serverURL = &#34;&#34;
         pageview = true # FixIt 0.2.15 | 新增
-        emoji = ["//unpkg.com/@waline/emojis@1.1.0/weibo"]
-        meta = ["nick", "mail", "link"]
-        requiredMeta = ["nick", "mail"]
-        login = "enable"
+        emoji = [&#34;//unpkg.com/@waline/emojis@1.1.0/weibo&#34;]
+        meta = [&#34;nick&#34;, &#34;mail&#34;, &#34;link&#34;]
+        requiredMeta = [&#34;nick&#34;, &#34;mail&#34;]
+        login = &#34;enable&#34;
         wordLimit = 0
         pageSize = 10
         imageUploader = true # FixIt 0.2.15 | 新增
@@ -193,7 +193,7 @@ main.container, footer.footer {
         comment = true # FixIt 0.2.15 | 新增
         texRenderer = true # FixIt 0.2.16 | 新增
         search = true # FixIt 0.2.16 | 新增
-        recaptchaV3Key = "" # FixIt 0.2.16 | 新增
+        recaptchaV3Key = &#34;&#34; # FixIt 0.2.16 | 新增
 ```
 
 ##### 修改 fontawesome
@@ -201,11 +201,11 @@ main.container, footer.footer {
 茯苓根据自己的情况，创建了一个 fontawesome 模版，放在博客根目录的 archetypes 文件夹下，建一个 posts.md
 
 ```yaml
-title: "{{ replace .TranslationBaseName "-" " " | title }}"
+title: &#34;{{ replace .TranslationBaseName &#34;-&#34; &#34; &#34; | title }}&#34;
 date: {{ .Date }}
 Lastmod:
 password:
-message: "此地无银三百两"
+message: &#34;此地无银三百两&#34;
 comment: true
 weight: 0
 
@@ -232,7 +232,7 @@ hugo
 cd public
 git init
 git add .
-git commit -m "updating site on $(date)"
+git commit -m &#34;updating site on $(date)&#34;
 git remote add origin https://github.com/PoriaMs/poriams.github.io.git
 git push -u origin main
 ```
@@ -245,7 +245,7 @@ git push -u origin main
 hugo
 cd public
 git add .
-git commit -m "updating site on $(date)"
+git commit -m &#34;updating site on $(date)&#34;
 git push origin main
 ```
 
@@ -260,7 +260,7 @@ git push origin main
     enable = true
     # Google Analytics
     [params.analytics.google]
-      id = ""
+      id = &#34;&#34;
       # 是否匿名化用户 IP
       anonymizeIP = true
 ```
@@ -279,7 +279,7 @@ git push origin main
 
 ###### 百度
 
-进入[百度搜索资源平台](https://ziyuan.baidu.com/)，选择 用户中心->站点管理->添加网站，这里的验证方式也可以选择下载html的方式，步骤和google的一样，验证成功后选择 搜索服务->普通收录->sitemap，输入sitemap的网址，和google的站点地图一样。不过百度的收录速度貌似很慢
+进入[百度搜索资源平台](https://ziyuan.baidu.com/)，选择 用户中心-&gt;站点管理-&gt;添加网站，这里的验证方式也可以选择下载html的方式，步骤和google的一样，验证成功后选择 搜索服务-&gt;普通收录-&gt;sitemap，输入sitemap的网址，和google的站点地图一样。不过百度的收录速度貌似很慢
 
 ###### 必应
 
@@ -297,6 +297,6 @@ git push origin main
 
 ---
 
-> 作者: [晨星_茯苓](/about/)  
+> 作者:   
 > URL: https://poriams.github.io/%E4%BB%8E-hexo-%E5%88%B0-hugo/  
 

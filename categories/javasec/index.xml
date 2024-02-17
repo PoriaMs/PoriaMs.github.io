@@ -2,15 +2,14 @@
   <channel>
     <title>JavaSec - 分类 - 晨星_茯苓</title>
     <link>https://poriams.github.io/categories/javasec/</link>
-    <description>JavaSec - 分类 - 晨星_茯苓</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>PoriaMs@outlook.com (晨星_茯苓)</managingEditor>
-      <webMaster>PoriaMs@outlook.com (晨星_茯苓)</webMaster><lastBuildDate>Wed, 07 Sep 2022 10:31:40 &#43;0800</lastBuildDate><atom:link href="https://poriams.github.io/categories/javasec/" rel="self" type="application/rss+xml" /><item>
+    <description>JavaSec - 分类 | 晨星_茯苓</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 07 Sep 2022 10:31:40 &#43;0800</lastBuildDate><atom:link href="https://poriams.github.io/categories/javasec/" rel="self" type="application/rss+xml" /><item>
   <title>二次反序列化，看我一命通关</title>
   <link>https://poriams.github.io/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/</link>
   <pubDate>Wed, 07 Sep 2022 10:31:40 &#43;0800</pubDate>
-  <author>晨星_茯苓</author>
+  <author>作者</author>
   <guid>https://poriams.github.io/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/</guid>
-  <description><![CDATA[<p>对 Java 二次反序列化学习研究整理</p>]]></description>
+  <description><![CDATA[<div class="featured-image"><img loading="eager" src="https://poriams.github.io/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/Zets/index/header.png" alt="二次反序列化，看我一命通关" title="二次反序列化，看我一命通关" referrerpolicy="no-referrer"/></div><p>对 Java 二次反序列化学习研究整理</p>]]></description>
 </item>
 </channel>
 </rss>

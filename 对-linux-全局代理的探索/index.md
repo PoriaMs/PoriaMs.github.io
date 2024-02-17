@@ -1,7 +1,7 @@
 # 对 Linux 全局代理的探索
 
 
-<!--more-->
+&lt;!--more--&gt;
 
 Linux 全局代理脚本
 
@@ -43,68 +43,68 @@ redsocks 是一个能够重定向socks代理的一款开源软件，它允许我
 #!/bin/bash
 
 # redsocks 配置
-redsocks_bin_path="redsocks"
-redsocks_config_file_path="/etc/redsocks.conf"
-shell_log_path="/tmp/socks-switch.log"
+redsocks_bin_path=&#34;redsocks&#34;
+redsocks_config_file_path=&#34;/etc/redsocks.conf&#34;
+shell_log_path=&#34;/tmp/socks-switch.log&#34;
 
 # 代理配置
 sed_tool(){
-    sed -i $1'd' $redsocks_config_file_path
-    sed -i $1"i\        $2" $redsocks_config_file_path
+    sed -i $1&#39;d&#39; $redsocks_config_file_path
+    sed -i $1&#34;i\        $2&#34; $redsocks_config_file_path
 }
 set_proxy(){
     # 行号 内容
     # type
-    sed_tool '52' 'type = socks5;'
+    sed_tool &#39;52&#39; &#39;type = socks5;&#39;
     # ip
-    sed_tool '47' 'ip = 10.37.129.2'
+    sed_tool &#39;47&#39; &#39;ip = 10.37.129.2&#39;
     # port
-    sed_tool '48' 'port = 7890'
-    socks_loging "set proxy ..."
+    sed_tool &#39;48&#39; &#39;port = 7890&#39;
+    socks_loging &#34;set proxy ...&#34;
 }
 
 # 记录日志
 socks_loging(){
-    current_time=$(date +"%Y-%m-%d %H:%M:%S");
-    echo "[*] "$current_time ": " $1 >> $shell_log_path
-    echo "[*] "$current_time ": " $1
+    current_time=$(date &#43;&#34;%Y-%m-%d %H:%M:%S&#34;);
+    echo &#34;[*] &#34;$current_time &#34;: &#34; $1 &gt;&gt; $shell_log_path
+    echo &#34;[*] &#34;$current_time &#34;: &#34; $1
 }
 
 # 开启 redsocks
 start_redsocks(){
     $redsocks_bin_path -c $redsocks_config_file_path
-    socks_loging "start redsocks ..."
+    socks_loging &#34;start redsocks ...&#34;
 }
 
 # 关闭 redsocks
 stop_redsocks(){
     pkill redsocks
-    socks_loging "stop redsocks ..."
+    socks_loging &#34;stop redsocks ...&#34;
 }
 
 # 重置 iptalbes 不影响其他规则
 reset_iptables(){
-    ids=`iptables -t nat -nL OUTPUT --line-number | grep REDSOCKS | awk '{print $1}'`
-    if [ ! -z "$ids" ]; then
+    ids=`iptables -t nat -nL OUTPUT --line-number | grep REDSOCKS | awk &#39;{print $1}&#39;`
+    if [ ! -z &#34;$ids&#34; ]; then
         id_array=(${ids//\\n/ })
-    	#socks_loging "REDSOCKS OUTPUT Chian ID : $id_array"
+    	#socks_loging &#34;REDSOCKS OUTPUT Chian ID : $id_array&#34;
     	for id in ${id_array[@]}
     	do
-        	id=`echo $id|egrep -o "[0-9]{1,4}"`
-        	if [ $id != "" ]; then
+        	id=`echo $id|egrep -o &#34;[0-9]{1,4}&#34;`
+        	if [ $id != &#34;&#34; ]; then
             		iptables -t nat -D OUTPUT $id
             		#iptables -t nat -D PREROUTING $id
         	fi
     	done
     fi
-    #socks_loging "No Set Iptables ..."
+    #socks_loging &#34;No Set Iptables ...&#34;
     
-    iptables -t nat -nvL REDSOCKS > /dev/null 2>&1
-    if [ "$?" != "1" ]; then
+    iptables -t nat -nvL REDSOCKS &gt; /dev/null 2&gt;&amp;1
+    if [ &#34;$?&#34; != &#34;1&#34; ]; then
             iptables -t nat -F REDSOCKS
             iptables -t nat -X REDSOCKS
     fi
-    socks_loging "reset iptables ..."
+    socks_loging &#34;reset iptables ...&#34;
 }
 
 # 清除全部 iptables
@@ -130,7 +130,7 @@ clean(){
     iptables -t raw -X
     iptables -t raw -P PREROUTING ACCEPT
     iptables -t raw -P OUTPUT ACCEPT
-    socks_loging "clean iptables ..."
+    socks_loging &#34;clean iptables ...&#34;
 }
 
 # 浏览模式
@@ -141,7 +141,7 @@ browse(){
     iptables -t nat -A REDSOCKS -d 172.16.0.0/12 -j RETURN
     iptables -t nat -A REDSOCKS -d 192.168.0.0/16 -j RETURN
     iptables -t nat -A REDSOCKS -p tcp -j REDIRECT --to-port 12345
-    socks_loging "browse mode ..."
+    socks_loging &#34;browse mode ...&#34;
 }
 
 # 内网模式
@@ -150,12 +150,12 @@ intranet(){
     iptables -t nat -A REDSOCKS -p tcp -d 10.0.0.0/8 -j REDIRECT --to-port 12345
     iptables -t nat -A REDSOCKS -p tcp -d 172.0.0.0/8 -j REDIRECT --to-port 12345
     iptables -t nat -A REDSOCKS -p tcp -d 192.168.0.0/16 -j REDIRECT --to-port 12345
-    socks_loging "intranet mode ..."
+    socks_loging &#34;intranet mode ...&#34;
 }
 
 # 自定义模式
 diy(){
-    socks_loging "diy mode ..."
+    socks_loging &#34;diy mode ...&#34;
 }
 
 # 载入防火墙
@@ -165,15 +165,15 @@ install(){
     iptables -t nat -N REDSOCKS
     iptables -t nat -A REDSOCKS -d $proxy_ip -j RETURN
     
-    if [ "$1" = "browse" ]; then
+    if [ &#34;$1&#34; = &#34;browse&#34; ]; then
         browse
     fi
 
-    if [ "$1" = "intranet" ]; then
+    if [ &#34;$1&#34; = &#34;intranet&#34; ]; then
         intranet
     fi
 
-    if [ "$1" = "diy" ]; then
+    if [ &#34;$1&#34; = &#34;diy&#34; ]; then
         diy
     fi
 
@@ -182,8 +182,8 @@ install(){
 }
 
 # banner
-if [ -z "$1" ]; then
-    echo "[*] Usage
+if [ -z &#34;$1&#34; ]; then
+    echo &#34;[*] Usage
     proxy    : 配置代理
     browse   : 浏览模式
     intranet : 内网模式
@@ -191,42 +191,42 @@ if [ -z "$1" ]; then
     reset    : 重制 iptables 不影响其他规则
     clean    : 清空 iptables 所有规则
     stop     : 重制 iptables 并关闭代理
-    "
+    &#34;
     exit 0
 fi
 
 
-if [ "$1" = "proxy" ]; then
+if [ &#34;$1&#34; = &#34;proxy&#34; ]; then
     set_proxy
     exit 0
 fi
 
-if [ "$1" = "browse" ]; then
+if [ &#34;$1&#34; = &#34;browse&#34; ]; then
     install $1
     exit 0
 fi
 
-if [ "$1" = "intranet" ]; then
+if [ &#34;$1&#34; = &#34;intranet&#34; ]; then
     install $1
     exit 0
 fi
 
-if [ "$1" = "diy" ]; then
+if [ &#34;$1&#34; = &#34;diy&#34; ]; then
     install $1
     exit 0
 fi
 
-if [ "$1" = "clean" ]; then
+if [ &#34;$1&#34; = &#34;clean&#34; ]; then
     clean
     exit 0
 fi
 
-if [ "$1" = "reset" ]; then
+if [ &#34;$1&#34; = &#34;reset&#34; ]; then
     reset_iptables
     exit 0
 fi
 
-if [ "$1" = "stop" ]; then
+if [ &#34;$1&#34; = &#34;stop&#34; ]; then
     stop_redsocks
     reset_iptables
     exit 0
@@ -237,7 +237,7 @@ fi
 
 ### 茯苓基于 GOST 的透明代理
 
-<https://latest.gost.run/tutorials/redirect/>是 GOST 关于透明代理的用法，原理上也是 redsocks 的重定向，但是 GOST 将该功能集成在自身，茯苓测试操作之后，利用 GOST v3 重写了 Linux 全局代理脚本。
+&lt;https://latest.gost.run/tutorials/redirect/&gt;是 GOST 关于透明代理的用法，原理上也是 redsocks 的重定向，但是 GOST 将该功能集成在自身，茯苓测试操作之后，利用 GOST v3 重写了 Linux 全局代理脚本。
 
 ##### 脚本
 
@@ -249,13 +249,13 @@ fi
 
 ##### 准备
 
-需要先去<https://latest.gost.run/>下载对应平台的 GOST 二进制文件
+需要先去&lt;https://latest.gost.run/&gt;下载对应平台的 GOST 二进制文件
 
 ![image-20230211181516738](./Zets/index/image-20230211181516738.png) 
 
 ##### 操作介绍
 
-将 shell 脚本下载到本地以后，先用 `chmod +x vanish.sh`添加权限
+将 shell 脚本下载到本地以后，先用 `chmod &#43;x vanish.sh`添加权限
 
 ![image-20230211182136599](./Zets/index/image-20230211182136599.png)
 
@@ -279,7 +279,7 @@ off 选项，会关闭 gost 并且清除工具添加的 iptables 规则而不影
 
 ![image-20230211191442248](./Zets/index/image-20230211191442248.png)
 
-clean 选项，会删除日志，日志默认位置在`log="/tmp/vanish.log"`，可以自行修改
+clean 选项，会删除日志，日志默认位置在`log=&#34;/tmp/vanish.log&#34;`，可以自行修改
 
 ### 结语
 
@@ -296,6 +296,6 @@ clean 选项，会删除日志，日志默认位置在`log="/tmp/vanish.log"`，
 
 ---
 
-> 作者: [晨星_茯苓](/about/)  
+> 作者:   
 > URL: https://poriams.github.io/%E5%AF%B9-linux-%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E7%9A%84%E6%8E%A2%E7%B4%A2/  
 

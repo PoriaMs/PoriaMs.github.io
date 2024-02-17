@@ -1,9 +1,9 @@
 # 友情链接
 
 
-<!-- When you set data `friends.yml` in `yourProject/data/` directory, it will be automatically loaded here. -->
+&lt;!-- When you set data `friends.yml` in `yourProject/data/` directory, it will be automatically loaded here. --&gt;
 ---
-<!-- You can define additional content below for this page. -->
+&lt;!-- You can define additional content below for this page. --&gt;
 ## 说明
 
 ```yaml
@@ -18,6 +18,6 @@
 
 ---
 
-> 作者: [晨星_茯苓](/about/)  
+> 作者:   
 > URL: https://poriams.github.io/friends/  
 
